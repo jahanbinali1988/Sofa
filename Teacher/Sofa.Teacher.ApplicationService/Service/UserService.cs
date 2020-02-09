@@ -1,0 +1,130 @@
+﻿using MassTransit;
+using Sofa.Events.User;
+using Sofa.SharedKernel;
+using Sofa.SharedKernel.BaseClasses.Exceptions;
+using Sofa.SharedKernel.Enum;
+using Sofa.SharedKernel.Log;
+using Sofa.Teacher.DomainService;
+using Sofa.Teacher.Model;
+using Sofa.Teacher.Repository;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Sofa.Teacher.ApplicationService.Service
+{
+    public class UserService : IUserService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserDomainService _userDomainService;
+        private readonly IBusControl _bus;
+        public UserService(IUnitOfWork unitOfWork, IUserDomainService userDomainService, IBusControl bus)
+        {
+            this._unitOfWork = unitOfWork;
+            this._userDomainService = userDomainService;
+            this._bus = bus;
+        }
+
+        public async Task<ExistedUserResponse> ExistedUser(ExistedUserRequest request)
+        {
+            try
+            {
+                var result = await _userDomainService.Existance(request.PhoneNumber);
+
+                return new ExistedUserResponse(true, "شماره وارد شده در سیستم وجود دارد") { Existed = result };
+            }
+            catch (BusinessException e)
+            {
+                Logger.Log("BusinessException", "Teacher", "User", "ExistedUser", e.Message);
+                return new ExistedUserResponse(true, e.Message) { Existed = false };
+            }
+            catch (Exception e)
+            {
+                Logger.Log("Exception", "Teacher", "User", "ExistedUser", e.Message);
+                return new ExistedUserResponse(false, e.Message);
+            }
+        }
+
+        public async Task<AddUserResponse> AddUser(AddUserRequest request)
+        {
+            try
+            {
+                var user = User.DefaultFactory(request.FirstName, request.LastName, request.Email, request.UserName, request.Level,
+                    request.PhoneNumber, true, null);
+                await _userDomainService.CanAdd(user);
+
+                _unitOfWork.userRepository.Add(user);
+                _unitOfWork.Commit();
+
+                //await _bus.Publish<RegisteredUserEvent>(new RegisteredUserEvent()
+                //{
+                //    Description = "Created in Teacher Bot",
+                //    Email = user.Email,
+                //    FirstName = user.FirstName,
+                //    Id = user.Id,
+                //    IsActive = true,
+                //    LastName = user.LastName,
+                //    PasswordHash = SHA256HashGenerator.GenerateSHA256Hash(user.PhoneNumber),
+                //    PhoneNumber = user.PhoneNumber,
+                //    Role = (short)UserRoleEnum.Student,
+                //    UserName = user.UserName
+                //});
+
+                return new AddUserResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = user.Id };
+            }
+            catch (BusinessException e)
+            {
+                Logger.Log("BusinessException", "Teacher", "User", "AddUser", e.Message);
+                return new AddUserResponse(false, e.Message);
+            }
+            catch (Exception e)
+            {
+                Logger.Log("Exception", "Teacher", "User", "AddUser", e.Message);
+                return new AddUserResponse(false, e.Message);
+            }
+        }
+
+        public async Task<GetUserByIdResponse> Get(GetUserByIdRequest request)
+        {
+            try
+            {
+                var user = await _unitOfWork.userRepository.GetAsync(request.UserId);
+
+                return new GetUserByIdResponse(true, "عملیات خواندن با موفقیت انجام شد", "") { User = user.Convert() };
+            }
+            catch (BusinessException e)
+            {
+                Logger.Log("BusinessException", "Teacher", "User", "Get", e.Message);
+                return new GetUserByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                Logger.Log("Exception", "Teacher", "User", "Get", e.Message);
+                return new GetUserByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public async Task<GetUserByPhoneNumberResponse> GetByPhoneNumber(GetUserByPhoneNumberRequest request)
+        {
+            try
+            {
+                var user = await _unitOfWork.userRepository.QueryAsync(c => c.PhoneNumber.Equals(request.PhoneNumber));
+
+                return new GetUserByPhoneNumberResponse(true, "عملیات خواندن با موفقیت انجام شد", "")
+                {
+                    User = user.FirstOrDefault().Convert()
+                };
+            }
+            catch (BusinessException e)
+            {
+                Logger.Log("BusinessException", "Teacher", "User", "GetByPhoneNumber", e.Message);
+                return new GetUserByPhoneNumberResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                Logger.Log("Exception", "Teacher", "User", "GetByPhoneNumber", e.Message);
+                return new GetUserByPhoneNumberResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+    }
+}

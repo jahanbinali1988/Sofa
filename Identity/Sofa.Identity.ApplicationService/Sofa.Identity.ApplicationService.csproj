@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CourseManagement\Sofa.CourseManagement.Repository\Sofa.CourseManagement.Repository.csproj" />
+    <ProjectReference Include="..\..\Sofa.SharedKernel\Sofa.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\Sofa.SharedSpecs\Sofa.SharedSpecs.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.Model\Sofa.Identity.Model.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.Repository.Dapper\Sofa.Identity.Repository.Dapper.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.Repository\Sofa.Identity.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

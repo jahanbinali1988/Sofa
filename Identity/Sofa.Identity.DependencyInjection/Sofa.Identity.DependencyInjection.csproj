@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="6.0.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="6.0.1" />
+    <PackageReference Include="MassTransit.StructureMap" Version="6.0.1" />
+    <PackageReference Include="structuremap" Version="4.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Sofa.Events\Sofa.Events.csproj" />
+    <ProjectReference Include="..\..\Sofa.SharedKernel\Sofa.SharedKernel.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.ApplicationService\Sofa.Identity.ApplicationService.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.Consumer\Sofa.Identity.Consumer.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.EntityFramework\Sofa.Identity.EntityFramework.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.Repository.Dapper\Sofa.Identity.Repository.Dapper.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.repository.EF\Sofa.Identity.repository.EF.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.Repository\Sofa.Identity.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

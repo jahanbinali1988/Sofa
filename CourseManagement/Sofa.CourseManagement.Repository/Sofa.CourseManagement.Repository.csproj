@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sofa.CourseManagement.EntityFramework\Sofa.CourseManagement.EntityFramework.csproj" />
+    <ProjectReference Include="..\Sofa.CourseManagement.Model\Sofa.CourseManagement.Model.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Sofa.Dapper\Sofa.Dapper.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.Model\Sofa.Identity.Model.csproj" />
+    <ProjectReference Include="..\Sofa.Identity.Repository\Sofa.Identity.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

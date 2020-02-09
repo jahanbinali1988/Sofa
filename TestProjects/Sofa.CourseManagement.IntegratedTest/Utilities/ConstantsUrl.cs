@@ -1,0 +1,8 @@
+﻿namespace Sofa.CourseManagement.IntegratedTest.Utilities
+{
+    public static class ConstantsUrl
+    {
+        public static readonly string LevelAddApiUrl = "/api/LessonPlan/Add";
+        public static readonly string UserAddApiUrl = "/api/User/Add";
+    }
+}

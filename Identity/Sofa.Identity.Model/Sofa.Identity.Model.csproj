@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CaringFramework.Repository.Pattern" Version="1.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CourseManagement\Sofa.CourseManagement.Model\Sofa.CourseManagement.Model.csproj" />
+    <ProjectReference Include="..\..\Sofa.SharedKernel\Sofa.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>
