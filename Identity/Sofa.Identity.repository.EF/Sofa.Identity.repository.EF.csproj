@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CaringFramework.Repository.EntityFramework" Version="1.0.15" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Sofa.Identity.EntityFramework\Sofa.Identity.EntityFramework.csproj" />
     <ProjectReference Include="..\Sofa.Identity.Model\Sofa.Identity.Model.csproj" />
     <ProjectReference Include="..\Sofa.Identity.Repository\Sofa.Identity.Repository.csproj" />
