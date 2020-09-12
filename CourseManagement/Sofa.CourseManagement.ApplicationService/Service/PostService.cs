@@ -5,9 +5,9 @@ using Sofa.CourseManagement.Repository;
 using Sofa.Events.Post;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
 using Sofa.SharedKernel.Enum;
-using Sofa.SharedKernel.Log;
 using Sofa.SharedKernel.Validation;
 using System;
+using Sofa.SharedKernel;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
@@ -16,11 +16,13 @@ namespace Sofa.CourseManagement.ApplicationService
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPostDomainService _postDomainService;
         private readonly IBusControl _busControl;
-        public PostService(IUnitOfWork unitOfWork, IPostDomainService postDomainService, IBusControl busControl)
+        private readonly ILogger _logger;
+        public PostService(IUnitOfWork unitOfWork, IPostDomainService postDomainService, IBusControl busControl, ILogger logger)
         {
             this._unitOfWork = unitOfWork;
             this._postDomainService = postDomainService;
             this._busControl = busControl;
+            this._logger = logger;
         }
 
         public AddPostResponse AddPost(AddPostRequest request)
@@ -49,12 +51,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "CourseManagement", "Post", "AddPost", e.Message);
+                this._logger.Warning("Course Management-Post Service-Add Post ", e.Message);
                 return new AddPostResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), new Guid());
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "CourseManagement", "Post", "AddPost", e.Message);
+                this._logger.Error("Course Management-Post Service-Add Post ", e.Message);
                 return new AddPostResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), new Guid());
             }
         }
@@ -70,12 +72,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "CourseManagement", "Post", "Get", e.Message);
+                this._logger.Warning("Course Management-Post Service-Get Post ", e.Message);
                 return new GetPostByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "Booking", "Post", "Get", e.Message);
+                this._logger.Error("Course Management-Post Service-Get Post ", e.Message);
                 return new GetPostByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
         }

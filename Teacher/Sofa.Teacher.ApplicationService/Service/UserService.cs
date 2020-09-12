@@ -2,8 +2,6 @@
 using Sofa.Events.User;
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
-using Sofa.SharedKernel.Enum;
-using Sofa.SharedKernel.Log;
 using Sofa.Teacher.DomainService;
 using Sofa.Teacher.Model;
 using Sofa.Teacher.Repository;
@@ -18,11 +16,13 @@ namespace Sofa.Teacher.ApplicationService.Service
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserDomainService _userDomainService;
         private readonly IBusControl _bus;
-        public UserService(IUnitOfWork unitOfWork, IUserDomainService userDomainService, IBusControl bus)
+        private readonly ILogger _logger;
+        public UserService(IUnitOfWork unitOfWork, IUserDomainService userDomainService, IBusControl bus, ILogger logger)
         {
             this._unitOfWork = unitOfWork;
             this._userDomainService = userDomainService;
             this._bus = bus;
+            this._logger = logger;
         }
 
         public async Task<ExistedUserResponse> ExistedUser(ExistedUserRequest request)
@@ -35,12 +35,12 @@ namespace Sofa.Teacher.ApplicationService.Service
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "Teacher", "User", "ExistedUser", e.Message);
+                this._logger.Error("Teacher-User service-Existed user-BusinessException ", e.Message);
                 return new ExistedUserResponse(true, e.Message) { Existed = false };
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "Teacher", "User", "ExistedUser", e.Message);
+                this._logger.Error("Teacher-User service-Existed user-Exception ", e.Message);
                 return new ExistedUserResponse(false, e.Message);
             }
         }
@@ -74,12 +74,12 @@ namespace Sofa.Teacher.ApplicationService.Service
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "Teacher", "User", "AddUser", e.Message);
+                this._logger.Error("Teacher-User service-Add user-BusinessException ", e.Message);
                 return new AddUserResponse(false, e.Message);
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "Teacher", "User", "AddUser", e.Message);
+                this._logger.Error("Teacher-User service-Add user-Exception ", e.Message);
                 return new AddUserResponse(false, e.Message);
             }
         }
@@ -94,12 +94,12 @@ namespace Sofa.Teacher.ApplicationService.Service
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "Teacher", "User", "Get", e.Message);
+                this._logger.Error("Teacher-User service-Get user-BusinessException ", e.Message);
                 return new GetUserByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "Teacher", "User", "Get", e.Message);
+                this._logger.Error("Teacher-User service-Get user-Exception ", e.Message);
                 return new GetUserByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
         }
@@ -117,12 +117,12 @@ namespace Sofa.Teacher.ApplicationService.Service
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "Teacher", "User", "GetByPhoneNumber", e.Message);
+                this._logger.Error("Teacher-User service-GetByPhoneNumber user-BusinessException ", e.Message);
                 return new GetUserByPhoneNumberResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "Teacher", "User", "GetByPhoneNumber", e.Message);
+                this._logger.Error("Teacher-User service-GetByPhoneNumber user-Exception ", e.Message);
                 return new GetUserByPhoneNumberResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
         }

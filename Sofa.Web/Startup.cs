@@ -5,7 +5,8 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,7 +34,7 @@ namespace Sofa.Web
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             //var busControl = containerBuilder.RegisterInstance<IBusControl>();
             //busControl.Start();
@@ -57,6 +58,7 @@ namespace Sofa.Web
             });
 
             app.UseIdentityServer();
+            loggerFactory.AddLog4Net();
 
             app.UseMvc();
             app.UseStaticFiles(new StaticFileOptions()
@@ -104,7 +106,6 @@ namespace Sofa.Web
             // Add framework services.
             services.AddMvc()
                 .AddControllersAsServices();
-
 
             var identityAuthority = Configuration.GetValue<string>("identityAuthority");
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -3,8 +3,8 @@ using Sofa.CourseManagement.DomainService;
 using Sofa.CourseManagement.Model;
 using Sofa.CourseManagement.Repository;
 using Sofa.Events.Lesson;
+using Sofa.SharedKernel;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
-using Sofa.SharedKernel.Log;
 using Sofa.SharedKernel.Validation;
 using System;
 
@@ -15,11 +15,13 @@ namespace Sofa.CourseManagement.ApplicationService
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILessonDomainService _lessonDomainRepository;
         private readonly IBusControl _busControl;
-        public LessonService(IUnitOfWork unitOfWork, ILessonDomainService lessonDomainRepository, IBusControl busControl)
+        private readonly ILogger _logger;
+        public LessonService(IUnitOfWork unitOfWork, ILessonDomainService lessonDomainRepository, IBusControl busControl, ILogger logger)
         {
             this._unitOfWork = unitOfWork;
             this._lessonDomainRepository = lessonDomainRepository;
             this._busControl = busControl;
+            this._logger = logger;
         }
 
         public AddLessonResponse AddLesson(AddLessonRequest request)
@@ -47,12 +49,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "CourseManagement", "Lesson", "AddLesson", e.Message);
+                this._logger.Warning("Course Management-Lesson Service-Add Lesson ", e.Message);
                 return new AddLessonResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), new Guid());
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "CourseManagement", "Lesson", "AddLesson", e.Message);
+                this._logger.Error("Course Management-Lesson Service-Add Lesson ", e.Message);
                 return new AddLessonResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), new Guid());
             }
         }
@@ -68,12 +70,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "CourseManagement", "Lesson", "Get", e.Message);
+                this._logger.Warning("Course Management-Lesson Service-Get Lesson ", e.Message);
                 return new GetLessonByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "CourseManagement", "Lesson", "Get", e.Message);
+                this._logger.Error("Course Management-Lesson Service-Get Lesson ", e.Message);
                 return new GetLessonByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
         }

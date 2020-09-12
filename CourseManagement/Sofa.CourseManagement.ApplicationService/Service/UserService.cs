@@ -5,9 +5,9 @@ using Sofa.CourseManagement.Repository;
 using Sofa.Events.User;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
 using Sofa.SharedKernel.Enum;
-using Sofa.SharedKernel.Log;
 using Sofa.SharedKernel.Validation;
 using System;
+using Sofa.SharedKernel;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
@@ -16,11 +16,13 @@ namespace Sofa.CourseManagement.ApplicationService
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserDomainService _userDomainService;
         private IBusControl _busControl;
-        public UserService(IUnitOfWork unitOfWork, IUserDomainService userDomainService, IBusControl busControl)
+        private readonly ILogger _logger;
+        public UserService(IUnitOfWork unitOfWork, IUserDomainService userDomainService, IBusControl busControl, ILogger logger)
         {
             this._unitOfWork = unitOfWork;
             this._userDomainService = userDomainService;
             this._busControl = busControl;
+            this._logger = logger;
         }
 
         public AddUserResponse AddUser(AddUserRequest request)
@@ -53,12 +55,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "CourseManagement", "User", "AddUser", e.Message);
+                this._logger.Warning("Course Management-Users Service-Add User ", e.Message);
                 return new AddUserResponse(false, e.Message);
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "CourseManagement", "User", "AddUser", e.Message);
+                this._logger.Error("Course Management-User Service-Add User ", e.Message);
                 return new AddUserResponse(false, e.Message);
             }
         }
@@ -74,12 +76,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "CourseManagement", "User", "Get", e.Message);
+                this._logger.Warning("Course Management-User Service-Get User ", e.Message);
                 return new GetUserByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "CourseManagement", "User", "Get", e.Message);
+                this._logger.Error("Course Management-User Service-Get User ", e.Message);
                 return new GetUserByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
         }

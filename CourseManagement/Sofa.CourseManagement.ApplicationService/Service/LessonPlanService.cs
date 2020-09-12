@@ -3,9 +3,9 @@ using Sofa.CourseManagement.DomainService;
 using Sofa.CourseManagement.Model;
 using Sofa.CourseManagement.Repository;
 using Sofa.Events.LessonPlan;
+using Sofa.SharedKernel;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
 using Sofa.SharedKernel.Enum;
-using Sofa.SharedKernel.Log;
 using Sofa.SharedKernel.Validation;
 using System;
 
@@ -16,11 +16,13 @@ namespace Sofa.CourseManagement.ApplicationService
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILessonPlanDomainService _lessonPlanDomainService;
         private readonly IBusControl _busControl;
-        public LessonPlanService(IUnitOfWork unitOfWork, ILessonPlanDomainService lessonPlanDomainService, IBusControl busControl)
+        private readonly ILogger _logger;
+        public LessonPlanService(IUnitOfWork unitOfWork, ILessonPlanDomainService lessonPlanDomainService, IBusControl busControl, ILogger logger)
         {
             this._unitOfWork = unitOfWork;
             this._lessonPlanDomainService = lessonPlanDomainService;
             this._busControl = busControl;
+            this._logger = logger;
         }
 
         public AddLessonPlanResponse AddLessonPlan(AddLessonPlanRequest request)
@@ -46,12 +48,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "CourseManagement", "LessonPlan", "AddLessonPlan", e.Message);
+                this._logger.Warning("Course Management-LessonPlan Service-Add LessonPlan ", e.Message);
                 return new AddLessonPlanResponse(false, e.Message);
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "CourseManagement", "LessonPlan", "AddLessonPlan", e.Message);
+                this._logger.Error("Course Management-LessonPlan Service-Add LessonPlan ", e.Message);
                 return new AddLessonPlanResponse(false, e.Message);
             }
         }
@@ -67,12 +69,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                Logger.Log("BusinessException", "CourseManagement", "LessonPlan", "Get", e.Message);
+                this._logger.Warning("Course Management-LessonPlan Service-Get LessonPlan ", e.Message);
                 return new GetLessonPlanByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
-                Logger.Log("Exception", "CourseManagement", "LessonPlan", "Get", e.Message);
+                this._logger.Error("Course Management-LessonPlan Service-Get LessonPlan ", e.Message);
                 return new GetLessonPlanByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
         }
