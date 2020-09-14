@@ -25,4 +25,10 @@
     <ProjectReference Include="..\Identity\Sofa.Identity.WebAPI\Sofa.Identity.WebAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

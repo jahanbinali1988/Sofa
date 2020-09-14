@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using MassTransit;
 using Sofa.SharedKernel;
+using System;
 
 namespace Sofa.CourseManagement.DependencyResolver
 {
@@ -15,7 +16,7 @@ namespace Sofa.CourseManagement.DependencyResolver
 
                 var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    cfg.Host(busSettings.HostAddress, h =>
+                    cfg.Host(new Uri(busSettings.Scheme + "://" + busSettings.HostAddress), busSettings.Port, h =>
                     {
                         h.Username(busSettings.Username);
                         h.Password(busSettings.Password);

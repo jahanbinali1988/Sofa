@@ -7,5 +7,6 @@
         public string Password { get; set; }
         public string Scheme { get; set; }
         public string QueueName { get; set; }
+        public string Port { get; set; }
     }
 }

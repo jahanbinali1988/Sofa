@@ -1,7 +1,7 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=DESKTOP-H01072U; Database=SofaLanguageDB; User Id=sa; password=123;",
-    "SofaIdentity": "Server=DESKTOP-H01072U; Database=SofaIdentityDB; User Id=sa; password=123;"
+    "DefaultConnection": "Server=DESKTOP-3K4JC73; Database=SofaLanguageDB; User Id=sa; password=123;",
+    "SofaIdentity": "Server=DESKTOP-3K4JC73; Database=SofaIdentityDB; User Id=sa; password=123;"
   },
   "Logging": {
     "LogLevel": {
