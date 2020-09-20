@@ -1,15 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MassTransit" Version="6.0.1" />
+    <PackageReference Include="MassTransit" Version="7.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Sofa.Events\Sofa.Events.csproj" />
+    <ProjectReference Include="..\..\Sofa.SharedKernel\Sofa.SharedKernel.csproj" />
     <ProjectReference Include="..\Sofa.CourseManagement.DomainService\Sofa.CourseManagement.DomainService.csproj" />
     <ProjectReference Include="..\Sofa.CourseManagement.Model\Sofa.CourseManagement.Model.csproj" />
     <ProjectReference Include="..\Sofa.CourseManagement.Repository\Sofa.CourseManagement.Repository.csproj" />

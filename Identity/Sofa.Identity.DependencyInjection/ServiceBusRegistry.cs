@@ -4,6 +4,7 @@ using StructureMap;
 using System;
 using Sofa.Identiity.Consumer.RegisterUser;
 using Sofa.Identity.Repository;
+using Sofa.SharedKernel.Validation;
 
 namespace Sofa.Identity.DependencyInjection
 {
@@ -18,18 +19,19 @@ namespace Sofa.Identity.DependencyInjection
             {
                 return Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    var host = cfg.Host(new Uri(busSetting.Scheme + "://" + busSetting.HostAddress), rabbitMqSetting =>
-                    {
-                        rabbitMqSetting.Username(busSetting.Username);
-                        rabbitMqSetting.Password(busSetting.Password);
-                    });
+                    cfg.Host(
+                        new Uri(busSetting.Scheme + "://" + busSetting.HostAddress), cfg =>
+                        {
+                            cfg.Username(busSetting.Username);
+                            cfg.Password(busSetting.Password);
+                        });
 
-                    cfg.ReceiveEndpoint(host, busSetting.QueueName, e =>
+                    cfg.ReceiveEndpoint(busSetting.QueueName, e =>
                     {
-                        e.Bind(busSetting.QueueName, s => { s.Durable = true; });
-                        e.Instance(new RegisterUserEventConsumer(container.GetInstance<IEfUnitOfWork>(), container.GetInstance<ILogger>()));
+                        //e.Bind(busSetting.QueueName, s => { s.Durable = true; });
+                        //e.Instance(new RegisterUserEventConsumer(container.GetInstance<IEfUnitOfWork>(), container.GetInstance<ILogger>()));
                         //or
-                        //e.Consumer<RegisterUserEventConsumer>(container);
+                        e.Consumer<RegisterUserEventConsumer>(container);
                     });
                 });
             }).Singleton();

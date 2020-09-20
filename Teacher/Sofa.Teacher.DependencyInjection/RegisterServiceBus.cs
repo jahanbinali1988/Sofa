@@ -19,7 +19,7 @@ namespace Sofa.Teacher.DependencyResolver
                 var busSettings = busSettingProvider.GetBusSetting();
                 var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    var host = cfg.Host(busSettings.HostAddress, h =>
+                    cfg.Host(busSettings.HostAddress, h =>
                     {
                         h.Username(busSettings.Username);
                         h.Password(busSettings.Password);

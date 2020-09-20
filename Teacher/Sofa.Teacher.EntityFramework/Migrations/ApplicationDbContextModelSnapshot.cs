@@ -147,7 +147,7 @@ namespace Sofa.Teacher.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("731874e2-b89c-4509-819a-5b69396a336b"),
-                            CreateDate = new DateTime(2020, 2, 9, 3, 51, 21, 18, DateTimeKind.Local).AddTicks(3433),
+                            CreateDate = new DateTime(2020, 9, 14, 16, 59, 30, 183, DateTimeKind.Local).AddTicks(2969),
                             Description = "",
                             Email = "jahanbin.ali1988@gmail.com",
                             FirstName = "Ali",
@@ -155,7 +155,7 @@ namespace Sofa.Teacher.EntityFramework.Migrations
                             LastCourseId = new Guid("00000000-0000-0000-0000-000000000000"),
                             LastName = "Jahanbin",
                             Level = 2,
-                            ModifyDate = new DateTime(2020, 2, 9, 3, 51, 21, 18, DateTimeKind.Local).AddTicks(7277),
+                            ModifyDate = new DateTime(2020, 9, 14, 16, 59, 30, 183, DateTimeKind.Local).AddTicks(4974),
                             PhoneNumber = "09224957626",
                             RowVersion = 0,
                             UserName = "09224957626"
@@ -163,7 +163,7 @@ namespace Sofa.Teacher.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("253e472e-21ac-4864-b218-b364169d0611"),
-                            CreateDate = new DateTime(2020, 2, 9, 3, 51, 21, 19, DateTimeKind.Local).AddTicks(1070),
+                            CreateDate = new DateTime(2020, 9, 14, 16, 59, 30, 196, DateTimeKind.Local).AddTicks(4334),
                             Description = "",
                             Email = "jahanbinali88@yahoo.com",
                             FirstName = "Ali",
@@ -171,7 +171,7 @@ namespace Sofa.Teacher.EntityFramework.Migrations
                             LastCourseId = new Guid("00000000-0000-0000-0000-000000000000"),
                             LastName = "Jahanbin",
                             Level = 1,
-                            ModifyDate = new DateTime(2020, 2, 9, 3, 51, 21, 19, DateTimeKind.Local).AddTicks(1110),
+                            ModifyDate = new DateTime(2020, 9, 14, 16, 59, 30, 196, DateTimeKind.Local).AddTicks(4423),
                             PhoneNumber = "09389459731",
                             RowVersion = 0,
                             UserName = "09389459731"
@@ -179,7 +179,7 @@ namespace Sofa.Teacher.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("50ecc8e1-5c5c-4a97-a5f5-af9e9eba1b70"),
-                            CreateDate = new DateTime(2020, 2, 9, 3, 51, 21, 19, DateTimeKind.Local).AddTicks(1142),
+                            CreateDate = new DateTime(2020, 9, 14, 16, 59, 30, 196, DateTimeKind.Local).AddTicks(4482),
                             Description = "",
                             Email = "jahanbin.ali1988@yahoo.com",
                             FirstName = "Ali",
@@ -187,7 +187,7 @@ namespace Sofa.Teacher.EntityFramework.Migrations
                             LastCourseId = new Guid("00000000-0000-0000-0000-000000000000"),
                             LastName = "Jahanbin",
                             Level = 0,
-                            ModifyDate = new DateTime(2020, 2, 9, 3, 51, 21, 19, DateTimeKind.Local).AddTicks(1145),
+                            ModifyDate = new DateTime(2020, 9, 14, 16, 59, 30, 196, DateTimeKind.Local).AddTicks(4490),
                             PhoneNumber = "09370429731",
                             RowVersion = 0,
                             UserName = "09370429731"

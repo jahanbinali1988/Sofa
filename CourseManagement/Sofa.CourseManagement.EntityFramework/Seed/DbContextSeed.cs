@@ -5,6 +5,8 @@ using Sofa.EntityFramework.Seed;
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.Enum;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sofa.CourseManagement.EntityFramework.Seed
 {
@@ -33,7 +35,8 @@ namespace Sofa.CourseManagement.EntityFramework.Seed
                 PhoneNumber = "09224957626",
                 Role = UserRoleEnum.SysAdmin,
                 RowVersion = 0,
-                UserName = "sysadmin"
+                UserName = "sysadmin",
+                Level = LevelEnum.Advanced
             };
             var userTeacher = new User
             {
@@ -49,7 +52,8 @@ namespace Sofa.CourseManagement.EntityFramework.Seed
                 PhoneNumber = "09224957626",
                 Role = UserRoleEnum.Teacher,
                 RowVersion = 0,
-                UserName = "teacher"
+                UserName = "teacher",
+                Level = LevelEnum.Advanced
             };
             var userStudent = new User
             {
@@ -65,11 +69,32 @@ namespace Sofa.CourseManagement.EntityFramework.Seed
                 PhoneNumber = "09224957626",
                 Role = UserRoleEnum.Teacher,
                 RowVersion = 0,
-                UserName = "student"
+                UserName = "student",
+                Level = LevelEnum.Begginer
             };
 
-            modelBuilder.Entity<User>()
-                .HasData(userSysAdmin, userTeacher, userStudent);
+            var institute = Institute.DefaultFactory("Default", true);
+            var address = Address.DefaultFactory("Kian Pars", "Ahwaz", "Khuzestan", "Iran", "1748398760");
+            //institute.AssignAddress(address);
+            modelBuilder.Entity<Institute>().HasData(institute);
+            
+            
+            //modelBuilder.Entity<Institute>().OwnsMany<Address>(c => c.Addresses).HasData(institute, address);
+            
+
+            //var instituteId = Guid.NewGuid();
+            //modelBuilder.Entity<Institute>().HasData(new Institute() {
+            //    Id = instituteId,
+            //    CreateDate = DateTime.Now,
+            //    IsActive = true,
+            //    RowVersion = 0,
+            //    Title = "Default",
+            //    Addresses = new List<Address>() { 
+            //        new Address() { City = "Ahwaz", Country="Iran", InstituteId = instituteId , State = "Khuzestan", Street ="Kian Pars", ZipCode= "1748398760" }
+            //    }
+            //});
+
+            modelBuilder.Entity<User>().HasData(userSysAdmin, userTeacher, userStudent);
         }
     }
 }

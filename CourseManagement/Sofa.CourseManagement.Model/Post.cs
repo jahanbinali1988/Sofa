@@ -9,11 +9,11 @@ namespace Sofa.CourseManagement.Model
         public string Title { get; set; }
         public short Order { get; set; }
         public PostTypeEnum PostType { get; set; }
-        public Guid LessonId { get; set; }
 
-        public Lesson Lesson { get; set; }
+        public Guid LessonPlanId { get; set; }
+        public LessonPlan LessonPlan { get; set; }
 
-        public static Post DefaultFactory(string title, short order, PostTypeEnum postType, Guid LessonId, bool isActive)
+        public static Post DefaultFactory(string title, short order, PostTypeEnum postType, Guid LessonPlanId, bool isActive)
         {
             return new Post()
             {
@@ -21,7 +21,7 @@ namespace Sofa.CourseManagement.Model
                 Title = title,
                 Order = order,
                 PostType = postType,
-                LessonId = LessonId,
+                LessonPlanId = LessonPlanId,
                 IsActive = isActive
             };
         }

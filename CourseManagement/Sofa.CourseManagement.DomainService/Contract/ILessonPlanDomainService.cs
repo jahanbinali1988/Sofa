@@ -2,6 +2,5 @@
 {
     public interface ILessonPlanDomainService
     {
-        void CanAdd(string title);
     }
 }

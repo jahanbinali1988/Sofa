@@ -17,7 +17,6 @@ namespace Sofa.CourseManagement.ApplicationService
             return new LessonPlanDto
             {
                 Id = source.Id,
-                Title = source.Title,
                 Level = source.Level,
                 LevelCaption = source.Level.GetDescription()
             };

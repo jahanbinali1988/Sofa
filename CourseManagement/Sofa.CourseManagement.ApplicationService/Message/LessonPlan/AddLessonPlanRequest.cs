@@ -1,5 +1,4 @@
 ﻿using Sofa.SharedKernel.BaseClasses.Message;
-using Sofa.SharedKernel.Enum;
 using System;
 using System.ComponentModel.DataAnnotations;
 

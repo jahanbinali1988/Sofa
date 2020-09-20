@@ -9,9 +9,9 @@ namespace Sofa.CourseManagement.Repository.EF
     {
         private readonly ApplicationDbContext _context;
         ILessonPlanRepository IUnitOfWork.lessonPlanRepository => new LessonPlanRepository(_context);
-        ILessonRepository IUnitOfWork.lessonRepository => new LessonRepository(_context);
         IPostRepository IUnitOfWork.postRepository => new PostRepository(_context);
         IUserRepository IUnitOfWork.userRepository => new UserRepository(_context);
+        public IInstituteRepository instituteRepository => new InstituteRepository(_context);
 
         public UnitOfWork(ApplicationDbContext context)
         {

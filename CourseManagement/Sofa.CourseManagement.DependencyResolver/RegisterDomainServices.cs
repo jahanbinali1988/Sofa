@@ -7,8 +7,8 @@ namespace Sofa.CourseManagement.DependencyResolver
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<InstituteDomainService>().As<IInstituteDomainService>();
             builder.RegisterType<LessonPlanDomainService>().As<ILessonPlanDomainService>();
-            builder.RegisterType<LessonDomainService>().As<ILessonDomainService>();
             builder.RegisterType<PostDomainService>().As<IPostDomainService>();
             builder.RegisterType<UserDomainService>().As<IUserDomainService>();
         }

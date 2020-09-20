@@ -28,7 +28,6 @@ namespace Sofa.Web.Controllers
 
         [Route("Get")]
         [HttpGet]
-        [Authorize]
         public IActionResult Get([FromBody] GetUserByIdRequest request)
         {
             var response = userService.Get(request);

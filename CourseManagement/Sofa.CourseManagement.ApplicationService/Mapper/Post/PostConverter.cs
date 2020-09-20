@@ -18,10 +18,8 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 Id = source.Id,
                 Title = source.Title,
-                LessonId = source.LessonId,
                 PostType = source.PostType,
                 Order = source.Order,
-                LessonCaption = source.Lesson is null ? "" : source.Lesson.Title,
                 PostTypeCaption = source.PostType.GetDescription(),
                 IsActive = source.IsActive
             };

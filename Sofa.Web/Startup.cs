@@ -61,6 +61,7 @@ namespace Sofa.Web
             loggerFactory.AddLog4Net();
 
             app.UseMvc();
+
             app.UseStaticFiles(new StaticFileOptions()
             {
                 ContentTypeProvider = new JsonContentTypeProvider()
@@ -80,22 +81,27 @@ namespace Sofa.Web
             // ********************
             // Setup CORS
             // ********************            
-            var corsBuilder = new CorsPolicyBuilder();
-            corsBuilder.AllowAnyHeader();
-            corsBuilder.AllowAnyMethod();
-            corsBuilder.AllowAnyOrigin(); // For anyone access.            
-            corsBuilder.AllowCredentials();
-
-            services.AddHttpClient();
             services.AddCors(options =>
             {
-                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+                options.AddDefaultPolicy(builder =>
+                    builder.SetIsOriginAllowed(_ => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
             });
+            //var corsBuilder = new CorsPolicyBuilder();
+            //corsBuilder.AllowAnyHeader();
+            //corsBuilder.AllowAnyMethod();
+            //corsBuilder.AllowAnyOrigin(); // For anyone access.            
+            //corsBuilder.AllowCredentials();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "Sofa Course Management API", Version = "v1" });
-            });
+            services.AddHttpClient();
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+            //});
+
+            services.AddSwaggerGen();
 
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
@@ -104,8 +110,8 @@ namespace Sofa.Web
                 .AddResourceOwnerValidator<CustomUserOwnedPasswordValidator>();
 
             // Add framework services.
-            services.AddMvc()
-                .AddControllersAsServices();
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+            //services.AddMvc().AddControllersAsServices();
 
             var identityAuthority = Configuration.GetValue<string>("identityAuthority");
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -133,6 +139,7 @@ namespace Sofa.Web
             // Add the DbContextOptions:
             var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("Sofa.CourseManagement.EntityFramework"))
+                .EnableSensitiveDataLogging()
                 .Options;
             services.AddSingleton(dbContextOptions);
             // Finally register the DbContextOptions:
@@ -146,7 +153,7 @@ namespace Sofa.Web
             var containerBuilder = new ContainerBuilder();
 
             containerBuilder.RegisterType<ServiceBusSettingProvider>().As<IServiceBusSettingProvider>();
-
+            containerBuilder.RegisterType<Logger>().As<SharedKernel.ILogger>();
             containerBuilder.Populate(services);
 
             // Register your own services within Autofac

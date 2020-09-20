@@ -8,8 +8,8 @@ namespace Sofa.CourseManagement.DependencyResolver
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<InstituteRepository>().As<IInstituteRepository>();
             builder.RegisterType<LessonPlanRepository>().As<ILessonPlanRepository>();
-            builder.RegisterType<LessonRepository>().As<ILessonRepository>();
             builder.RegisterType<PostRepository>().As<IPostRepository>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
         }

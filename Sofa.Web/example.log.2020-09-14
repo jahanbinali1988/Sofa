@@ -1,0 +1,9 @@
+2020-09-14 15:18:03,940  INFO Microsoft.AspNetCore.Hosting.Internal.WebHost.? [?] - MESSAGE: Request starting HTTP/2.0 GET https://localhost:44306/api/values  
+ 2020-09-14 15:18:04,227 DEBUG IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler.? [?] - MESSAGE: AuthenticationScheme: Bearer was not authenticated.
+ 2020-09-14 15:18:04,273 DEBUG IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler.? [?] - MESSAGE: AuthenticationScheme: Bearer was not authenticated.
+ 2020-09-14 15:18:04,643  INFO Microsoft.AspNetCore.Hosting.Internal.WebHost.? [?] - MESSAGE: Request finished in 711.0205ms 404 
+ 2020-09-14 15:21:28,416  INFO Microsoft.AspNetCore.Hosting.Internal.WebHost.? [?] - MESSAGE: Request starting HTTP/2.0 GET https://localhost:44306/api/values  
+ 2020-09-14 15:21:28,535 DEBUG IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler.? [?] - MESSAGE: AuthenticationScheme: Bearer was not authenticated.
+ 2020-09-14 15:21:28,556 DEBUG IdentityServer4.AccessTokenValidation.IdentityServerAuthenticationHandler.? [?] - MESSAGE: AuthenticationScheme: Bearer was not authenticated.
+ 2020-09-14 15:21:28,698  INFO Microsoft.AspNetCore.Hosting.Internal.WebHost.? [?] - MESSAGE: Request finished in 287.7026ms 404 
+ 

@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.4" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
-    <PackageReference Include="MassTransit" Version="6.0.1" />
-    <PackageReference Include="MassTransit.AspNetCore" Version="6.0.1" />
-    <PackageReference Include="MassTransit.Autofac" Version="6.0.1" />
-    <PackageReference Include="MassTransit.RabbitMQ" Version="6.0.1" />
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="MassTransit" Version="7.0.4" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.0.4" />
+    <PackageReference Include="MassTransit.Autofac" Version="7.0.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.0.4" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 
@@ -18,7 +18,6 @@
     <ProjectReference Include="..\..\Sofa.Events\Sofa.Events.csproj" />
     <ProjectReference Include="..\Sofa.CourseManagement.ApplicationService\Sofa.CourseManagement.ApplicationService.csproj" />
     <ProjectReference Include="..\Sofa.CourseManagement.Consumer\Sofa.CourseManagement.Consumer.csproj" />
-    <ProjectReference Include="..\Sofa.CourseManagement.EntityFramework\Sofa.CourseManagement.EntityFramework.csproj" />
   </ItemGroup>
 
   <ItemGroup>

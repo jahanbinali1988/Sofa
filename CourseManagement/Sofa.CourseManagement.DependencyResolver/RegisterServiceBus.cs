@@ -24,7 +24,7 @@ namespace Sofa.CourseManagement.DependencyResolver
 
                     cfg.ReceiveEndpoint(busSettings.QueueName, ec =>
                     {
-                        ec.LoadFrom(context);
+                        //ec.LoadFrom(context);
                     });
                 });
 

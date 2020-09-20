@@ -31,8 +31,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                this._lessonPlanDomainService.CanAdd(request.Title);
-                var lessonPlan = LessonPlan.DefaultFactory(request.Title, (LevelEnum)request.Level, request.IsActive);
+                var lessonPlan = LessonPlan.DefaultFactory((LevelEnum)request.Level, request.IsActive);
 
                 this._unitOfWork.lessonPlanRepository.Add(lessonPlan);
                 this._unitOfWork.Commit();
@@ -41,8 +40,7 @@ namespace Sofa.CourseManagement.ApplicationService
                     Description = "Created in CourseManagement Module",
                     Id = lessonPlan.Id,
                     IsActive = lessonPlan.IsActive,
-                    Level = (short)lessonPlan.Level,
-                    Title = lessonPlan.Title
+                    Level = (short)lessonPlan.Level
                 });
                 return new AddLessonPlanResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = lessonPlan.Id };
             }

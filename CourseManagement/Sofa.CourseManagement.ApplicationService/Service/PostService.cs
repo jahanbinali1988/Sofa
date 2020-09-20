@@ -38,7 +38,6 @@ namespace Sofa.CourseManagement.ApplicationService
                 this._unitOfWork.Commit();
 
                 _busControl.Publish<RegisterPostEvent>(new RegisterPostEvent() {
-                    LessonId = post.LessonId,
                     Order = post.Order,
                     PostType = (short)post.PostType,
                     Title = post.Title,
