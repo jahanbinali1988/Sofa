@@ -4,5 +4,6 @@
     {
         public static readonly string LevelAddApiUrl = "/api/LessonPlan/Add";
         public static readonly string UserAddApiUrl = "/api/User/Add";
+        public static readonly string GetInstituteByIdApiUrl = "api/Institute/Get?Id=";
     }
 }

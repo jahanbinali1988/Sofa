@@ -45,13 +45,9 @@ namespace Sofa.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseDeveloperExceptionPage();
-
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
-
-            //// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sofa Course Management API V1");
@@ -59,14 +55,7 @@ namespace Sofa.Web
 
             app.UseIdentityServer();
             loggerFactory.AddLog4Net();
-
             app.UseMvc();
-
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                ContentTypeProvider = new JsonContentTypeProvider()
-            });
-
             HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
         }
 
@@ -77,6 +66,7 @@ namespace Sofa.Web
             {
                 options.CustomSchemaIds(x => x.FullName);
             });
+            services.AddHttpClient();
 
             // ********************
             // Setup CORS
@@ -87,19 +77,10 @@ namespace Sofa.Web
                     builder.SetIsOriginAllowed(_ => true)
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowCredentials());
+                    //.AllowAnyOrigin()
+                    .AllowCredentials()
+                    );
             });
-            //var corsBuilder = new CorsPolicyBuilder();
-            //corsBuilder.AllowAnyHeader();
-            //corsBuilder.AllowAnyMethod();
-            //corsBuilder.AllowAnyOrigin(); // For anyone access.            
-            //corsBuilder.AllowCredentials();
-
-            services.AddHttpClient();
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
-            //});
 
             services.AddSwaggerGen();
 
@@ -109,9 +90,15 @@ namespace Sofa.Web
                 .AddInMemoryClients(IdentityServerConfig.GetClients())
                 .AddResourceOwnerValidator<CustomUserOwnedPasswordValidator>();
 
-            // Add framework services.
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-            //services.AddMvc().AddControllersAsServices();
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.EnableEndpointRouting = false;
+
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            .AddXmlSerializerFormatters()
+            .AddXmlDataContractSerializerFormatters()
+            .AddControllersAsServices();
 
             var identityAuthority = Configuration.GetValue<string>("identityAuthority");
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

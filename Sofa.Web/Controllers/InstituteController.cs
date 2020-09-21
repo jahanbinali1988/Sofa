@@ -16,8 +16,8 @@ namespace Sofa.Web.Controllers
             this.instituteService = instituteService;
         }
 
-        [Route("Add")]
         [HttpPost]
+        [Route("Add")]
         //[Authorize]
         public ActionResult<AddInstituteResponse> Add([FromBody]AddInstituteRequest request)
         {

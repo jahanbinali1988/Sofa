@@ -33,7 +33,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
                 Role = 2
             };
 
-            var result = sysAdminHttpClient.CallFMSService<AddUserResponse>(ConstantsUrl.UserAddApiUrl, request);
+            var result = sysAdminHttpClient.CallPostService<AddUserResponse>(ConstantsUrl.UserAddApiUrl, request);
             Assert.True(result.IsSuccess);
         }
 

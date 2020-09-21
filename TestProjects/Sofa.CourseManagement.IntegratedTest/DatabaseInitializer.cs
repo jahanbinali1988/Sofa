@@ -26,10 +26,10 @@ namespace Sofa.CourseManagement.IntegratedTest
             var applicationContextOptions = new ApplicationDbContextOptions(dbContextOptions, null, null);
             var testContext = new ApplicationDbContext(applicationContextOptions);
 
-            //context.Database.ExecuteSqlCommand("EXEC CleanDatabase");
-            //var contextService = context.GetService<IMigrator>();
-            //contextService.Migrate();
-            //AddDefaultData(context);
+            //context.database.executesqlcommand("exec cleandatabase");
+            //var contextservice = context.getservice<imigrator>();
+            //contextservice.migrate();
+            //adddefaultdata(context);
         }
 
         private static void AddDefaultData(ApplicationDbContext context)

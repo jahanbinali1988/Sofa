@@ -27,7 +27,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
                 Title = Guid.NewGuid().ToString()
             };
 
-            var result = sysAdminHttpClient.CallFMSService<AddLevelResponse>(ConstantsUrl.LevelAddApiUrl, request);
+            var result = sysAdminHttpClient.CallPostService<AddLevelResponse>(ConstantsUrl.LevelAddApiUrl, request);
             Assert.True(result.IsSuccess);
         }
 

@@ -1,11 +1,10 @@
-﻿using Sofa.SharedKernel.BaseClasses;
-using System.Net.Http;
+﻿using System.Net.Http;
 
 namespace Sofa.CourseManagement.IntegratedTest.Utilities
 {
     public static class HTTPClientExtention
     {
-        public static T CallFMSService<T>(this HttpClient httpClient, string url, object request) where T : ResponseBase
+        public static T CallPostService<T>(this HttpClient httpClient, string url, object request) where T : ResponseBase
         {
             var response = httpClient.PostAsJsonAsync(url, request).Result;
             var error = response.Content.ReadAsStringAsync().Result;
@@ -14,7 +13,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Utilities
             return result;
         }
 
-        public static T CallFMSGetService<T>(this HttpClient httpClient, string url)
+        public static T CallGetService<T>(this HttpClient httpClient, string url)
         {
             var response = httpClient.GetAsync(url).Result;
             response.EnsureSuccessStatusCode();

@@ -113,10 +113,6 @@ namespace Sofa.Teacher
             app.UseIdentityServer();
 
             app.UseMvc();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                ContentTypeProvider = new JsonContentTypeProvider()
-            });
         }
 
         private IServiceProvider ConfigurationIoc(IServiceCollection services)

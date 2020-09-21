@@ -11,7 +11,7 @@
   "AllowedHosts": "*",
   "logFilePath": "C:\\Users\\Jahan\\Desktop\\log.txt",
   "identityAuthority": "http://localhost:5000/",
-  "FmsElasticConnectionSettings": {
+  "ElasticConnectionSettings": {
     "ClusterUrl": "http://192.168.150.49:9200/",
     "DefaultIndex": "sofa"
   },
