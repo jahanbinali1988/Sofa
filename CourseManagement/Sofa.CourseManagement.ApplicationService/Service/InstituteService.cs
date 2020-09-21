@@ -34,7 +34,8 @@ namespace Sofa.CourseManagement.ApplicationService
 
                 this._instituteDomainService.CanAdd(request.Title);
                 var institute = Institute.DefaultFactory(request.Title, request.IsActive);
-                institute.AssignAddress(request.Addresses);
+                var addresses = request.Addresses.Convert();
+                institute.AssignAddress(addresses);
                 this._unitOfWork.instituteRepository.Add(institute);
                 this._unitOfWork.Commit();
 

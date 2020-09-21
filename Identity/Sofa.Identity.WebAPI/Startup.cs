@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +28,15 @@ namespace Sofa.Identity.WebAPI
         [Obsolete]
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddControllersAsServices();
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.EnableEndpointRouting = false;
+
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            .AddXmlSerializerFormatters()
+            .AddXmlDataContractSerializerFormatters()
+            .AddControllersAsServices();
 
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()

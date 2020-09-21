@@ -18,10 +18,10 @@ namespace Sofa.Web.Controllers
 
         [HttpPost]
         [Route("Add")]
-        //[Authorize]
+        [Authorize]
         public ActionResult<AddInstituteResponse> Add([FromBody]AddInstituteRequest request)
         {
-            //request.CommanderID = User.GetUserId();
+            request.CommanderID = User.GetUserId();
             return instituteService.AddInstitute(request);
         }
 

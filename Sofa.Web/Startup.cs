@@ -19,6 +19,7 @@ using Sofa.EntityFramework.Factory;
 using Sofa.EntityFramework.Seed;
 using Sofa.SharedKernel;
 using Swashbuckle.AspNetCore.Swagger;
+using Sofa.Web.Middleware;
 
 namespace Sofa.Web
 {
@@ -36,8 +37,7 @@ namespace Sofa.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            //var busControl = containerBuilder.RegisterInstance<IBusControl>();
-            //busControl.Start();
+            app.UseMiddleware<EnableRewindableBodyStartup>();
 
             app.UseCors("SiteCorsPolicy");
 
@@ -95,7 +95,7 @@ namespace Sofa.Web
                 options.RespectBrowserAcceptHeader = true;
                 options.EnableEndpointRouting = false;
 
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
             .AddXmlSerializerFormatters()
             .AddXmlDataContractSerializerFormatters()
             .AddControllersAsServices();
