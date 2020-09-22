@@ -16,14 +16,14 @@ namespace Sofa.CourseManagement.ApplicationService
         private readonly IUnitOfWork _unitOfWork;
         private readonly IInstituteDomainService _instituteDomainService;
         private readonly IBusControl _busControl;
-        //private readonly ILogger _logger;
+        private readonly ILogger _logger;
 
-        public InstituteService(IUnitOfWork unitOfWork, IInstituteDomainService instituteDomainService, IBusControl busControl)//, ILogger logger
+        public InstituteService(IUnitOfWork unitOfWork, IInstituteDomainService instituteDomainService, IBusControl busControl, ILogger logger)//
         {
             this._unitOfWork = unitOfWork;
             this._instituteDomainService = instituteDomainService;
             this._busControl = busControl;
-            //this._logger = logger;
+            this._logger = logger;
         }
 
         public AddInstituteResponse AddInstitute(AddInstituteRequest request)
@@ -43,12 +43,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                //this._logger.Warning("Course Management-Post Service-Add Post ", e.Message);
+                this._logger.Warning("Course Management-Post Service-Add Post ", e.Message);
                 return new AddInstituteResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
-                //this._logger.Error("Course Management-Post Service-Add Post ", e.Message);
+                this._logger.Error("Course Management-Post Service-Add Post ", e.Message);
                 return new AddInstituteResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
         }
@@ -65,12 +65,12 @@ namespace Sofa.CourseManagement.ApplicationService
             }
             catch (BusinessException e)
             {
-                //this._logger.Warning("Course Management-Post Service-Get Post ", e.Message);
+                this._logger.Warning("Course Management-Post Service-Get Post ", e.Message);
                 return new GetInstituteByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
-                //this._logger.Error("Course Management-Post Service-Get Post ", e.Message);
+                this._logger.Error("Course Management-Post Service-Get Post ", e.Message);
                 return new GetInstituteByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
         }

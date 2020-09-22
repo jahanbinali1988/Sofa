@@ -9,7 +9,7 @@
     }
   },
   "AllowedHosts": "*",
-  "logFilePath": "C:\\Users\\Jahan\\Desktop\\log.txt",
+  "logFilePath": "C:\\Users\\PC\\Desktop\\log.txt",
   "identityAuthority": "http://localhost:5000/",
   "ElasticConnectionSettings": {
     "ClusterUrl": "http://192.168.150.49:9200/",

@@ -1,67 +1,53 @@
 ﻿using System;
-using Sofa.SharedKernel;
-using log4net;
+using Serilog;
 
 namespace Sofa.Web
 {
-    public class Logger : ILogger
+    public class Logger : Sofa.SharedKernel.ILogger
     {
-        private readonly log4net.ILog _logger;
-        public void Debug(string data, params object[] propertyValue)
+        public void Information(string data)
         {
-            foreach (var prop in propertyValue)
-            {
-                _logger.Debug(data + prop);
-            }
-        }
-
-        public void Debug(string data)
-        {
-            _logger.Debug(data);
-        }
-
-        public void Error(string data, params object[] propertyValue)
-        {
-            foreach (var prop in propertyValue)
-            {
-                _logger.Error(data + prop);
-            }
-        }
-
-        public void Error(string data)
-        {
-            _logger.Error(data);
-        }
-
-        public void Exception(Exception exception, string message)
-        {
-                _logger.Error(message, exception);
+            Log.Information(data);
         }
 
         public void Information(string data, params object[] propertyValue)
         {
-            foreach (var prop in propertyValue)
-            {
-                _logger.Info(data + prop);
-            }
+            Log.Information(data, propertyValue);
         }
 
-        public void Information(string data)
+        public void Error(string data)
         {
-            _logger.Info(data);
+            Log.Error(data);
         }
 
-        public void Warning(string data, params object[] propertyValue)
+        public void Error(string data, params object[] propertyValue)
         {
-            foreach (var prop in propertyValue)
-            {
-                _logger.Warn(data + prop);
-            }
+            Log.Error(data, propertyValue);
+        }
+
+        public void Debug(string data)
+        {
+            Log.Debug(data);
+        }
+
+        public void Debug(string data, params object[] propertyValue)
+        {
+            Log.Debug(data, propertyValue);
         }
 
         public void Warning(string data)
         {
-            _logger.Warn(data);
+            Log.Warning(data);
+        }
+
+        public void Warning(string data, params object[] propertyValue)
+        {
+            Log.Warning(data, propertyValue);
+        }
+
+        public void Exception(Exception exception, string message)
+        {
+            Log.Error(exception, message);
         }
     }
 }

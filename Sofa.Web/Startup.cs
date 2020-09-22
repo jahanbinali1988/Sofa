@@ -54,7 +54,6 @@ namespace Sofa.Web
             });
 
             app.UseIdentityServer();
-            loggerFactory.AddLog4Net();
             app.UseMvc();
             HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
         }
