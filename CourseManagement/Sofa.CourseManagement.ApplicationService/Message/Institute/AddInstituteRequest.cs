@@ -8,8 +8,7 @@ namespace Sofa.CourseManagement.ApplicationService
 {
     public class AddInstituteRequest : LoginRequiredRequest
     {
-        [ListValidator]
-        public ICollection<AddressDto> Addresses { get; set; }
+        public AddressDto Address { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار عنوان موسسه الزامی است")]
         public string Title { get; set; }

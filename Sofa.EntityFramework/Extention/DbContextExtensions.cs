@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sofa.SharedKernel.BaseClasses;
 
-namespace Sofa.Teacher.EntityFramework.Context
+namespace Sofa.EntityFramework.Context
 {
     public static class DbContextExtensions
     {

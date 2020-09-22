@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sofa.CourseManagement.EntityFramework.Context;
 
 namespace Sofa.CourseManagement.EntityFramework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200922072940_09222020-2")]
+    partial class _092220202
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,6 +49,17 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         .HasName("PK_Institute");
 
                     b.ToTable("Institute");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5f3a1b34-0310-4253-9f14-77ca67dff811"),
+                            CreateDate = new DateTime(2020, 9, 22, 10, 59, 39, 461, DateTimeKind.Local).AddTicks(3844),
+                            IsActive = true,
+                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
+                            Title = "Default"
+                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.LessonPlan", b =>
@@ -176,14 +189,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("731874e2-b89c-4509-819a-5b69396a336b"),
-                            CreateDate = new DateTime(2020, 9, 22, 17, 18, 50, 590, DateTimeKind.Local).AddTicks(1927),
+                            CreateDate = new DateTime(2020, 9, 22, 10, 59, 39, 421, DateTimeKind.Local).AddTicks(9905),
                             Description = "",
                             Email = "jahanbin.ali1988@gmail.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 2,
-                            ModifyDate = new DateTime(2020, 9, 22, 17, 18, 50, 590, DateTimeKind.Local).AddTicks(7533),
+                            ModifyDate = new DateTime(2020, 9, 22, 10, 59, 39, 422, DateTimeKind.Local).AddTicks(3617),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 0,
@@ -193,14 +206,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("253e472e-21ac-4864-b218-b364169d0611"),
-                            CreateDate = new DateTime(2020, 9, 22, 17, 18, 50, 608, DateTimeKind.Local).AddTicks(8329),
+                            CreateDate = new DateTime(2020, 9, 22, 10, 59, 39, 442, DateTimeKind.Local).AddTicks(6167),
                             Description = "",
                             Email = "jahanbinali88@yahoo.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 2,
-                            ModifyDate = new DateTime(2020, 9, 22, 17, 18, 50, 608, DateTimeKind.Local).AddTicks(8474),
+                            ModifyDate = new DateTime(2020, 9, 22, 10, 59, 39, 442, DateTimeKind.Local).AddTicks(6300),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 1,
@@ -210,14 +223,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("50ecc8e1-5c5c-4a97-a5f5-af9e9eba1b70"),
-                            CreateDate = new DateTime(2020, 9, 22, 17, 18, 50, 617, DateTimeKind.Local).AddTicks(9349),
+                            CreateDate = new DateTime(2020, 9, 22, 10, 59, 39, 452, DateTimeKind.Local).AddTicks(151),
                             Description = "",
                             Email = "jahanbin.ali1988@yahoo.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 0,
-                            ModifyDate = new DateTime(2020, 9, 22, 17, 18, 50, 617, DateTimeKind.Local).AddTicks(9384),
+                            ModifyDate = new DateTime(2020, 9, 22, 10, 59, 39, 452, DateTimeKind.Local).AddTicks(182),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 1,

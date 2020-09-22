@@ -28,7 +28,23 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetById()
         {
-            var url = ConstantsUrl.GetInstituteByIdApiUrl + "EAB09285-AE8B-4396-B041-32A3E60D5512";
+            var request = new AddInstituteRequest()
+            {
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Address = new AddressDto()
+                {
+                    City = Guid.NewGuid().ToString(),
+                    ZipCode = Guid.NewGuid().ToString(),
+                    Country = Guid.NewGuid().ToString(),
+                    State = Guid.NewGuid().ToString(),
+                    Street = Guid.NewGuid().ToString()
+                }
+            };
+            var resultAdd = sysAdminHttpClient.CallPostService<Messages.AddInstituteResponse>(ConstantsUrl.AddInstituteApiUrl, request);
+            Assert.True(resultAdd.IsSuccess);
+
+            var url = ConstantsUrl.GetInstituteByIdApiUrl + resultAdd.NewRecordedId;
             var result = unknownHttpClient.CallGetService<Messages.GetInstituteByIdResponse>(url);
             Assert.True(result.IsSuccess);
         }
@@ -42,14 +58,13 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
-                Addresses = new List<AddressDto>() { 
-                    new AddressDto(){
-                        City = Guid.NewGuid().ToString(),
-                        ZipCode = Guid.NewGuid().ToString(),
-                        Country = Guid.NewGuid().ToString(),
-                        State = Guid.NewGuid().ToString(),
-                        Street = Guid.NewGuid().ToString()
-                    } 
+                Address = new AddressDto()
+                {
+                    City = Guid.NewGuid().ToString(),
+                    ZipCode = Guid.NewGuid().ToString(),
+                    Country = Guid.NewGuid().ToString(),
+                    State = Guid.NewGuid().ToString(),
+                    Street = Guid.NewGuid().ToString()
                 }
             };
 

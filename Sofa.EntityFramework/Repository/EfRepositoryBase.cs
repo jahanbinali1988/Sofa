@@ -24,7 +24,8 @@ namespace Sofa.EntityFramework.Repository
         {
             try
             {
-                _context.Entry<TEntity>(entity).State = EntityState.Added;
+                //_context.Entry<TEntity>(entity).State = EntityState.Added;
+                _context.Add<TEntity>(entity);
                 return true;
             }
             catch (Exception)
@@ -207,7 +208,8 @@ namespace Sofa.EntityFramework.Repository
         {
             try
             {
-                _context.Entry<TEntity>(entity).State = EntityState.Modified;
+                //_context.Entry<TEntity>(entity).State = EntityState.Modified;
+                _context.Update<TEntity>(entity);
                 return true;
             }
             catch (Exception)

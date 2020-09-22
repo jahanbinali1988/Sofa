@@ -6,32 +6,40 @@ namespace Sofa.CourseManagement.Model
 {
     public class Institute : BaseEntity
     {
-        public ICollection<Address> Addresses { get; set; }
-        public string Title { get; set; }
+        public string Title { get; private set; }
+
+        public Address Address { get; private set; }
 
         internal Institute()
         {
 
         }
 
-        public void AssignAddress(IEnumerable<Address> addresses)
+        public void AssignAddress(Address address)
         {
-            if (Addresses is null)
+            if (Address is null)
             {
-                Addresses = new List<Address>();
+                Address = new Address();
             }
 
-            foreach (var address in addresses)
+            var existed = this.Address.Equals(address);
+            if (!existed)
             {
-                var existed = this.Addresses.Contains(address);
-                if (!existed)
-                {
-                    this.Addresses.Add(address);
-                }
+                this.Address = address;
             }
         }
 
-        public static Institute DefaultFactory(string title, bool isActive)
+        public void AssignTitle(string title)
+        {
+            this.Title = title;
+        }
+
+        public void AssignActivityMode(bool isActive)
+        {
+            this.IsActive = isActive;
+        }
+
+        public static Institute CreateInstance(string title, bool isActive)
         {
             return new Institute()
             {

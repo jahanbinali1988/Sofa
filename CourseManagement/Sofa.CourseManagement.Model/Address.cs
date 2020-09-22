@@ -1,6 +1,7 @@
 ﻿using Sofa.SharedKernel.BaseClasses.ValueObject;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sofa.CourseManagement.Model
 {
@@ -14,7 +15,7 @@ namespace Sofa.CourseManagement.Model
 
         internal Address() { }
 
-        public static Address DefaultFactory(string street, string city, string state, string country, string zipcode)
+        public static Address CreateInstance(string street, string city, string state, string country, string zipcode)
         {
             return new Address()
             {
@@ -22,7 +23,7 @@ namespace Sofa.CourseManagement.Model
                 City = city,
                 State = state,
                 Country = country,
-                ZipCode = zipcode,
+                ZipCode = zipcode
             };
         }
     }

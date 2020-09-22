@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sofa.CourseManagement.EntityFramework.Context;
 
 namespace Sofa.CourseManagement.EntityFramework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200922060549_09222020-1")]
+    partial class _092220201
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,6 +49,17 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         .HasName("PK_Institute");
 
                     b.ToTable("Institute");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c224f75f-1156-47a7-a944-17a239af0618"),
+                            CreateDate = new DateTime(2020, 9, 22, 9, 35, 47, 535, DateTimeKind.Local).AddTicks(5081),
+                            IsActive = true,
+                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RowVersion = 0,
+                            Title = "Default"
+                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.LessonPlan", b =>
@@ -176,14 +189,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("731874e2-b89c-4509-819a-5b69396a336b"),
-                            CreateDate = new DateTime(2020, 9, 22, 17, 18, 50, 590, DateTimeKind.Local).AddTicks(1927),
+                            CreateDate = new DateTime(2020, 9, 22, 9, 35, 47, 494, DateTimeKind.Local).AddTicks(9848),
                             Description = "",
                             Email = "jahanbin.ali1988@gmail.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 2,
-                            ModifyDate = new DateTime(2020, 9, 22, 17, 18, 50, 590, DateTimeKind.Local).AddTicks(7533),
+                            ModifyDate = new DateTime(2020, 9, 22, 9, 35, 47, 495, DateTimeKind.Local).AddTicks(3287),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 0,
@@ -193,14 +206,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("253e472e-21ac-4864-b218-b364169d0611"),
-                            CreateDate = new DateTime(2020, 9, 22, 17, 18, 50, 608, DateTimeKind.Local).AddTicks(8329),
+                            CreateDate = new DateTime(2020, 9, 22, 9, 35, 47, 518, DateTimeKind.Local).AddTicks(1962),
                             Description = "",
                             Email = "jahanbinali88@yahoo.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 2,
-                            ModifyDate = new DateTime(2020, 9, 22, 17, 18, 50, 608, DateTimeKind.Local).AddTicks(8474),
+                            ModifyDate = new DateTime(2020, 9, 22, 9, 35, 47, 518, DateTimeKind.Local).AddTicks(2095),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 1,
@@ -210,14 +223,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("50ecc8e1-5c5c-4a97-a5f5-af9e9eba1b70"),
-                            CreateDate = new DateTime(2020, 9, 22, 17, 18, 50, 617, DateTimeKind.Local).AddTicks(9349),
+                            CreateDate = new DateTime(2020, 9, 22, 9, 35, 47, 526, DateTimeKind.Local).AddTicks(8660),
                             Description = "",
                             Email = "jahanbin.ali1988@yahoo.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 0,
-                            ModifyDate = new DateTime(2020, 9, 22, 17, 18, 50, 617, DateTimeKind.Local).AddTicks(9384),
+                            ModifyDate = new DateTime(2020, 9, 22, 9, 35, 47, 526, DateTimeKind.Local).AddTicks(8690),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 1,
@@ -228,10 +241,15 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.Institute", b =>
                 {
-                    b.OwnsOne("Sofa.CourseManagement.Model.Address", "Address", b1 =>
+                    b.OwnsMany("Sofa.CourseManagement.Model.Address", "Addresses", b1 =>
                         {
                             b1.Property<Guid>("InstituteId")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<string>("City")
                                 .HasColumnType("nvarchar(max)");
@@ -248,9 +266,9 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                             b1.Property<string>("ZipCode")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("InstituteId");
+                            b1.HasKey("InstituteId", "Id");
 
-                            b1.ToTable("Institute");
+                            b1.ToTable("Address");
 
                             b1.WithOwner()
                                 .HasForeignKey("InstituteId");

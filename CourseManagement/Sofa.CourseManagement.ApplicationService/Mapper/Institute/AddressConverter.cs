@@ -41,7 +41,7 @@ namespace Sofa.CourseManagement.ApplicationService
                 return null;
             }
 
-            return Address.DefaultFactory(source.Street, source.City, source.State, source.Country, source.ZipCode);
+            return Address.CreateInstance(source.Street, source.City, source.State, source.Country, source.ZipCode);
         }
 
         public static IEnumerable<Address> Convert(this IEnumerable<AddressDto> source)

@@ -17,7 +17,7 @@ namespace Sofa.CourseManagement.ApplicationService
             return new InstituteDto
             {
                  Title = source.Title,
-                 Addresses = source.Addresses
+                 Address = source.Address.Convert()
             };
         }
 

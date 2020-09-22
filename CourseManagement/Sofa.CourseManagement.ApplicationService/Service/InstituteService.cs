@@ -33,9 +33,9 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
 
                 this._instituteDomainService.CanAdd(request.Title);
-                var institute = Institute.DefaultFactory(request.Title, request.IsActive);
-                var addresses = request.Addresses.Convert();
-                institute.AssignAddress(addresses);
+                var institute = Institute.CreateInstance(request.Title, request.IsActive);
+                var address = request.Address.Convert();
+                institute.AssignAddress(address);
                 this._unitOfWork.instituteRepository.Add(institute);
                 this._unitOfWork.Commit();
 
@@ -60,7 +60,8 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
 
                 var institute = this._unitOfWork.instituteRepository.Get(request.InstituteId);
-                return new GetInstituteByIdResponse(true, "عملیات خواندن با موفقیت انجام شد", "") { Institute = institute.Convert() };
+                var result = institute.Convert();
+                return new GetInstituteByIdResponse(true, "عملیات خواندن با موفقیت انجام شد", "") { Institute =  result};
             }
             catch (BusinessException e)
             {

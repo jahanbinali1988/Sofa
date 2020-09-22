@@ -14,12 +14,8 @@ namespace Sofa.CourseManagement.EntityFramework.Mapper
                 .HasName("PK_Institute");
 
             builder
-                .ToTable("Institute").OwnsMany<Address>(e => e.Addresses, a =>
-                {
-                    a.WithOwner();
-                    //.HasForeignKey(d => d.InstituteId)
-                    //.HasPrincipalKey(k => k.Id);
-                });
+                .ToTable("Institute").OwnsOne(typeof(Address), "Address");
+
         }
     }
 }

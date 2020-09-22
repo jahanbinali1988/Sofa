@@ -73,27 +73,6 @@ namespace Sofa.CourseManagement.EntityFramework.Seed
                 Level = LevelEnum.Begginer
             };
 
-            var institute = Institute.DefaultFactory("Default", true);
-            var address = Address.DefaultFactory("Kian Pars", "Ahwaz", "Khuzestan", "Iran", "1748398760");
-            //institute.AssignAddress(address);
-            modelBuilder.Entity<Institute>().HasData(institute);
-            
-            
-            //modelBuilder.Entity<Institute>().OwnsMany<Address>(c => c.Addresses).HasData(institute, address);
-            
-
-            //var instituteId = Guid.NewGuid();
-            //modelBuilder.Entity<Institute>().HasData(new Institute() {
-            //    Id = instituteId,
-            //    CreateDate = DateTime.Now,
-            //    IsActive = true,
-            //    RowVersion = 0,
-            //    Title = "Default",
-            //    Addresses = new List<Address>() { 
-            //        new Address() { City = "Ahwaz", Country="Iran", InstituteId = instituteId , State = "Khuzestan", Street ="Kian Pars", ZipCode= "1748398760" }
-            //    }
-            //});
-
             modelBuilder.Entity<User>().HasData(userSysAdmin, userTeacher, userStudent);
         }
     }
