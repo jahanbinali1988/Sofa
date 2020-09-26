@@ -21,7 +21,8 @@ namespace Sofa.CourseManagement.ApplicationService
                 PostType = source.PostType,
                 Order = source.Order,
                 PostTypeCaption = source.PostType.GetDescription(),
-                IsActive = source.IsActive
+                IsActive = source.IsActive,
+                LessonPlanId = source.LessonPlanId
             };
         }
 

@@ -1,30 +1,30 @@
-﻿using Sofa.CourseManagement.Model;
-using Sofa.SharedKernel.Enum;
+﻿using Sofa.CourseManagement.ApplicationServic;
+using Sofa.CourseManagement.Model;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public static class LessonPlanConverter
+    public static class SessionConverter
     {
-        public static LessonPlanDto Convert(this LessonPlan source)
+        public static SessionDto Convert(this Session source)
         {
             if (source == null)
             {
                 return null;
             }
 
-            return new LessonPlanDto
+            return new SessionDto
             {
                 Id = source.Id,
-                Level = source.Level,
-                LevelCaption = source.Level.GetDescription(),
+                Title = source.Title,
                 IsActive = source.IsActive,
-                SessionId = source.SessionId
+                LessonPlanId = source.LessonPlanId,
+                TermId = source.TermId
             };
         }
 
-        public static IEnumerable<LessonPlanDto> Convert(this IEnumerable<LessonPlan> source)
+        public static IEnumerable<SessionDto> Convert(this IEnumerable<Session> source)
         {
             if (source == null)
             {

@@ -1,30 +1,28 @@
 ﻿using Sofa.CourseManagement.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public static class InstituteConverter
+public static class TermConverter
     {
-        public static InstituteDto Convert(this Institute source)
+        public static TermDto Convert(this Term source)
         {
             if (source == null)
             {
                 return null;
             }
 
-            return new InstituteDto
+            return new TermDto
             {
-                 Title = source.Title,
-                 Address = source.Address.Convert(),
-                 Id = source.Id,
-                 IsActive = source.IsActive,
-                 WebsiteUrl = source.WebsiteUrl
+                Id = source.Id,
+                Title = source.Title,
+                IsActive = source.IsActive,
+                CourseId = source.CourseId
             };
         }
 
-        public static IEnumerable<InstituteDto> Convert(this IEnumerable<Institute> source)
+        public static IEnumerable<TermDto> Convert(this IEnumerable<Term> source)
         {
             if (source == null)
             {

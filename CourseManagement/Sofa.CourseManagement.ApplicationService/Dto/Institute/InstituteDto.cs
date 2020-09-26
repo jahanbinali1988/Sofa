@@ -8,5 +8,7 @@ namespace Sofa.CourseManagement.ApplicationService
         public string Title { get; set; }
         public string WebsiteUrl { get; set; }
         public bool IsActive { get; set; }
+
+        public AddressDto Address { get; set; }
     }
 }
