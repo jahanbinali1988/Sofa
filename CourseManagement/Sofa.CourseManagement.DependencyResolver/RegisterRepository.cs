@@ -12,6 +12,10 @@ namespace Sofa.CourseManagement.DependencyResolver
             builder.RegisterType<LessonPlanRepository>().As<ILessonPlanRepository>();
             builder.RegisterType<PostRepository>().As<IPostRepository>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
+            builder.RegisterType<FieldRepository>().As<IFieldRepository>();
+            builder.RegisterType<TermRepository>().As<ITermRepository>();
+            builder.RegisterType<SessionRepository>().As<ISessionRepository>();
+            builder.RegisterType<CourseRepository>().As<ICourseRepository>();
         }
     }
 }

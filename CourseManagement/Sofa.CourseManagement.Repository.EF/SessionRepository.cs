@@ -2,14 +2,12 @@
 using Sofa.CourseManagement.EntityFramework.Context;
 using Sofa.EntityFramework.Repository;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sofa.CourseManagement.Repository.EF
 {
-    public class PostRepository : EfRepositoryBase<Post, Guid>, IPostRepository
+    public class SessionRepository : EfRepositoryBase<Session, Guid>, ISessionRepository
     {
-        public PostRepository(ApplicationDbContext context) : base(context)
+        public SessionRepository(ApplicationDbContext context) : base(context)
         {
         }
 

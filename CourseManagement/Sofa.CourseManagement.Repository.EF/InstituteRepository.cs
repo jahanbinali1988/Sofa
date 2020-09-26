@@ -10,15 +10,13 @@ namespace Sofa.CourseManagement.Repository.EF
 {
     public class InstituteRepository : EfRepositoryBase<Institute, Guid>, IInstituteRepository
     {
-        private readonly ApplicationDbContext _context;
         public InstituteRepository(ApplicationDbContext context) : base(context)
         {
-            _context = context;
         }
 
         public IEnumerable<Institute> GetInstitutesWithFieldsById(Guid instituteId)
         {
-            return _context.Query<Institute>().Where(c => c.Id == instituteId).Include(i => i.Fields);
+            return _context.Set<Institute>().Where(c => c.Id == instituteId).Include(i => i.Fields);
         }
     }
 }

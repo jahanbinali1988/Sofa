@@ -7,10 +7,8 @@ namespace Sofa.CourseManagement.Repository.EF
 {
     public class LessonPlanRepository : EfRepositoryBase<LessonPlan, Guid>, ILessonPlanRepository
     {
-        private readonly ApplicationDbContext _context;
         public LessonPlanRepository(ApplicationDbContext context) : base(context)
         {
-            _context = context;
         }
 
     }
