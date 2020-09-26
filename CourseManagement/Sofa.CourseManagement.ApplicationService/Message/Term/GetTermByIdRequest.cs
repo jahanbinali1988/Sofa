@@ -10,6 +10,6 @@ namespace Sofa.CourseManagement.ApplicationService
     {
         [GuidValidator]
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار شناسه الزامی است")]
-        public Guid InstituteId { get; set; }
+        public Guid TermId { get; set; }
     }
 }

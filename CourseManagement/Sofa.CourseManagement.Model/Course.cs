@@ -13,7 +13,7 @@ namespace Sofa.CourseManagement.Model
         public Field Field { get; set; }
         public ICollection<Term> Terms { get; set; }
 
-        public Course CreateInstance(string title, string ageRange, bool isActive)
+        public static Course CreateInstance(string title, string ageRange, bool isActive, Guid fieldId)
         {
             return new Course()
             {
@@ -22,7 +22,8 @@ namespace Sofa.CourseManagement.Model
                 CreateDate = DateTime.Now,
                 AgeRange = ageRange,
                 IsActive = isActive,
-                RowVersion = 0
+                RowVersion = 0,
+                FieldId = fieldId
             };
         }
     }

@@ -13,6 +13,6 @@ namespace Sofa.CourseManagement.ApplicationService
         {
         }
 
-        public SessionDto MyProperty { get; set; }
+        public SessionDto Session { get; set; }
     }
 }

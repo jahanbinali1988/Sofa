@@ -11,6 +11,10 @@ namespace Sofa.CourseManagement.Repository
         IPostRepository postRepository { get; }
         IUserRepository userRepository { get; }
         IInstituteRepository instituteRepository { get; }
+        IFieldRepository fieldRepository { get; }
+        ICourseRepository courseRepository { get; }
+        ITermRepository termRepository { get; }
+        ISessionRepository sessionRepository { get; }
 
         IDbContextTransaction BeginTransaction();
         Task<IDbContextTransaction> BeginTransactionAsync();

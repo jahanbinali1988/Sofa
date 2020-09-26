@@ -12,7 +12,7 @@ namespace Sofa.CourseManagement.Model
         public Guid LessonPlanId { get; set; }
         public LessonPlan LessonPlan { get; set; }
 
-        public Session CreateInstance(string title, bool isActive)
+        public static Session CreateInstance(string title, bool isActive, Guid lessonPlanId, Guid termId)
         {
             return new Session()
             {
@@ -20,7 +20,9 @@ namespace Sofa.CourseManagement.Model
                 Title = title,
                 CreateDate = DateTime.Now,
                 Id = Guid.NewGuid(),
-                RowVersion = 0
+                RowVersion = 0,
+                LessonPlanId = lessonPlanId,
+                TermId = termId
             };
         }
     }

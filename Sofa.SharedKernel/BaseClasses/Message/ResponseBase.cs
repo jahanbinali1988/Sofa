@@ -16,7 +16,6 @@ namespace Sofa.SharedKernel.BaseClasses
         }
 
         public bool IsSuccess { get; internal set; }
-
         public string Message { get; internal set; }
         public string ErrorMessage { get; internal set; }
         public int ResponseStatusCode { get; internal set; }
