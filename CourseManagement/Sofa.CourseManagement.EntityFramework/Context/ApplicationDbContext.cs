@@ -16,6 +16,10 @@ namespace Sofa.CourseManagement.EntityFramework.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.AddConfiguration(new InstituteMapper());
+            builder.AddConfiguration(new FieldMapper());
+            builder.AddConfiguration(new CourseMapper());
+            builder.AddConfiguration(new TermMapper());
+            builder.AddConfiguration(new SessionMapper());
             builder.AddConfiguration(new LessonPlanMapper());
             builder.AddConfiguration(new PostMapper());
             builder.AddConfiguration(new UserMapper());

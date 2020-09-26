@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public class GetInstituteByIdRequest : RequestBase
+    public class GetSessionByIdRequest : RequestBase
     {
         [GuidValidator]
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار شناسه الزامی است")]
-        public Guid InstituteId { get; set; }
+        public Guid SessionId { get; set; }
     }
 }

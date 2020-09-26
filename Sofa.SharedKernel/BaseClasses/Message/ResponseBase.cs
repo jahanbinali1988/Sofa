@@ -1,4 +1,6 @@
-﻿namespace Sofa.SharedKernel.BaseClasses
+﻿using System.Collections.Generic;
+
+namespace Sofa.SharedKernel.BaseClasses
 {
     public class ResponseBase
     {
@@ -18,5 +20,6 @@
         public string Message { get; internal set; }
         public string ErrorMessage { get; internal set; }
         public int ResponseStatusCode { get; internal set; }
+        public IEnumerable<ValidationResult> ValidationResults { get; set; }
     }
 }

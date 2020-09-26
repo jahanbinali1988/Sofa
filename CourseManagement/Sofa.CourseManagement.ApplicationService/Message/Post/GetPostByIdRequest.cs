@@ -6,7 +6,7 @@ namespace Sofa.CourseManagement.ApplicationService
 {
     public class GetPostByIdRequest : RequestBase
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار اندیس الزامی است")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار شناسه الزامی است")]
         public Guid PostId { get; set; }
     }
 }

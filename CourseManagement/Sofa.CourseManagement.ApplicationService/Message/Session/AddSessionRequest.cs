@@ -1,16 +1,15 @@
-﻿using Sofa.SharedKernel.Enum;
+﻿using Sofa.SharedKernel.BaseClasses.Message;
 using System;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public class LessonPlanDto
+    public class AddSessionRequest : LoginRequiredRequest
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public LevelEnum Level { get; set; }
-        public string LevelCaption { get; set; }
         public bool IsActive { get; set; }
 
-        public Guid SessionId { get; set; }
+        public Guid TermId { get; set; }
+        public Guid LessonPlanId { get; set; }
     }
 }

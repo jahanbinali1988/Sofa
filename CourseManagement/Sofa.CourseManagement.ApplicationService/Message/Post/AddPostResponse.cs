@@ -7,11 +7,9 @@ namespace Sofa.CourseManagement.ApplicationService
     {
         public AddPostResponse(bool successful, string message, string errorMessage, Guid newRecordedId) : base(successful, message, errorMessage, newRecordedId)
         {
-            this.NewRecordedId = newRecordedId;
         }
         public AddPostResponse(Guid newRecordedId) : base(newRecordedId)
         {
-            this.NewRecordedId = newRecordedId;
         }
     }
 }

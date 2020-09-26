@@ -1,19 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using Sofa.SharedKernel.BaseClasses;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public class AddUserResponse : ResponseBase
+    public class AddUserResponse : AddResponseBase
     {
-        public AddUserResponse(bool isSuccess, string message) : base(isSuccess, message)
+        public AddUserResponse()
         {
         }
 
-        public AddUserResponse(bool isSuccess, string message, string errorMessage) : base(isSuccess, message, errorMessage)
+        public AddUserResponse(Guid newRecordedId) : base(newRecordedId)
         {
         }
-        public Guid NewRecordedId { get; set; }
-        public IEnumerable<ValidationResult> ValidationResults { get; set; }
+
+        public AddUserResponse(bool successful, string message, string errorMessage, Guid newRecordedId) : base(successful, message, errorMessage, newRecordedId)
+        {
+        }
     }
 }

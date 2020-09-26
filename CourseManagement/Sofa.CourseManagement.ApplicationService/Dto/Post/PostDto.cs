@@ -10,8 +10,8 @@ namespace Sofa.CourseManagement.ApplicationService
         public short Order { get; set; }
         public PostTypeEnum PostType { get; set; }
         public string PostTypeCaption { get; set; }
-        public Guid LessonId { get; set; }
-        public string LessonCaption { get; set; }
         public bool IsActive { get; set; }
+
+        public Guid LessonPlanId { get; set; }
     }
 }

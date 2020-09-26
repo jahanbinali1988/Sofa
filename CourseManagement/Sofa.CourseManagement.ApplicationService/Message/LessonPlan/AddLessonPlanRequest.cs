@@ -12,7 +12,7 @@ namespace Sofa.CourseManagement.ApplicationService
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار سطح برنامه تحصیلی الزامی است")]
         [Range(0, 2, ErrorMessage = "مفدار وارد شده خارج از حد مجاز است")]
         public short Level { get; set; }
-
+        [Required(ErrorMessage = "وضعیت فعال بودن برنامه آموزش را مشخص کنید")]
         public bool IsActive { get; set; }
     }
 }

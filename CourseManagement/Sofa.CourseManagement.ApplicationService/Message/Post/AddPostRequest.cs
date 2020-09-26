@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Sofa.SharedKernel.BaseClasses.Message;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public class AddPostRequest
+    public class AddPostRequest : LoginRequiredRequest
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار عنوان الزامی است")]
         public String Title { get; set; }
