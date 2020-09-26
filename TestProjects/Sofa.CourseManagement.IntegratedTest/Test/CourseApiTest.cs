@@ -1,12 +1,6 @@
-﻿using Microsoft.VisualBasic;
-using Sofa.CourseManagement.ApplicationService;
-using Sofa.CourseManagement.IntegratedTest.Messages;
+﻿using Sofa.CourseManagement.ApplicationService;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
-using Sofa.CourseManagement.Model;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using Xunit;
 
 namespace Sofa.CourseManagement.IntegratedTest.Test
@@ -40,7 +34,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         {
             var request = new AddCourseRequest()
             {
-                
+
             };
 
             var result = sysAdminHttpClient.CallPostService<Messages.AddCourseResponse>(ConstantsUrl.AddCourseApiUrl, request);

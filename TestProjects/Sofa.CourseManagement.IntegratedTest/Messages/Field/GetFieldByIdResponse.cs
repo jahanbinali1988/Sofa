@@ -2,7 +2,7 @@
 
 namespace Sofa.CourseManagement.IntegratedTest.Messages
 {
-   public class GetFieldByIdResponse : ResponseBase
+    public class GetFieldByIdResponse : ResponseBase
     {
         public FieldDto Field { get; set; }
     }

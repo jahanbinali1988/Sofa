@@ -12,7 +12,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         public UserApiTest(TestContextFixture contextFixture)
             : base(contextFixture)
         {
-             sysAdminHttpClient = testContext.GetAuthenticatedHttpClient(DefaultData.SysAdminUsername, DefaultData.SysAdminPassword);
+            sysAdminHttpClient = testContext.GetAuthenticatedHttpClient(DefaultData.SysAdminUsername, DefaultData.SysAdminPassword);
             teacherHttpClient = testContext.GetAuthenticatedHttpClient(DefaultData.TeacherUsername, DefaultData.TeacherPassword);
         }
 

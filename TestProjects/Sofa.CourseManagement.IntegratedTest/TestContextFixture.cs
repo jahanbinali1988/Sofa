@@ -1,15 +1,15 @@
-﻿using Sofa.Web;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Events;
+using Sofa.CourseManagement.IntegratedTest.Utilities;
+using Sofa.Web;
 using System;
 using System.IO;
 using System.Net.Http;
 using Xunit;
-using Sofa.CourseManagement.IntegratedTest.Utilities;
 
 namespace Sofa.CourseManagement.IntegratedTest
 {
@@ -85,7 +85,7 @@ namespace Sofa.CourseManagement.IntegratedTest
         {
             var integrationTestsPath = PlatformServices.Default.Application.ApplicationBasePath;
             var applicationPath = integrationTestsPath.Replace("TestProjects\\Sofa.CourseManagement.IntegratedTest", "Sofa.Web");
-            
+
             return applicationPath;
         }
 

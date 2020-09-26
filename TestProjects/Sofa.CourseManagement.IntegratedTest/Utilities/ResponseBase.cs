@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sofa.CourseManagement.IntegratedTest
+﻿namespace Sofa.CourseManagement.IntegratedTest
 {
     public class ResponseBase
     {

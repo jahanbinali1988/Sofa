@@ -1,7 +1,4 @@
 ﻿using Sofa.CourseManagement.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sofa.CourseManagement.IntegratedTest.Messages
 {

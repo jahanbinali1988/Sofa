@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.PlatformAbstractions;
 using System.Diagnostics;
-using System.IO;
 
 namespace Sofa.CourseManagement.IntegratedTest
 {

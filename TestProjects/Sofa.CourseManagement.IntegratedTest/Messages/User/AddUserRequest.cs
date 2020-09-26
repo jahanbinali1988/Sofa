@@ -1,5 +1,4 @@
 ﻿using Sofa.SharedKernel.BaseClasses.Message;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Sofa.CourseManagement.IntegratedTest

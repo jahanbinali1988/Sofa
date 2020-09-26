@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using Polly;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
