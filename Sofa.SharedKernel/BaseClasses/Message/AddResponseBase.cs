@@ -14,7 +14,7 @@ namespace Sofa.SharedKernel.BaseClasses
 
         public AddResponseBase(Guid newRecordedId) : base(true, "عملیات با موفقیت انجام شد.")
         {
-            NewRecordedId = newRecordedId;
+            this.NewRecordedId = newRecordedId;
             this.Message = "عملیات با موفقیت انجام شد.";
             this.ErrorMessage = "";
             this.IsSuccess = true;

@@ -22,7 +22,8 @@ namespace Sofa.Web.Controllers
         public ActionResult<AddInstituteResponse> Add([FromBody]AddInstituteRequest request)
         {
             request.CommanderID = User.GetUserId();
-            return instituteService.AddInstitute(request);
+            var result = instituteService.AddInstitute(request);
+            return result;
         }
 
         [Route("Get")]

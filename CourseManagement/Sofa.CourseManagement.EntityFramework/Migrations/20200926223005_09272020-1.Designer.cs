@@ -10,8 +10,8 @@ using Sofa.CourseManagement.EntityFramework.Context;
 namespace Sofa.CourseManagement.EntityFramework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200920104710_09202020-1")]
-    partial class _092020201
+    [Migration("20200926223005_09272020-1")]
+    partial class _092720201
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,79 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Sofa.CourseManagement.Model.Course", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AgeRange")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("FieldId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RowVersion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Course");
+
+                    b.HasIndex("FieldId");
+
+                    b.ToTable("Course");
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Model.Field", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("InstituteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RowVersion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Field");
+
+                    b.HasIndex("InstituteId");
+
+                    b.ToTable("Field");
+                });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.Institute", b =>
                 {
@@ -45,21 +118,13 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("WebsiteUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id")
                         .HasName("PK_Institute");
 
                     b.ToTable("Institute");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("eab09285-ae8b-4396-b041-32a3e60d5512"),
-                            CreateDate = new DateTime(2020, 9, 20, 15, 17, 9, 698, DateTimeKind.Local).AddTicks(9692),
-                            IsActive = true,
-                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RowVersion = 0,
-                            Title = "Default"
-                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.LessonPlan", b =>
@@ -85,6 +150,9 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
 
                     b.Property<int>("RowVersion")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("SessionId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id")
                         .HasName("PK_LessonPlan");
@@ -133,6 +201,82 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                     b.HasIndex("LessonPlanId");
 
                     b.ToTable("Post");
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Model.Session", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("LessonPlanId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RowVersion")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TermId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Session");
+
+                    b.HasIndex("LessonPlanId")
+                        .IsUnique();
+
+                    b.HasIndex("TermId");
+
+                    b.ToTable("Session");
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Model.Term", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RowVersion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Term");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Term");
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.User", b =>
@@ -189,14 +333,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("731874e2-b89c-4509-819a-5b69396a336b"),
-                            CreateDate = new DateTime(2020, 9, 20, 15, 17, 9, 668, DateTimeKind.Local).AddTicks(2410),
+                            CreateDate = new DateTime(2020, 9, 27, 2, 0, 5, 100, DateTimeKind.Local).AddTicks(5016),
                             Description = "",
                             Email = "jahanbin.ali1988@gmail.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 2,
-                            ModifyDate = new DateTime(2020, 9, 20, 15, 17, 9, 668, DateTimeKind.Local).AddTicks(5908),
+                            ModifyDate = new DateTime(2020, 9, 27, 2, 0, 5, 100, DateTimeKind.Local).AddTicks(8659),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 0,
@@ -206,14 +350,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("253e472e-21ac-4864-b218-b364169d0611"),
-                            CreateDate = new DateTime(2020, 9, 20, 15, 17, 9, 680, DateTimeKind.Local).AddTicks(9728),
+                            CreateDate = new DateTime(2020, 9, 27, 2, 0, 5, 112, DateTimeKind.Local).AddTicks(8190),
                             Description = "",
                             Email = "jahanbinali88@yahoo.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 2,
-                            ModifyDate = new DateTime(2020, 9, 20, 15, 17, 9, 680, DateTimeKind.Local).AddTicks(9899),
+                            ModifyDate = new DateTime(2020, 9, 27, 2, 0, 5, 112, DateTimeKind.Local).AddTicks(8324),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 1,
@@ -223,14 +367,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("50ecc8e1-5c5c-4a97-a5f5-af9e9eba1b70"),
-                            CreateDate = new DateTime(2020, 9, 20, 15, 17, 9, 689, DateTimeKind.Local).AddTicks(4050),
+                            CreateDate = new DateTime(2020, 9, 27, 2, 0, 5, 121, DateTimeKind.Local).AddTicks(2159),
                             Description = "",
                             Email = "jahanbin.ali1988@yahoo.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 0,
-                            ModifyDate = new DateTime(2020, 9, 20, 15, 17, 9, 689, DateTimeKind.Local).AddTicks(4078),
+                            ModifyDate = new DateTime(2020, 9, 27, 2, 0, 5, 121, DateTimeKind.Local).AddTicks(2180),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 1,
@@ -239,17 +383,30 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Sofa.CourseManagement.Model.Course", b =>
+                {
+                    b.HasOne("Sofa.CourseManagement.Model.Field", "Field")
+                        .WithMany("Courses")
+                        .HasForeignKey("FieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Model.Field", b =>
+                {
+                    b.HasOne("Sofa.CourseManagement.Model.Institute", "Institute")
+                        .WithMany("Fields")
+                        .HasForeignKey("InstituteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Sofa.CourseManagement.Model.Institute", b =>
                 {
-                    b.OwnsMany("Sofa.CourseManagement.Model.Address", "Addresses", b1 =>
+                    b.OwnsOne("Sofa.CourseManagement.Model.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("InstituteId")
                                 .HasColumnType("uniqueidentifier");
-
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<string>("City")
                                 .HasColumnType("nvarchar(max)");
@@ -266,9 +423,9 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                             b1.Property<string>("ZipCode")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("InstituteId", "Id");
+                            b1.HasKey("InstituteId");
 
-                            b1.ToTable("Address");
+                            b1.ToTable("Institute");
 
                             b1.WithOwner()
                                 .HasForeignKey("InstituteId");
@@ -280,6 +437,30 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                     b.HasOne("Sofa.CourseManagement.Model.LessonPlan", "LessonPlan")
                         .WithMany("Posts")
                         .HasForeignKey("LessonPlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Model.Session", b =>
+                {
+                    b.HasOne("Sofa.CourseManagement.Model.LessonPlan", "LessonPlan")
+                        .WithOne("Session")
+                        .HasForeignKey("Sofa.CourseManagement.Model.Session", "LessonPlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sofa.CourseManagement.Model.Term", "Term")
+                        .WithMany("Sessions")
+                        .HasForeignKey("TermId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sofa.CourseManagement.Model.Term", b =>
+                {
+                    b.HasOne("Sofa.CourseManagement.Model.Course", "Course")
+                        .WithMany("Terms")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
