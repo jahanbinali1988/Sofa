@@ -7,8 +7,10 @@ namespace Sofa.CourseManagement.Model
     public class Institute : BaseEntity
     {
         public string Title { get; private set; }
-
+        public string WebsiteUrl { get; private set; }
         public Address Address { get; private set; }
+
+        public ICollection<Field> Fields { get; set; }
 
         internal Institute()
         {

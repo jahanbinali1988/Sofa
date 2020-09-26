@@ -9,12 +9,11 @@ namespace Sofa.CourseManagement.EntityFramework.Mapper
     {
         public override void Map(EntityTypeBuilder<LessonPlan> builder)
         {
-            builder
-                .ToTable("LessonPlan");
+            builder.ToTable("LessonPlan");
+            builder.HasKey(x => x.Id).HasName("PK_LessonPlan");
 
-            builder
-                .HasKey(x => x.Id)
-                .HasName("PK_LessonPlan");
+            builder.HasOne(a => a.Session).WithOne(b => b.LessonPlan).HasForeignKey<Session>(c => c.LessonPlanId);
+            builder.HasMany<Post>(c => c.Posts);
         }
     }
 }

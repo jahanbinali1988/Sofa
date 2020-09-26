@@ -4,24 +4,23 @@ using System.Collections.Generic;
 
 namespace Sofa.CourseManagement.Model
 {
-    public class Field : BaseEntity
+    public class Term : BaseEntity
     {
         public string Title { get; private set; }
 
-        public Guid InstituteId { get; set; }
-        public Institute Institute { get; set; }
+        public Guid CourseId { get; set; }
+        public Course Course { get; set; }
+        public ICollection<Session> Sessions { get; set; }
 
-        public ICollection<Course> Courses { get; set; }
-
-        public Field CreateInstances(string title, bool isActive)
+        public static Term CreateInstance(string title, bool isActive)
         {
-            return new Field()
+            return new Term()
             {
                 CreateDate = DateTime.Now,
                 Id = Guid.NewGuid(),
                 IsActive = isActive,
-                Title = title,
-                RowVersion = 0
+                RowVersion = 0,
+                Title = title
             };
         }
     }

@@ -9,12 +9,11 @@ namespace Sofa.CourseManagement.EntityFramework.Mapper
     {
         public override void Map(EntityTypeBuilder<Institute> builder)
         {
-            builder
-                .HasKey(x => x.Id)
-                .HasName("PK_Institute");
+            builder.ToTable("Institute");
+            builder.HasKey(x => x.Id).HasName("PK_Institute");
+            builder.OwnsOne(typeof(Address), "Address");
 
-            builder
-                .ToTable("Institute").OwnsOne(typeof(Address), "Address");
+            builder.HasMany<Field>(c => c.Fields);
 
         }
     }

@@ -8,6 +8,8 @@ using Sofa.SharedKernel.BaseClasses.Exceptions;
 using Sofa.SharedKernel.Enum;
 using Sofa.SharedKernel.Validation;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sofa.CourseManagement.ApplicationService
 {

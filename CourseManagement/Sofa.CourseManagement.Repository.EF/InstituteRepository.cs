@@ -1,7 +1,10 @@
-﻿using Sofa.CourseManagement.EntityFramework.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Sofa.CourseManagement.EntityFramework.Context;
 using Sofa.CourseManagement.Model;
 using Sofa.EntityFramework.Repository;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sofa.CourseManagement.Repository.EF
 {
@@ -13,5 +16,9 @@ namespace Sofa.CourseManagement.Repository.EF
             _context = context;
         }
 
+        public IEnumerable<Institute> GetInstitutesWithFieldsById(Guid instituteId)
+        {
+            return _context.Query<Institute>().Where(c => c.Id == instituteId).Include(i => i.Fields);
+        }
     }
 }

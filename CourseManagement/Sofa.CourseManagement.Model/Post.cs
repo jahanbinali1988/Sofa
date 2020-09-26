@@ -6,14 +6,14 @@ namespace Sofa.CourseManagement.Model
 {
     public class Post : BaseEntity
     {
-        public string Title { get; set; }
-        public short Order { get; set; }
-        public PostTypeEnum PostType { get; set; }
+        public string Title { get; private set; }
+        public short Order { get; private set; }
+        public PostTypeEnum PostType { get; private set; }
 
         public Guid LessonPlanId { get; set; }
         public LessonPlan LessonPlan { get; set; }
 
-        public static Post DefaultFactory(string title, short order, PostTypeEnum postType, Guid LessonPlanId, bool isActive)
+        public static Post CreateInstance(string title, short order, PostTypeEnum postType, Guid LessonPlanId, bool isActive)
         {
             return new Post()
             {
@@ -22,7 +22,8 @@ namespace Sofa.CourseManagement.Model
                 Order = order,
                 PostType = postType,
                 LessonPlanId = LessonPlanId,
-                IsActive = isActive
+                IsActive = isActive,
+                RowVersion = 0
             };
         }
     }

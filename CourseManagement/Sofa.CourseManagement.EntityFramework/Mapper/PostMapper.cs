@@ -9,20 +9,12 @@ namespace Sofa.CourseManagement.EntityFramework.Mapper
     {
         public override void Map(EntityTypeBuilder<Post> builder)
         {
-            builder
-                .ToTable("Post");
+            builder.ToTable("Post");
+            builder.HasKey(x => x.Id).HasName("PK_Post");
+            builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedOnAdd();
+            builder.Property(x => x.Title).HasColumnName("Title");
 
-            builder
-                .HasKey(x => x.Id)
-                .HasName("PK_Post");
-
-            builder.Property(x => x.Id)
-                .HasColumnName("Id")
-                .ValueGeneratedOnAdd();
-
-            builder
-                .Property(x => x.Title)
-                .HasColumnName("Title");
+            builder.HasOne<LessonPlan>(c => c.LessonPlan);
         }
     }
 }

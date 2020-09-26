@@ -32,7 +32,7 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
 
                 this._postDomainService.CanAdd(request.Title);
-                var post = Post.DefaultFactory(request.Title, request.Order, (PostTypeEnum)request.PostType, request.LessonId, request.IsActive);
+                var post = Post.CreateInstance(request.Title, request.Order, (PostTypeEnum)request.PostType, request.LessonId, request.IsActive);
 
                 this._unitOfWork.postRepository.Add(post);
                 this._unitOfWork.Commit();
