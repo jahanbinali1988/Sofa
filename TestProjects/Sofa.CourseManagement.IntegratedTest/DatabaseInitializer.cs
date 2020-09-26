@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Sofa.CourseManagement.EntityFramework.Context;
 
@@ -26,10 +28,10 @@ namespace Sofa.CourseManagement.IntegratedTest
             var applicationContextOptions = new ApplicationDbContextOptions(dbContextOptions, null, null);
             var testContext = new ApplicationDbContext(applicationContextOptions);
 
-            //context.database.executesqlcommand("exec cleandatabase");
-            //var contextservice = context.getservice<imigrator>();
-            //contextservice.migrate();
-            //adddefaultdata(context);
+            testContext.Database.ExecuteSqlCommand("exec CleanDatabase");
+            var contextservice = testContext.GetService<IMigrator>();
+            contextservice.Migrate();
+            AddDefaultData(testContext);
         }
 
         private static void AddDefaultData(ApplicationDbContext context)

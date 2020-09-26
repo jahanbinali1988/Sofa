@@ -11,12 +11,12 @@ using Xunit;
 
 namespace Sofa.CourseManagement.IntegratedTest.Test
 {
-    public class InstituteApiTest : SofaTestClassBase
+    public class PostApiTest : SofaTestClassBase
     {
         HttpClient sysAdminHttpClient;
         HttpClient teacherHttpClient;
         HttpClient unknownHttpClient;
-        public InstituteApiTest(TestContextFixture contextFixture)
+        public PostApiTest(TestContextFixture contextFixture)
             : base(contextFixture)
         {
             sysAdminHttpClient = testContext.GetAuthenticatedHttpClient(DefaultData.SysAdminUsername, DefaultData.SysAdminPassword);
@@ -28,31 +28,23 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetById()
         {
-            var url = ConstantsUrl.GetInstituteByIdApiUrl + "";
-            var result = unknownHttpClient.CallGetService<Messages.GetInstituteByIdResponse>(url);
+            var url = ConstantsUrl.GetPostByIdApiUrl + "";
+            var result = unknownHttpClient.CallGetService<Messages.GetPostByIdResponse>(url);
             Assert.True(result.IsSuccess);
         }
         #endregion
 
-        #region AddInstitute
+        #region AddPost
         [Fact]
         public void Add()
         {
-            var request = new AddInstituteRequest()
+            var request = new AddPostRequest()
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
-                Address = new AddressDto()
-                {
-                    City = Guid.NewGuid().ToString(),
-                    ZipCode = Guid.NewGuid().ToString(),
-                    Country = Guid.NewGuid().ToString(),
-                    State = Guid.NewGuid().ToString(),
-                    Street = Guid.NewGuid().ToString()
-                }
             };
 
-            var result = sysAdminHttpClient.CallPostService<Messages.AddInstituteResponse>(ConstantsUrl.AddInstituteApiUrl, request);
+            var result = sysAdminHttpClient.CallPostService<Messages.AddPostResponse>(ConstantsUrl.AddPostApiUrl, request);
             Assert.True(result.IsSuccess);
         }
         #endregion

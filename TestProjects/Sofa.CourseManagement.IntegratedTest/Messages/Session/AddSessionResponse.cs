@@ -2,7 +2,7 @@
 
 namespace Sofa.CourseManagement.IntegratedTest.Messages
 {
-    public class AddInstituteResponse : AddResponseBase
+    public class AddSessionResponse : AddResponseBase
     {
     }
 }

@@ -4,7 +4,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Utilities
 {
     public static class HTTPClientExtention
     {
-        public static T CallPostService<T>(this HttpClient httpClient, string url, object request) where T : ResponseBase
+        public static T CallPostService<T>(this HttpClient httpClient, string url, object request) where T : class
         {
             var response = httpClient.PostAsJsonAsync(url, request).Result;
             var error = response.Content.ReadAsStringAsync().Result;

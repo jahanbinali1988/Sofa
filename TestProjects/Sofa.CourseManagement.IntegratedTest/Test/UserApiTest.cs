@@ -33,7 +33,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
                 Role = 2
             };
 
-            var result = sysAdminHttpClient.CallPostService<AddUserResponse>(ConstantsUrl.UserAddApiUrl, request);
+            var result = sysAdminHttpClient.CallPostService<AddUserResponse>(ConstantsUrl.AddUserApiUrl, request);
             Assert.True(result.IsSuccess);
         }
 
@@ -53,7 +53,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             };
 
             var httpClient = testContext.GetHttpClient();
-            var response = httpClient.PostAsJsonAsync(ConstantsUrl.UserAddApiUrl, request).Result;
+            var response = httpClient.PostAsJsonAsync(ConstantsUrl.AddUserApiUrl, request).Result;
             Assert.Equal(System.Net.HttpStatusCode.Unauthorized, response.StatusCode);
         }
         #endregion

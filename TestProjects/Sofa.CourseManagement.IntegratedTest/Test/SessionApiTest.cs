@@ -11,12 +11,12 @@ using Xunit;
 
 namespace Sofa.CourseManagement.IntegratedTest.Test
 {
-    public class InstituteApiTest : SofaTestClassBase
+    public class SessionApiTest : SofaTestClassBase
     {
         HttpClient sysAdminHttpClient;
         HttpClient teacherHttpClient;
         HttpClient unknownHttpClient;
-        public InstituteApiTest(TestContextFixture contextFixture)
+        public SessionApiTest(TestContextFixture contextFixture)
             : base(contextFixture)
         {
             sysAdminHttpClient = testContext.GetAuthenticatedHttpClient(DefaultData.SysAdminUsername, DefaultData.SysAdminPassword);
@@ -28,31 +28,23 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetById()
         {
-            var url = ConstantsUrl.GetInstituteByIdApiUrl + "";
-            var result = unknownHttpClient.CallGetService<Messages.GetInstituteByIdResponse>(url);
+            var url = ConstantsUrl.GetSessionByIdApiUrl + "";
+            var result = unknownHttpClient.CallGetService<Messages.GetSessionByIdResponse>(url);
             Assert.True(result.IsSuccess);
         }
         #endregion
 
-        #region AddInstitute
+        #region AddSession
         [Fact]
         public void Add()
         {
-            var request = new AddInstituteRequest()
+            var request = new AddSessionRequest()
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
-                Address = new AddressDto()
-                {
-                    City = Guid.NewGuid().ToString(),
-                    ZipCode = Guid.NewGuid().ToString(),
-                    Country = Guid.NewGuid().ToString(),
-                    State = Guid.NewGuid().ToString(),
-                    Street = Guid.NewGuid().ToString()
-                }
             };
 
-            var result = sysAdminHttpClient.CallPostService<Messages.AddInstituteResponse>(ConstantsUrl.AddInstituteApiUrl, request);
+            var result = sysAdminHttpClient.CallPostService<Messages.AddSessionResponse>(ConstantsUrl.AddSessionApiUrl, request);
             Assert.True(result.IsSuccess);
         }
         #endregion
