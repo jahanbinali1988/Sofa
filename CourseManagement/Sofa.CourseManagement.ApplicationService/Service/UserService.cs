@@ -51,17 +51,17 @@ namespace Sofa.CourseManagement.ApplicationService
                     UserName = user.UserName,
                     Level = (short)user.Level
                 });
-                return new AddUserResponse(true, "ثبت با موفقیت انجام شد", null, user.Id);
+                return new AddUserResponse(true, "ثبت با موفقیت انجام شد", null) { NewRecordedId = user.Id };
             }
             catch (BusinessException e)
             {
                 this._logger.Warning("Course Management-Users Service-Add User ", e.Message);
-                return new AddUserResponse(false, "ثبت با مشکل مواجه شده است", e.Message, Guid.Empty);
+                return new AddUserResponse(false, "ثبت با مشکل مواجه شده است", e.Message);
             }
             catch (Exception e)
             {
                 this._logger.Error("Course Management-User Service-Add User ", e.Message);
-                return new AddUserResponse(false, "ثبت با مشکل مواجه شده است", e.Message, Guid.Empty);
+                return new AddUserResponse(false, "ثبت با مشکل مواجه شده است", e.Message);
             }
         }
 

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using Sofa.CourseManagement.IntegratedTest.Utilities;
 
 namespace Sofa.CourseManagement.IntegratedTest
 {
     public class AddUserResponse : ResponseBase
     {
-        public Guid NewRecordedId { get; set; }
-        public IEnumerable<ValidationResult> ValidationResults { get; set; }
+        public string NewRecordedId { get; set; }
     }
 }

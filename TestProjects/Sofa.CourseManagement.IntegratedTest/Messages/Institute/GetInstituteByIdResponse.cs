@@ -1,9 +1,10 @@
-﻿using Sofa.CourseManagement.Model;
+﻿using Sofa.CourseManagement.ApplicationService;
+using Sofa.CourseManagement.IntegratedTest.Utilities;
 
 namespace Sofa.CourseManagement.IntegratedTest.Messages
 {
     public class GetInstituteByIdResponse : ResponseBase
     {
-        public Institute Institute { get; set; }
+        public InstituteDto Institute { get; set; }
     }
 }

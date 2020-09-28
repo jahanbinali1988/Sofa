@@ -37,17 +37,17 @@ namespace Sofa.CourseManagement.ApplicationService
                 this._unitOfWork.instituteRepository.Add(institute);
                 this._unitOfWork.Commit();
 
-                return new AddInstituteResponse(true, "ثبت با موفقیت انجام شد", null, institute.Id);
+                return new AddInstituteResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = institute.Id };
             }
             catch (BusinessException e)
             {
                 this._logger.Warning("Course Management-Institute Service-Add Institute ", e.Message);
-                return new AddInstituteResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), Guid.Empty);
+                return new AddInstituteResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
                 this._logger.Error("Course Management-Institute Service-Add Institute ", e.Message);
-                return new AddInstituteResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), Guid.Empty);
+                return new AddInstituteResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
         }
 

@@ -42,17 +42,17 @@ namespace Sofa.CourseManagement.ApplicationService
                     IsActive = lessonPlan.IsActive,
                     Level = (short)lessonPlan.Level
                 });
-                return new AddLessonPlanResponse(true, "ثبت با موفقیت انجام شد", null, lessonPlan.Id);
+                return new AddLessonPlanResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = lessonPlan.Id };
             }
             catch (BusinessException e)
             {
                 this._logger.Warning("Course Management-LessonPlan Service-Add LessonPlan ", e.Message);
-                return new AddLessonPlanResponse(false, "ثبت با مشکل مواجه شده است",e.Message, Guid.Empty);
+                return new AddLessonPlanResponse(false, "ثبت با مشکل مواجه شده است",e.Message);
             }
             catch (Exception e)
             {
                 this._logger.Error("Course Management-LessonPlan Service-Add LessonPlan ", e.Message);
-                return new AddLessonPlanResponse(false, "ثبت با مشکل مواجه شده است", e.Message, Guid.Empty);
+                return new AddLessonPlanResponse(false, "ثبت با مشکل مواجه شده است", e.Message);
             }
         }
 

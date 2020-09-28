@@ -32,17 +32,17 @@ namespace Sofa.CourseManagement.ApplicationService
                 this._unitOfWork.fieldRepository.Add(field);
                 this._unitOfWork.Commit();
 
-                return new AddFieldResponse(true, "ثبت با موفقیت انجام شد", null, field.Id);
+                return new AddFieldResponse(true, "ثبت با موفقیت انجام شد", null) { NewRecordedId = field.Id };
             }
             catch (BusinessException e)
             {
                 this._logger.Warning("Course Management-Field Service-Add Field ", e.Message);
-                return new AddFieldResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), Guid.Empty);
+                return new AddFieldResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
                 this._logger.Error("Course Management-Field Service-Add Field ", e.Message);
-                return new AddFieldResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), Guid.Empty);
+                return new AddFieldResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
         }
 

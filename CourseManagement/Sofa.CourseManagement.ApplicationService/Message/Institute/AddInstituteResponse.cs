@@ -3,18 +3,16 @@ using System;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public class AddInstituteResponse : AddResponseBase
+    public class AddInstituteResponse : ResponseBase
     {
-        public AddInstituteResponse()
+        public AddInstituteResponse(bool isSuccess, string message) : base(isSuccess, message)
         {
         }
 
-        public AddInstituteResponse(Guid newRecordedId) : base(newRecordedId)
+        public AddInstituteResponse(bool isSuccess, string message, string errorMessage) : base(isSuccess, message, errorMessage)
         {
         }
 
-        public AddInstituteResponse(bool successful, string message, string errorMessage, Guid newRecordedId) : base(successful, message, errorMessage, newRecordedId)
-        {
-        }
+        public Guid NewRecordedId { get; set; }
     }
 }

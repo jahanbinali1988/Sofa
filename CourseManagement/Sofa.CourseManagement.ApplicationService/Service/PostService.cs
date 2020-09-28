@@ -46,17 +46,17 @@ namespace Sofa.CourseManagement.ApplicationService
                     IsActive = post.IsActive
                 });
 
-                return new AddPostResponse(true, "ثبت با موفقیت انجام شد", "", post.Id);
+                return new AddPostResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = post.Id };
             }
             catch (BusinessException e)
             {
                 this._logger.Warning("Course Management-Post Service-Add Post ", e.Message);
-                return new AddPostResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), new Guid());
+                return new AddPostResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
                 this._logger.Error("Course Management-Post Service-Add Post ", e.Message);
-                return new AddPostResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), new Guid());
+                return new AddPostResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
         }
 

@@ -32,17 +32,17 @@ namespace Sofa.CourseManagement.ApplicationService
                 this._unitOfWork.sessionRepository.Add(session);
                 this._unitOfWork.Commit();
 
-                return new AddSessionResponse(true, "ثبت با موفقیت انجام شد", null, session.Id);
+                return new AddSessionResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = session.Id };
             }
             catch (BusinessException e)
             {
                 this._logger.Warning("Course Management-Session Service-Add Session ", e.Message);
-                return new AddSessionResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), Guid.Empty);
+                return new AddSessionResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
             catch (Exception e)
             {
                 this._logger.Error("Course Management-Session Service-Add Session ", e.Message);
-                return new AddSessionResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString(), Guid.Empty);
+                return new AddSessionResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
             }
         }
 

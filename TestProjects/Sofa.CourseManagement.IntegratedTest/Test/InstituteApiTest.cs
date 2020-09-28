@@ -23,7 +23,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetById()
         {
-            var url = ConstantsUrl.GetInstituteByIdApiUrl + "";
+            var url = ConstantsUrl.GetInstituteByIdApiUrl + "CCDD20D4-B2A0-455A-8F7A-168503776B82";
             var result = unknownHttpClient.CallGetService<Messages.GetInstituteByIdResponse>(url);
             Assert.True(result.IsSuccess);
         }

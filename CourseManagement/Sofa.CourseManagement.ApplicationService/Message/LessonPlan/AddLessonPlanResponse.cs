@@ -3,18 +3,16 @@ using Sofa.SharedKernel.BaseClasses;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public class AddLessonPlanResponse : AddResponseBase
+    public class AddLessonPlanResponse : ResponseBase
     {
-        public AddLessonPlanResponse()
+        public AddLessonPlanResponse(bool isSuccess, string message) : base(isSuccess, message)
         {
         }
 
-        public AddLessonPlanResponse(Guid newRecordedId) : base(newRecordedId)
+        public AddLessonPlanResponse(bool isSuccess, string message, string errorMessage) : base(isSuccess, message, errorMessage)
         {
         }
 
-        public AddLessonPlanResponse(bool successful, string message, string errorMessage, Guid newRecordedId) : base(successful, message, errorMessage, newRecordedId)
-        {
-        }
+        public Guid NewRecordedId { get; set; }
     }
 }
