@@ -28,7 +28,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var field = Field.CreateInstance(request.Title, request.IsActive, request.InstituteId);
+                var field = Field.CreateInstance(null, request.Title, request.IsActive, request.InstituteId);
                 this._unitOfWork.fieldRepository.Add(field);
                 this._unitOfWork.Commit();
 

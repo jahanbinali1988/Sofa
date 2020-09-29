@@ -13,11 +13,11 @@ namespace Sofa.CourseManagement.Model
         public Guid LessonPlanId { get; set; }
         public LessonPlan LessonPlan { get; set; }
 
-        public static Post CreateInstance(string title, short order, PostTypeEnum postType, Guid LessonPlanId, bool isActive)
+        public static Post CreateInstance(Guid? id, string title, short order, PostTypeEnum postType, Guid LessonPlanId, bool isActive)
         {
             return new Post()
             {
-                Id = Guid.NewGuid(),
+                Id = id.HasValue ? id.Value : Guid.NewGuid(),
                 Title = title,
                 Order = order,
                 PostType = postType,

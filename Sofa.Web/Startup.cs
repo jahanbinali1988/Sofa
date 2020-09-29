@@ -4,7 +4,6 @@ using Autofac.Extensions.DependencyInjection;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +17,8 @@ using Sofa.CourseManagement.EntityFramework.Seed;
 using Sofa.EntityFramework.Factory;
 using Sofa.EntityFramework.Seed;
 using Sofa.SharedKernel;
-using Swashbuckle.AspNetCore.Swagger;
 using Sofa.Web.Middleware;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Sofa.Web
 {

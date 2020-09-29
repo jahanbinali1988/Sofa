@@ -23,7 +23,7 @@ namespace Sofa.CourseManagement.EntityFramework.Seed
         {
             var userSysAdmin = new User
             {
-                Id = Guid.Parse("731874E2-B89C-4509-819A-5B69396A336B"),
+                Id = DefaultData.SysAdminId,
                 CreateDate = DateTime.Now,
                 Description = string.Empty,
                 Email = "jahanbin.ali1988@gmail.com",
@@ -31,16 +31,16 @@ namespace Sofa.CourseManagement.EntityFramework.Seed
                 IsActive = true,
                 LastName = "Jahanbin",
                 ModifyDate = DateTime.Now,
-                PasswordHash = SHA256HashGenerator.GenerateSHA256Hash("123456"),
+                PasswordHash = SHA256HashGenerator.GenerateSHA256Hash(DefaultData.SysAdminPassword),
                 PhoneNumber = "09224957626",
                 Role = UserRoleEnum.SysAdmin,
                 RowVersion = 0,
-                UserName = "sysadmin",
+                UserName = DefaultData.SysAdminUsername,
                 Level = LevelEnum.Advanced
             };
             var userTeacher = new User
             {
-                Id = Guid.Parse("253E472E-21AC-4864-B218-B364169D0611"),
+                Id = DefaultData.TeacherUserId,
                 CreateDate = DateTime.Now,
                 Description = string.Empty,
                 Email = "jahanbinali88@yahoo.com",
@@ -48,16 +48,16 @@ namespace Sofa.CourseManagement.EntityFramework.Seed
                 IsActive = true,
                 LastName = "Jahanbin",
                 ModifyDate = DateTime.Now,
-                PasswordHash = SHA256HashGenerator.GenerateSHA256Hash("123456"),
+                PasswordHash = SHA256HashGenerator.GenerateSHA256Hash(DefaultData.TeacherPassword),
                 PhoneNumber = "09224957626",
                 Role = UserRoleEnum.Teacher,
                 RowVersion = 0,
-                UserName = "teacher",
+                UserName = DefaultData.TeacherUsername,
                 Level = LevelEnum.Advanced
             };
             var userStudent = new User
             {
-                Id = Guid.Parse("50ECC8E1-5C5C-4A97-A5F5-AF9E9EBA1B70"),
+                Id = DefaultData.StudentId,
                 CreateDate = DateTime.Now,
                 Description = string.Empty,
                 Email = "jahanbin.ali1988@yahoo.com",
@@ -65,14 +65,35 @@ namespace Sofa.CourseManagement.EntityFramework.Seed
                 IsActive = true,
                 LastName = "Jahanbin",
                 ModifyDate = DateTime.Now,
-                PasswordHash = SHA256HashGenerator.GenerateSHA256Hash("123456"),
+                PasswordHash = SHA256HashGenerator.GenerateSHA256Hash(DefaultData.StudentPassword),
                 PhoneNumber = "09224957626",
                 Role = UserRoleEnum.Teacher,
                 RowVersion = 0,
-                UserName = "student",
+                UserName = DefaultData.StudentUsername,
                 Level = LevelEnum.Begginer
             };
 
+            var defaultInstitute = Institute.CreateInstance(DefaultData.defaultInstituteId, "TestInstitute", true, Guid.NewGuid().ToString());
+
+            var defaultField = Field.CreateInstance(DefaultData.defaultFieldId, "DefaultField", true, defaultInstitute.Id);
+
+            var defaultCourse = Course.CreateInstance(DefaultData.defaultCourseId, "DefaultCourse", "", true, defaultField.Id);
+
+            var defaultTerm = Term.CreateInstance(DefaultData.defaultTermId, "DefaultTerm", true, defaultCourse.Id);
+
+            var defaultLessonPlan = LessonPlan.CreateInstance(DefaultData.defaultLessonPlanId, SharedKernel.Enum.LevelEnum.Begginer, true);
+
+            var defaultSession = Session.CreateInstance(DefaultData.defaultSessionId, "DefaultSession", true, defaultLessonPlan.Id, defaultTerm.Id);
+
+            var defaultPost = Post.CreateInstance(DefaultData.defaultPostId, "DefaultPost", 1, SharedKernel.Enum.PostTypeEnum.Text, defaultLessonPlan.Id, true);
+
+            modelBuilder.Entity<Institute>().HasData(defaultInstitute);
+            modelBuilder.Entity<Field>().HasData(defaultField);
+            modelBuilder.Entity<Course>().HasData(defaultCourse);
+            modelBuilder.Entity<Term>().HasData(defaultTerm);
+            modelBuilder.Entity<LessonPlan>().HasData(defaultLessonPlan);
+            modelBuilder.Entity<Session>().HasData(defaultSession);
+            modelBuilder.Entity<Post>().HasData(defaultPost);
             modelBuilder.Entity<User>().HasData(userSysAdmin, userTeacher, userStudent);
         }
     }

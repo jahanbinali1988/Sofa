@@ -12,14 +12,14 @@ namespace Sofa.CourseManagement.Model
         public Guid LessonPlanId { get; set; }
         public LessonPlan LessonPlan { get; set; }
 
-        public static Session CreateInstance(string title, bool isActive, Guid lessonPlanId, Guid termId)
+        public static Session CreateInstance(Guid? id, string title, bool isActive, Guid lessonPlanId, Guid termId)
         {
             return new Session()
             {
                 IsActive = isActive,
                 Title = title,
                 CreateDate = DateTime.Now,
-                Id = Guid.NewGuid(),
+                Id = id.HasValue ? id.Value : Guid.NewGuid(),
                 RowVersion = 0,
                 LessonPlanId = lessonPlanId,
                 TermId = termId

@@ -5,7 +5,7 @@ using Sofa.EntityFramework.Map;
 
 namespace Sofa.CourseManagement.EntityFramework.Mapper
 {
-    class TermMapper : BaseEntityMap<Term>
+    public class TermMapper : BaseEntityMap<Term>
     {
         public override void Map(EntityTypeBuilder<Term> builder)
         {

@@ -28,7 +28,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var session = Session.CreateInstance(request.Title, request.IsActive, request.TermId, request.LessonPlanId);
+                var session = Session.CreateInstance(null, request.Title, request.IsActive, request.TermId, request.LessonPlanId);
                 this._unitOfWork.sessionRepository.Add(session);
                 this._unitOfWork.Commit();
 

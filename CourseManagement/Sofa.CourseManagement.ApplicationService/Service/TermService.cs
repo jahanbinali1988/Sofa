@@ -28,7 +28,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var term = Term.CreateInstance(request.Title, request.IsActive, request.CourseId);
+                var term = Term.CreateInstance(null, request.Title, request.IsActive, request.CourseId);
                 this._unitOfWork.termRepository.Add(term);
                 this._unitOfWork.Commit();
 

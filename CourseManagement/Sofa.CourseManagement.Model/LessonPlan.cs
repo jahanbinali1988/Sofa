@@ -13,11 +13,11 @@ namespace Sofa.CourseManagement.Model
         public Session Session { get; set; }
         public ICollection<Post> Posts { get; set; }
 
-        public static LessonPlan CreateInstance(LevelEnum level, bool isAvtive)
+        public static LessonPlan CreateInstance(Guid? id, LevelEnum level, bool isAvtive)
         {
             return new LessonPlan()
             {
-                Id = Guid.NewGuid(),
+                Id = id.HasValue ? id.Value : Guid.NewGuid(),
                 Level = level,
                 IsActive = isAvtive,
                 RowVersion = 0

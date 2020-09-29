@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sofa.CourseManagement.EntityFramework.Context;
 
 namespace Sofa.CourseManagement.EntityFramework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200929204312_09302020-1")]
+    partial class _093020201
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,19 +57,6 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                     b.HasIndex("FieldId");
 
                     b.ToTable("Course");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("b70d992c-2b43-496a-9981-3578e2d0ec4c"),
-                            AgeRange = "",
-                            CreateDate = new DateTime(2020, 9, 30, 0, 38, 57, 750, DateTimeKind.Local).AddTicks(3210),
-                            FieldId = new Guid("ccdd20d4-b2a0-455a-8f7a-168503776b82"),
-                            IsActive = true,
-                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RowVersion = 0,
-                            Title = "DefaultCourse"
-                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.Field", b =>
@@ -103,18 +92,6 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                     b.HasIndex("InstituteId");
 
                     b.ToTable("Field");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ccdd20d4-b2a0-455a-8f7a-168503776b82"),
-                            CreateDate = new DateTime(2020, 9, 30, 0, 38, 57, 749, DateTimeKind.Local).AddTicks(8035),
-                            InstituteId = new Guid("e9a52e3d-27aa-4726-a1a9-bf90b6cc2357"),
-                            IsActive = true,
-                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RowVersion = 0,
-                            Title = "DefaultField"
-                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.Institute", b =>
@@ -151,18 +128,6 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         .HasName("PK_Institute");
 
                     b.ToTable("Institute");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e9a52e3d-27aa-4726-a1a9-bf90b6cc2357"),
-                            Code = "0daffaaa-037e-44da-bd14-254262138acc",
-                            CreateDate = new DateTime(2020, 9, 30, 0, 38, 57, 749, DateTimeKind.Local).AddTicks(2752),
-                            IsActive = true,
-                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RowVersion = 0,
-                            Title = "TestInstitute"
-                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.LessonPlan", b =>
@@ -196,18 +161,6 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         .HasName("PK_LessonPlan");
 
                     b.ToTable("LessonPlan");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("0908ec03-9f07-426a-a26c-78cac8646545"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            Level = 0,
-                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RowVersion = 0,
-                            SessionId = new Guid("00000000-0000-0000-0000-000000000000")
-                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.Post", b =>
@@ -251,20 +204,6 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                     b.HasIndex("LessonPlanId");
 
                     b.ToTable("Post");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("b0108b2c-5837-4f22-b78d-857bc22f9554"),
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            LessonPlanId = new Guid("0908ec03-9f07-426a-a26c-78cac8646545"),
-                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Order = (short)1,
-                            PostType = 0,
-                            RowVersion = 0,
-                            Title = "DefaultPost"
-                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.Session", b =>
@@ -306,19 +245,6 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                     b.HasIndex("TermId");
 
                     b.ToTable("Session");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("49f4c5f7-d568-449c-9b5f-4d5b987e1e59"),
-                            CreateDate = new DateTime(2020, 9, 30, 0, 38, 57, 751, DateTimeKind.Local).AddTicks(6496),
-                            IsActive = true,
-                            LessonPlanId = new Guid("0908ec03-9f07-426a-a26c-78cac8646545"),
-                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RowVersion = 0,
-                            TermId = new Guid("21b8dc7f-9d87-409d-9ec1-46287e7a6559"),
-                            Title = "DefaultSession"
-                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.Term", b =>
@@ -354,18 +280,6 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("Term");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("21b8dc7f-9d87-409d-9ec1-46287e7a6559"),
-                            CourseId = new Guid("b70d992c-2b43-496a-9981-3578e2d0ec4c"),
-                            CreateDate = new DateTime(2020, 9, 30, 0, 38, 57, 750, DateTimeKind.Local).AddTicks(7455),
-                            IsActive = true,
-                            ModifyDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RowVersion = 0,
-                            Title = "DefaultTerm"
-                        });
                 });
 
             modelBuilder.Entity("Sofa.CourseManagement.Model.User", b =>
@@ -422,14 +336,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("731874e2-b89c-4509-819a-5b69396a336b"),
-                            CreateDate = new DateTime(2020, 9, 30, 0, 38, 57, 718, DateTimeKind.Local).AddTicks(6801),
+                            CreateDate = new DateTime(2020, 9, 30, 0, 13, 11, 605, DateTimeKind.Local).AddTicks(3000),
                             Description = "",
                             Email = "jahanbin.ali1988@gmail.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 2,
-                            ModifyDate = new DateTime(2020, 9, 30, 0, 38, 57, 719, DateTimeKind.Local).AddTicks(638),
+                            ModifyDate = new DateTime(2020, 9, 30, 0, 13, 11, 605, DateTimeKind.Local).AddTicks(6928),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 0,
@@ -439,14 +353,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("253e472e-21ac-4864-b218-b364169d0611"),
-                            CreateDate = new DateTime(2020, 9, 30, 0, 38, 57, 731, DateTimeKind.Local).AddTicks(3369),
+                            CreateDate = new DateTime(2020, 9, 30, 0, 13, 11, 638, DateTimeKind.Local).AddTicks(9398),
                             Description = "",
                             Email = "jahanbinali88@yahoo.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 2,
-                            ModifyDate = new DateTime(2020, 9, 30, 0, 38, 57, 731, DateTimeKind.Local).AddTicks(3506),
+                            ModifyDate = new DateTime(2020, 9, 30, 0, 13, 11, 638, DateTimeKind.Local).AddTicks(9541),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 1,
@@ -456,14 +370,14 @@ namespace Sofa.CourseManagement.EntityFramework.Migrations
                         new
                         {
                             Id = new Guid("50ecc8e1-5c5c-4a97-a5f5-af9e9eba1b70"),
-                            CreateDate = new DateTime(2020, 9, 30, 0, 38, 57, 740, DateTimeKind.Local).AddTicks(1739),
+                            CreateDate = new DateTime(2020, 9, 30, 0, 13, 11, 647, DateTimeKind.Local).AddTicks(2893),
                             Description = "",
                             Email = "jahanbin.ali1988@yahoo.com",
                             FirstName = "Ali",
                             IsActive = true,
                             LastName = "Jahanbin",
                             Level = 0,
-                            ModifyDate = new DateTime(2020, 9, 30, 0, 38, 57, 740, DateTimeKind.Local).AddTicks(1792),
+                            ModifyDate = new DateTime(2020, 9, 30, 0, 13, 11, 647, DateTimeKind.Local).AddTicks(2908),
                             PasswordHash = "JB661pQ8yCirbaGKuNu8wIZjd7/lq74u5bDYUaX6GW0=",
                             PhoneNumber = "09224957626",
                             Role = 1,

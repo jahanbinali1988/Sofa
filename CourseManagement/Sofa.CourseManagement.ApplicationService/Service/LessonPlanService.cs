@@ -31,7 +31,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var lessonPlan = LessonPlan.CreateInstance((LevelEnum)request.Level, request.IsActive);
+                var lessonPlan = LessonPlan.CreateInstance(null, (LevelEnum)request.Level, request.IsActive);
 
                 this._unitOfWork.lessonPlanRepository.Add(lessonPlan);
                 this._unitOfWork.Commit();

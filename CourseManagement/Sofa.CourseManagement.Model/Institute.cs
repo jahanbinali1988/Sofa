@@ -9,6 +9,7 @@ namespace Sofa.CourseManagement.Model
         public string Title { get; private set; }
         public string WebsiteUrl { get; private set; }
         public Address Address { get; private set; }
+        public string Code { get; private set; }
 
         public ICollection<Field> Fields { get; set; }
 
@@ -36,20 +37,26 @@ namespace Sofa.CourseManagement.Model
             this.Title = title;
         }
 
+        public void AssignCode(string code)
+        {
+            this.Code = code;
+        }
+
         public void AssignActivityMode(bool isActive)
         {
             this.IsActive = isActive;
         }
 
-        public static Institute CreateInstance(string title, bool isActive)
+        public static Institute CreateInstance(Guid? id, string title, bool isActive, string code)
         {
             return new Institute()
             {
                 CreateDate = DateTime.Now,
-                Id = Guid.NewGuid(),
+                Id = id.HasValue ? id.Value : Guid.NewGuid(),
                 IsActive = isActive,
                 Title = title,
-                RowVersion = 0
+                RowVersion = 0,
+                Code = code
             };
         }
     }

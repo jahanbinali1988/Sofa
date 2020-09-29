@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sofa.CourseManagement.IntegratedTest
+namespace Sofa.CourseManagement.EntityFramework.Seed
 {
     public static class DefaultData
     {

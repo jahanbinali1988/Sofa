@@ -13,7 +13,7 @@ namespace Sofa.CourseManagement.EntityFramework.Factory
             this.options = options;
         }
 
-        DbContext IApplicationDbContextFactory.Create()
+        public DbContext Create()
         {
             return new ApplicationDbContext(options);
         }

@@ -28,7 +28,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var course = Course.CreateInstance(request.Title, request.AgeRange, request.IsActive, request.FieldId);
+                var course = Course.CreateInstance(null, request.Title, request.AgeRange, request.IsActive, request.FieldId);
                 this._unitOfWork.courseRepository.Add(course);
                 this._unitOfWork.Commit();
 

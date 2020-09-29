@@ -13,6 +13,11 @@ namespace Sofa.Teacher.EntityFramework.Factory
             this.options = options;
         }
 
+        public DbContext CreateDbContext(string[] args)
+        {
+            return new ApplicationDbContext(options);
+        }
+
         DbContext IApplicationDbContextFactory.Create()
         {
             return new ApplicationDbContext(options);

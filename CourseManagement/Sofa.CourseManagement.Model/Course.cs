@@ -13,11 +13,11 @@ namespace Sofa.CourseManagement.Model
         public Field Field { get; set; }
         public ICollection<Term> Terms { get; set; }
 
-        public static Course CreateInstance(string title, string ageRange, bool isActive, Guid fieldId)
+        public static Course CreateInstance(Guid? id, string title, string ageRange, bool isActive, Guid fieldId)
         {
             return new Course()
             {
-                Id = Guid.NewGuid(),
+                Id = id.HasValue ? id.Value : Guid.NewGuid(),
                 Title = title,
                 CreateDate = DateTime.Now,
                 AgeRange = ageRange,
