@@ -4,5 +4,8 @@
     {
         AddInstituteResponse AddInstitute(AddInstituteRequest request);
         GetInstituteByIdResponse Get(GetInstituteByIdRequest request);
+        GetAllInstituteResponse GetAll(GetAllInstituteRequest request);
+        UpdateInstituteResponse Update(UpdateInstituteRequest request);
+        DeleteInstituteResponse Delete(DeleteInstituteRequest request);
     }
 }

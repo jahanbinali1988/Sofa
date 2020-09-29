@@ -3,11 +3,12 @@ using System;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public class AddTermRequest : LoginRequiredRequest
+    public class UpdateSessionRequest : LoginRequiredRequest
     {
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public bool IsActive { get; set; }
-
-        public Guid CourseId { get; set; }
+        public Guid TermId { get; set; }
+        public Guid LessonPlanId { get; set; }
     }
 }

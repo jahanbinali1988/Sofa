@@ -2,7 +2,7 @@
 
 namespace Sofa.SharedKernel.BaseClasses
 {
-    public class ResponseBase
+    public abstract class ResponseBase
     {
         public ResponseBase(bool isSuccess, string message)
         {

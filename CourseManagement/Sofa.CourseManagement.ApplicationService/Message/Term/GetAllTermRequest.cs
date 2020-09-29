@@ -3,11 +3,8 @@ using System;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public class AddTermRequest : LoginRequiredRequest
+    public class GetAllTermRequest : RequestWithPaging
     {
-        public string Title { get; set; }
-        public bool IsActive { get; set; }
-
         public Guid CourseId { get; set; }
     }
 }

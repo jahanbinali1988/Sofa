@@ -3,7 +3,7 @@ using System;
 
 namespace Sofa.SharedKernel.BaseClasses.Message
 {
-    public class LoginRequiredRequest : RequestBase
+    public abstract class LoginRequiredRequest : RequestBase
     {
         [JsonIgnore]
         public Guid CommanderID { get; set; }

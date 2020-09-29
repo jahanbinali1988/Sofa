@@ -1,6 +1,6 @@
 ﻿namespace Sofa.SharedKernel.BaseClasses
 {
-    public class RequestBase
+    public abstract class RequestBase
     {
     }
 }

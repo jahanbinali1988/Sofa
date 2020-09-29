@@ -4,5 +4,8 @@
     {
         AddLessonPlanResponse AddLessonPlan(AddLessonPlanRequest request);
         GetLessonPlanByIdResponse Get(GetLessonPlanByIdRequest request);
+        GetAllLessonPlanResponse GetAll(GetAllLessonPlanRequest request);
+        UpdateLessonPlanResponse Update(UpdateLessonPlanRequest request);
+        DeleteLessonPlanResponse Delete(DeleteLessonPlanRequest request);
     }
 }
