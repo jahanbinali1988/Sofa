@@ -10,10 +10,10 @@ namespace Sofa.Web.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService userService;
+        private readonly IUserService _userService;
         public UserController(IUserService userService)
         {
-            this.userService = userService;
+            this._userService = userService;
         }
 
         [Route("Add")]
@@ -22,7 +22,7 @@ namespace Sofa.Web.Controllers
         public IActionResult Add([FromBody] AddUserRequest request)
         {
             request.CommanderID = User.GetUserId();
-            var response = userService.AddUser(request);
+            var response = _userService.AddUser(request);
             return new ObjectResult(response);
         }
 
@@ -30,8 +30,37 @@ namespace Sofa.Web.Controllers
         [HttpGet]
         public IActionResult Get([FromBody] GetUserByIdRequest request)
         {
-            var response = userService.Get(request);
+            var response = _userService.Get(request);
             return new ObjectResult(response);
+        }
+
+        [HttpPost]
+        [Route("GetAll")]
+        [Authorize]
+        public ActionResult<GetAllUserResponse> GetAll([FromBody] GetAllUserRequest request)
+        {
+            var result = _userService.GetAll(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Delete")]
+        [Authorize]
+        public ActionResult<DeleteUserResponse> Delete([FromBody] DeleteUserRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _userService.Delete(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        [Authorize]
+        public ActionResult<UpdateUserResponse> Update([FromBody] UpdateUserRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _userService.Update(request);
+            return result;
         }
     }
 }

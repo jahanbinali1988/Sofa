@@ -10,45 +10,56 @@ namespace Sofa.Web.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private IPostService postService;
+        private readonly IPostService _postService;
         public PostController(IPostService postService)
         {
-            this.postService = postService;
+            this._postService = postService;
         }
 
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
+        [Route("Add")]
+        [HttpPost]
         [Authorize]
-        public ActionResult<GetPostByIdResponse> Get([FromQuery]string id)
+        public ActionResult<AddPostResponse> Add([FromBody] AddPostRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            return _postService.AddPost(request);
+        }
+
+        [Route("Get")]
+        [HttpGet]
+        public ActionResult<GetPostByIdResponse> Get([FromQuery] string id)
         {
             GetPostByIdRequest request = new GetPostByIdRequest() { PostId = Guid.Parse(id) };
-            return this.postService.Get(request);
+            return _postService.Get(request);
         }
 
-        // POST api/values
         [HttpPost]
-        public AddPostResponse Post([FromBody] AddPostRequest request)
+        [Route("GetAll")]
+        [Authorize]
+        public ActionResult<GetAllPostResponse> GetAll([FromBody] GetAllPostRequest request)
         {
-            return this.postService.AddPost(request);
+            var result = _postService.GetAll(request);
+            return result;
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        [Route("Delete")]
+        [Authorize]
+        public ActionResult<DeletePostResponse> Delete([FromBody] DeletePostRequest request)
         {
+            request.CommanderID = User.GetUserId();
+            var result = _postService.Delete(request);
+            return result;
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost]
+        [Route("Update")]
+        [Authorize]
+        public ActionResult<UpdatePostResponse> Update([FromBody] UpdatePostRequest request)
         {
+            request.CommanderID = User.GetUserId();
+            var result = _postService.Update(request);
+            return result;
         }
     }
 }

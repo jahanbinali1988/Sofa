@@ -10,10 +10,10 @@ namespace Sofa.Web.Controllers
     [ApiController]
     public class CourseController : ControllerBase
     {
-        private ICourseService courseService;
+        private readonly ICourseService _courseService;
         public CourseController(ICourseService courseService)
         {
-            this.courseService = courseService;
+            this._courseService = courseService;
         }
 
         [HttpPost]
@@ -22,7 +22,7 @@ namespace Sofa.Web.Controllers
         public ActionResult<AddCourseResponse> Add([FromBody]AddCourseRequest request)
         {
             request.CommanderID = User.GetUserId();
-            return courseService.AddCourse(request);
+            return _courseService.AddCourse(request);
         }
 
         [Route("Get")]
@@ -30,7 +30,36 @@ namespace Sofa.Web.Controllers
         public ActionResult<GetCourseByIdResponse> Get([FromQuery]string id)
         {
             GetCourseByIdRequest request = new GetCourseByIdRequest() { CourseId = Guid.Parse(id) };
-            return courseService.Get(request);
+            return _courseService.Get(request);
+        }
+
+        [HttpPost]
+        [Route("GetAll")]
+        [Authorize]
+        public ActionResult<GetAllCourseResponse> GetAll([FromBody] GetAllCourseRequest request)
+        {
+            var result = _courseService.GetAll(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Delete")]
+        [Authorize]
+        public ActionResult<DeleteCourseResponse> Delete([FromBody] DeleteCourseRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _courseService.Delete(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        [Authorize]
+        public ActionResult<UpdateCourseResponse> Update([FromBody] UpdateCourseRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _courseService.Update(request);
+            return result;
         }
     }
 }

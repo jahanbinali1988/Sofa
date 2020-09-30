@@ -10,10 +10,10 @@ namespace Sofa.Web.Controllers
     [ApiController]
     public class FieldController : ControllerBase
     {
-        private IFieldService fieldService;
+        private readonly IFieldService _fieldService;
         public FieldController(IFieldService fieldService)
         {
-            this.fieldService = fieldService;
+            this._fieldService = fieldService;
         }
 
         [HttpPost]
@@ -22,7 +22,7 @@ namespace Sofa.Web.Controllers
         public ActionResult<AddFieldResponse> Add([FromBody]AddFieldRequest request)
         {
             request.CommanderID = User.GetUserId();
-            return fieldService.AddField(request);
+            return _fieldService.AddField(request);
         }
 
         [Route("Get")]
@@ -30,7 +30,36 @@ namespace Sofa.Web.Controllers
         public ActionResult<GetFieldByIdResponse> Get([FromQuery]string id)
         {
             GetFieldByIdRequest request = new GetFieldByIdRequest() { FieldId = Guid.Parse(id) };
-            return fieldService.Get(request);
+            return _fieldService.Get(request);
+        }
+
+        [HttpPost]
+        [Route("GetAll")]
+        [Authorize]
+        public ActionResult<GetAllFieldResponse> GetAll([FromBody] GetAllFieldRequest request)
+        {
+            var result = _fieldService.GetAll(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Delete")]
+        [Authorize]
+        public ActionResult<DeleteFieldResponse> Delete([FromBody] DeleteFieldRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _fieldService.Delete(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        [Authorize]
+        public ActionResult<UpdateFieldResponse> Update([FromBody] UpdateFieldRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _fieldService.Update(request);
+            return result;
         }
     }
 }

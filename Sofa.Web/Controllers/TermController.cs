@@ -10,10 +10,10 @@ namespace Sofa.Web.Controllers
     [ApiController]
     public class TermController : ControllerBase
     {
-        private ITermService termService;
+        private readonly ITermService _termService;
         public TermController(ITermService termService)
         {
-            this.termService = termService;
+            this._termService = termService;
         }
 
         [HttpPost]
@@ -22,7 +22,7 @@ namespace Sofa.Web.Controllers
         public ActionResult<AddTermResponse> Add([FromBody]AddTermRequest request)
         {
             request.CommanderID = User.GetUserId();
-            return termService.AddTerm(request);
+            return _termService.AddTerm(request);
         }
 
         [Route("Get")]
@@ -30,7 +30,36 @@ namespace Sofa.Web.Controllers
         public ActionResult<GetTermByIdResponse> Get([FromQuery]string id)
         {
             GetTermByIdRequest request = new GetTermByIdRequest() { TermId = Guid.Parse(id) };
-            return termService.Get(request);
+            return _termService.Get(request);
+        }
+
+        [HttpPost]
+        [Route("GetAll")]
+        [Authorize]
+        public ActionResult<GetAllTermResponse> GetAll([FromBody] GetAllTermRequest request)
+        {
+            var result = _termService.GetAll(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Delete")]
+        [Authorize]
+        public ActionResult<DeleteTermResponse> Delete([FromBody] DeleteTermRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _termService.Delete(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        [Authorize]
+        public ActionResult<UpdateTermResponse> Update([FromBody] UpdateTermRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _termService.Update(request);
+            return result;
         }
     }
 }

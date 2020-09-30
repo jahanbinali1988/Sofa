@@ -10,10 +10,10 @@ namespace Sofa.Web.Controllers
     [ApiController]
     public class SessionController : ControllerBase
     {
-        private ISessionService sessionService;
+        private readonly ISessionService _sessionService;
         public SessionController(ISessionService sessionService)
         {
-            this.sessionService = sessionService;
+            this._sessionService = sessionService;
         }
 
         [HttpPost]
@@ -22,7 +22,7 @@ namespace Sofa.Web.Controllers
         public ActionResult<AddSessionResponse> Add([FromBody]AddSessionRequest request)
         {
             request.CommanderID = User.GetUserId();
-            return sessionService.AddSession(request);
+            return _sessionService.AddSession(request);
         }
 
         [Route("Get")]
@@ -30,7 +30,36 @@ namespace Sofa.Web.Controllers
         public ActionResult<GetSessionByIdResponse> Get([FromQuery]string id)
         {
             GetSessionByIdRequest request = new GetSessionByIdRequest() { SessionId = Guid.Parse(id) };
-            return sessionService.Get(request);
+            return _sessionService.Get(request);
+        }
+
+        [HttpPost]
+        [Route("GetAll")]
+        [Authorize]
+        public ActionResult<GetAllSessionResponse> GetAll([FromBody] GetAllSessionRequest request)
+        {
+            var result = _sessionService.GetAll(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Delete")]
+        [Authorize]
+        public ActionResult<DeleteSessionResponse> Delete([FromBody] DeleteSessionRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _sessionService.Delete(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        [Authorize]
+        public ActionResult<UpdateSessionResponse> Update([FromBody] UpdateSessionRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _sessionService.Update(request);
+            return result;
         }
     }
 }

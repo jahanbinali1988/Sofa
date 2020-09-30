@@ -9,10 +9,10 @@ namespace Sofa.Web.Controllers
     [ApiController]
     public class LessonPlanController : ControllerBase
     {
-        private ILessonPlanService lessonPlanService;
+        private readonly ILessonPlanService _lessonPlanService;
         public LessonPlanController(ILessonPlanService lessonPlanService)
         {
-            this.lessonPlanService = lessonPlanService;
+            this._lessonPlanService = lessonPlanService;
         }
 
         [Route("Add")]
@@ -21,7 +21,7 @@ namespace Sofa.Web.Controllers
         public ActionResult<AddLessonPlanResponse> Add([FromBody] AddLessonPlanRequest request)
         {
             request.CommanderID = User.GetUserId();
-            return lessonPlanService.AddLessonPlan(request);
+            return _lessonPlanService.AddLessonPlan(request);
         }
 
         [Route("Get")]
@@ -29,35 +29,37 @@ namespace Sofa.Web.Controllers
         public ActionResult<GetLessonPlanByIdResponse> Get([FromQuery]string id)
         {
             GetLessonPlanByIdRequest request = new GetLessonPlanByIdRequest() { LessonPlanId = Guid.Parse(id) };
-            return lessonPlanService.Get(request);
+            return _lessonPlanService.Get(request);
         }
 
-        //[Route("Update")]
-        //[HttpPost]
-        //public IActionResult Update([FromBody] UpdateDeviceRequest request)
-        //{
-        //    request.CommanderID = User.GetUserId();
-        //    var response = deviceService.Update(request);
-        //    return new ObjectResult(response);
-        //}
+        [HttpPost]
+        [Route("GetAll")]
+        [Authorize]
+        public ActionResult<GetAllLessonPlanResponse> GetAll([FromBody] GetAllLessonPlanRequest request)
+        {
+            var result = _lessonPlanService.GetAll(request);
+            return result;
+        }
 
-        //[Route("Delete")]
-        //[HttpPost]
-        //public IActionResult Delete([FromBody] DeleteDeviceRequest request)
-        //{
-        //    request.CommanderID = User.GetUserId();
-        //    var response = deviceService.Delete(request);
-        //    return new ObjectResult(response);
-        //}
+        [HttpPost]
+        [Route("Delete")]
+        [Authorize]
+        public ActionResult<DeleteLessonPlanResponse> Delete([FromBody] DeleteLessonPlanRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _lessonPlanService.Delete(request);
+            return result;
+        }
 
-        //[Route("GetById")]
-        //[HttpPost]
-        //public IActionResult GetById([FromBody] GetDeviceRequest request)
-        //{
-        //    request.CommanderID = User.GetUserId();
-        //    var response = deviceService.Get(request);
-        //    return new ObjectResult(response);
-        //}
+        [HttpPost]
+        [Route("Update")]
+        [Authorize]
+        public ActionResult<UpdateLessonPlanResponse> Update([FromBody] UpdateLessonPlanRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _lessonPlanService.Update(request);
+            return result;
+        }
 
     }
 }
