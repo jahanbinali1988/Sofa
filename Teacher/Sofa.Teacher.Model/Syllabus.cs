@@ -11,6 +11,11 @@ namespace Sofa.Teacher.Model
 
         public ICollection<Course> Courses { get; internal set; }
 
+        internal Syllabus()
+        {
+
+        }
+
         public void AssignTitle(string title) { this.Title = title; }
         public void AssignCourses(IEnumerable<Course> courses)
         {
