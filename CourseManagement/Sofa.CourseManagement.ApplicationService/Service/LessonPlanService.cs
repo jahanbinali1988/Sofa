@@ -32,7 +32,6 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
 
                 var lessonPlan = LessonPlan.CreateInstance(null, (LevelEnum)request.Level, request.IsActive);
-
                 this._unitOfWork.lessonPlanRepository.Add(lessonPlan);
                 this._unitOfWork.Commit();
 
@@ -56,6 +55,29 @@ namespace Sofa.CourseManagement.ApplicationService
             }
         }
 
+        public DeleteLessonPlanResponse Delete(DeleteLessonPlanRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.lessonPlanRepository.Remove(request.Id);
+                this._unitOfWork.Commit();
+
+                return new DeleteLessonPlanResponse(true, "حذف با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-LessonPlan Service-Delete LessonPlan ", e.Message);
+                return new DeleteLessonPlanResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-LessonPlan Service-Delete LessonPlan ", e.Message);
+                return new DeleteLessonPlanResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
         public GetLessonPlanByIdResponse Get(GetLessonPlanByIdRequest request)
         {
             try
@@ -74,6 +96,52 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-LessonPlan Service-Get LessonPlan ", e.Message);
                 return new GetLessonPlanByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public GetAllLessonPlanResponse GetAll(GetAllLessonPlanRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                var lessonPlans = this._unitOfWork.lessonPlanRepository.GetAll();
+                var result = lessonPlans.Convert();
+                return new GetAllLessonPlanResponse(true, "دریافت اطلاعات با موفقیت انجام شد") { LessonPlans = result };
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-LessonPlan Service-GetAll LessonPlan ", e.Message);
+                return new GetAllLessonPlanResponse(false, "دریافت اطلاعات با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-LessonPlan Service-GetAll LessonPlan ", e.Message);
+                return new GetAllLessonPlanResponse(false, "دریافت اطلاعات با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public UpdateLessonPlanResponse Update(UpdateLessonPlanRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                var lessonPlan = LessonPlan.CreateInstance(request.Id, (LevelEnum)request.Level, request.IsActive);
+                this._unitOfWork.lessonPlanRepository.Update(lessonPlan);
+                this._unitOfWork.Commit();
+
+                return new UpdateLessonPlanResponse(true, "به روز رسانی با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-LessonPlan Service-Update LessonPlan ", e.Message);
+                return new UpdateLessonPlanResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-LessonPlan Service-Update LessonPlan ", e.Message);
+                return new UpdateLessonPlanResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
             }
         }
     }

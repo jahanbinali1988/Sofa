@@ -12,12 +12,14 @@ namespace Sofa.CourseManagement.ApplicationService
     public class FieldService : IFieldService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IFieldDomainService _fieldDomainService;
         private readonly IBusControl _busControl;
         private readonly ILogger _logger;
 
-        public FieldService(IUnitOfWork unitOfWork, IBusControl busControl, ILogger logger)//
+        public FieldService(IUnitOfWork unitOfWork, IFieldDomainService fieldDomainService, IBusControl busControl, ILogger logger)
         {
             this._unitOfWork = unitOfWork;
+            this._fieldDomainService = fieldDomainService;
             this._busControl = busControl;
             this._logger = logger;
         }
@@ -27,6 +29,7 @@ namespace Sofa.CourseManagement.ApplicationService
             try
             {
                 request.Validate();
+                _fieldDomainService.CanAdd(request.Title);
 
                 var field = Field.CreateInstance(null, request.Title, request.IsActive, request.InstituteId);
                 this._unitOfWork.fieldRepository.Add(field);
@@ -43,6 +46,29 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-Field Service-Add Field ", e.Message);
                 return new AddFieldResponse(false, "ثبت با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public DeleteFieldResponse Delete(DeleteFieldRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.fieldRepository.Remove(request.Id);
+                this._unitOfWork.Commit();
+
+                return new DeleteFieldResponse(true, "حذف با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Field Service-Delete Field ", e.Message);
+                return new DeleteFieldResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Field Service-Delete Field ", e.Message);
+                return new DeleteFieldResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
             }
         }
 
@@ -65,6 +91,52 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-Field Service-Get Field ", e.Message);
                 return new GetFieldByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public GetAllFieldResponse GetAll(GetAllFieldRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                var fields = this._unitOfWork.fieldRepository.GetAll();
+                var result = fields.Convert();
+                return new GetAllFieldResponse(true, "دریافت اطلاعات با موفقیت انجام شد") { Fields = result };
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Field Service-GetAll Field ", e.Message);
+                return new GetAllFieldResponse(false, "دریافت اطلاعات با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Field Service-GetAll Field ", e.Message);
+                return new GetAllFieldResponse(false, "دریافت اطلاعات با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public UpdateFieldResponse Update(UpdateFieldRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                var field = Field.CreateInstance(request.Id, request.Title, request.IsActive, request.InstituteId);
+                this._unitOfWork.fieldRepository.Update(field);
+                this._unitOfWork.Commit();
+
+                return new UpdateFieldResponse(true, "به روز رسانی با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Field Service-Update Field ", e.Message);
+                return new UpdateFieldResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Field Service-Update Field ", e.Message);
+                return new UpdateFieldResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
             }
         }
     }

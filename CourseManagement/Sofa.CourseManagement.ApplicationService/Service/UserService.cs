@@ -85,5 +85,20 @@ namespace Sofa.CourseManagement.ApplicationService
                 return new GetUserByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
             }
         }
+
+        public GetAllUserResponse GetAll(GetAllUserRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UpdateUserResponse Update(UpdateUserRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DeleteUserResponse Delete(DeleteUserRequest request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

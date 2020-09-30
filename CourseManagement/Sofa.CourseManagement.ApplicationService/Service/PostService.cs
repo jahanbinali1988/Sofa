@@ -60,6 +60,29 @@ namespace Sofa.CourseManagement.ApplicationService
             }
         }
 
+        public DeletePostResponse Delete(DeletePostRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.postRepository.Remove(request.Id);
+                this._unitOfWork.Commit();
+
+                return new DeletePostResponse(true, "حذف با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Post Service-Delete Post ", e.Message);
+                return new DeletePostResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Post Service-Delete Post ", e.Message);
+                return new DeletePostResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
         public GetPostByIdResponse Get(GetPostByIdRequest request)
         {
             try
@@ -67,7 +90,8 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
 
                 var post = this._unitOfWork.postRepository.Get(request.PostId);
-                return new GetPostByIdResponse(true, "عملیات خواندن با موفقیت انجام شد", "") { Post = post.Convert() };
+                var result = post.Convert();
+                return new GetPostByIdResponse(true, "عملیات خواندن با موفقیت انجام شد", "") { Post = result };
             }
             catch (BusinessException e)
             {
@@ -78,6 +102,52 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-Post Service-Get Post ", e.Message);
                 return new GetPostByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public GetAllPostResponse GetAll(GetAllPostRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                var posts = this._unitOfWork.postRepository.GetAll();
+                var result = posts.Convert();
+                return new GetAllPostResponse(true, "دریافت اطلاعات با موفقیت انجام شد") { Posts = result };
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Post Service-GetAll Post ", e.Message);
+                return new GetAllPostResponse(false, "دریافت اطلاعات با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Post Service-GetAll Post ", e.Message);
+                return new GetAllPostResponse(false, "دریافت اطلاعات با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public UpdatePostResponse Update(UpdatePostRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                var post = Post.CreateInstance(request.Id, request.Title, request.Order, (PostTypeEnum)request.PostType, request.LessonId, request.IsActive);
+                this._unitOfWork.postRepository.Update(post);
+                this._unitOfWork.Commit();
+
+                return new UpdatePostResponse(true, "به روز رسانی با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Post Service-Update Post ", e.Message);
+                return new UpdatePostResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Post Service-Update Post ", e.Message);
+                return new UpdatePostResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
             }
         }
     }

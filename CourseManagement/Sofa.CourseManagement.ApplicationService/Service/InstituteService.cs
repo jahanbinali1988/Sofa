@@ -51,6 +51,29 @@ namespace Sofa.CourseManagement.ApplicationService
             }
         }
 
+        public DeleteInstituteResponse Delete(DeleteInstituteRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.instituteRepository.Remove(request.Id);
+                this._unitOfWork.Commit();
+
+                return new DeleteInstituteResponse(true, "حذف با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Institute Service-Delete Institute ", e.Message);
+                return new DeleteInstituteResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Institute Service-Delete Institute ", e.Message);
+                return new DeleteInstituteResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
         public GetInstituteByIdResponse Get(GetInstituteByIdRequest request)
         {
             try
@@ -70,6 +93,52 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-Institute Service-Get Institute ", e.Message);
                 return new GetInstituteByIdResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public GetAllInstituteResponse GetAll(GetAllInstituteRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                var institutes = this._unitOfWork.instituteRepository.GetAll();
+                var result = institutes.Convert();
+                return new GetAllInstituteResponse(true, "دریافت اطلاعات با موفقیت انجام شد") { Institutes = result };
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Institute Service-GetAll Institute ", e.Message);
+                return new GetAllInstituteResponse(false, "دریافت اطلاعات با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Institute Service-GetAll Institute ", e.Message);
+                return new GetAllInstituteResponse(false, "دریافت اطلاعات با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public UpdateInstituteResponse Update(UpdateInstituteRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                var institute = Institute.CreateInstance(request.Id, request.Title, request.IsActive, request.Code);
+                this._unitOfWork.instituteRepository.Update(institute);
+                this._unitOfWork.Commit();
+
+                return new UpdateInstituteResponse(true, "به روز رسانی با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Institute Service-Update Institute ", e.Message);
+                return new UpdateInstituteResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Institute Service-Update Institute ", e.Message);
+                return new UpdateInstituteResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
             }
         }
     }
