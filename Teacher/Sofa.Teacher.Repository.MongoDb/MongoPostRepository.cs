@@ -38,7 +38,7 @@ namespace Sofa.Teacher.Repository.MongoDb
             var filter = Builders<BsonDocument>.Filter.Eq("Id", postId);
             var response = collection.Find<BsonDocument>(filter).Project<PostMongo>(projection).Limit(1);
             if (response.CountDocuments() <= 0)
-                return new Post();
+                return Post.CreateInstance();
 
             return response.First<PostMongo>().ToEntity();
         }

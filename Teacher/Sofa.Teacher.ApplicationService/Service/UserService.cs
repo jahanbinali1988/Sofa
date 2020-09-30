@@ -49,8 +49,8 @@ namespace Sofa.Teacher.ApplicationService.Service
         {
             try
             {
-                var user = User.DefaultFactory(request.FirstName, request.LastName, request.Email, request.UserName, request.Level,
-                    request.PhoneNumber, true, null);
+                var user = User.CreateInstance(null, request.FirstName, request.LastName, request.Email, request.UserName, request.Level,
+                    request.PhoneNumber, true, null, request.Description);
                 await _userDomainService.CanAdd(user);
 
                 _unitOfWork.userRepository.Add(user);

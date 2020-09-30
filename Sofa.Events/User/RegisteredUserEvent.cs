@@ -14,6 +14,7 @@ namespace Sofa.Events.User
         public short Role { get; set; }
         public short Level { get; set; }
         public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
         public string Description { get; set; }
     }
 }

@@ -20,23 +20,22 @@ namespace Sofa.Teacher.Consumer.RegisterSyllabus
         {
             try
             {
-                var query = _unitOfWork.syllabusRepository.Query(c => c.Id == message.Id);
-                var syllabus = query.SingleOrDefault();
+                var syllabus = _unitOfWork.syllabusRepository.Query(c => c.Id == message.Id).SingleOrDefault();
 
                 if (syllabus != null)
                 {
-                    syllabus.IsActive = message.IsActive;
-                    syllabus.ModifyDate = DateTime.Now;
-                    syllabus.RowVersion = ++syllabus.RowVersion;
-                    syllabus.Title = message.Title;
-                    syllabus.Description = message.Description;
+                    syllabus.AssignModifiedDate(DateTime.Now);
+                    syllabus.IncreaseRowVersion();
+                    syllabus.AssignTitle(message.Title);
+                    syllabus.AssignDescription(message.Description);
+                    syllabus.AssignIsActive(message.IsActive);
 
                     _unitOfWork.syllabusRepository.Update(syllabus);
                     await _unitOfWork.CommitAsync();
                     return true;
                 }
 
-                var newSyllabus = Syllabus.DefaultFactory(message.Title, message.IsActive, message.Description);
+                var newSyllabus = Syllabus.CreateInstance(null, message.Title, message.IsActive, message.Description);
 
                 await _unitOfWork.syllabusRepository.AddAsync(newSyllabus);
                 await _unitOfWork.CommitAsync();

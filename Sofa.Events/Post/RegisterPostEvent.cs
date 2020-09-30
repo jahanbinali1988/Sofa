@@ -7,6 +7,7 @@ namespace Sofa.Events.Post
         public Guid Id { get; set; }
         public string Title { get; set; }
         public short Order { get; set; }
+        public string Content { get; set; }
         public short PostType { get; set; }
         public Guid LessonId { get; set; }
         public bool IsActive { get; set; }

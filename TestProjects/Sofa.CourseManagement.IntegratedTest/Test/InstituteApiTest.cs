@@ -1,5 +1,6 @@
 ﻿using Sofa.CourseManagement.ApplicationService;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
+using Sofa.SharedKernel;
 using System;
 using System.Net.Http;
 using Xunit;
@@ -23,7 +24,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetById()
         {
-            var url = ConstantsUrl.GetInstituteByIdApiUrl + DefaultData.defaultInstituteId;
+            var url = ConstantsUrl.GetInstituteByIdApiUrl + DefaultData.InstituteId;
             var result = unknownHttpClient.CallGetService<Messages.GetInstituteByIdResponse>(url);
             Assert.True(result.IsSuccess);
         }
@@ -45,10 +46,93 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
                     Country = Guid.NewGuid().ToString(),
                     State = Guid.NewGuid().ToString(),
                     Street = Guid.NewGuid().ToString()
-                }
+                },
+                WebsiteUrl = "www." + Guid.NewGuid().ToString() + ".com"
             };
 
             var result = sysAdminHttpClient.CallPostService<Messages.AddInstituteResponse>(ConstantsUrl.AddInstituteApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region GetAll
+        [Fact]
+        public void GetAll()
+        {
+            var request = new GetAllInstituteRequest
+            {
+                Accending = true,
+                OrderedBy = "Id",
+                PageIndex = 1,
+                PageSize = 10
+            };
+
+            var result = sysAdminHttpClient.CallPostService<GetAllInstituteResponse>(ConstantsUrl.GetAllInstituteApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region Delete
+        [Fact]
+        public void Delete()
+        {
+            var addRequest = new AddInstituteRequest()
+            {
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Code = Guid.NewGuid().ToString(),
+                Address = new AddressDto()
+                {
+                    City = Guid.NewGuid().ToString(),
+                    ZipCode = Guid.NewGuid().ToString(),
+                    Country = Guid.NewGuid().ToString(),
+                    State = Guid.NewGuid().ToString(),
+                    Street = Guid.NewGuid().ToString()
+                },
+                WebsiteUrl = "www." + Guid.NewGuid().ToString() + ".com"
+            };
+            var addResult = sysAdminHttpClient.CallPostService<AddInstituteResponse>(ConstantsUrl.AddInstituteApiUrl, addRequest);
+            Assert.True(addResult.IsSuccess);
+            Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
+
+            var request = new DeleteInstituteRequest
+            {
+                Id = addResult.NewRecordedId
+            };
+            var result = sysAdminHttpClient.CallPostService<DeleteInstituteResponse>(ConstantsUrl.DeleteInstituteApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region Update
+        [Fact]
+        public void Update()
+        {
+            var addRequest = new AddInstituteRequest()
+            {
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Code = Guid.NewGuid().ToString(),
+                Address = new AddressDto()
+                {
+                    City = Guid.NewGuid().ToString(),
+                    ZipCode = Guid.NewGuid().ToString(),
+                    Country = Guid.NewGuid().ToString(),
+                    State = Guid.NewGuid().ToString(),
+                    Street = Guid.NewGuid().ToString()
+                },
+                WebsiteUrl = "www." + Guid.NewGuid().ToString() + ".com"
+            };
+            var addResult = sysAdminHttpClient.CallPostService<AddInstituteResponse>(ConstantsUrl.AddInstituteApiUrl, addRequest);
+            Assert.True(addResult.IsSuccess);
+            Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
+
+            var request = new UpdateInstituteRequest
+            {
+                Id = addResult.NewRecordedId,
+                Title = Guid.NewGuid().ToString()
+            };
+            var result = sysAdminHttpClient.CallPostService<UpdateInstituteResponse>(ConstantsUrl.UpdateInstituteApiUrl, request);
             Assert.True(result.IsSuccess);
         }
         #endregion

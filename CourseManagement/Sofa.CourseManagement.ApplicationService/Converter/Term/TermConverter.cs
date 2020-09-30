@@ -18,7 +18,8 @@ public static class TermConverter
                 Id = source.Id,
                 Title = source.Title,
                 IsActive = source.IsActive,
-                CourseId = source.CourseId
+                CourseId = source.CourseId,
+                Description = source.Description
             };
         }
 

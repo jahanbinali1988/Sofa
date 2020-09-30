@@ -2,7 +2,7 @@
 
 namespace Sofa.SharedKernel.Enum
 {
-    public enum PostTypeEnum
+    public enum ContentTypeEnum
     {
         [Description("متن")]
         Text = 0,

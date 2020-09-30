@@ -24,23 +24,22 @@ namespace Sofa.Teacher.Consumer.ReisterPost
                 var post = _unitOfWork.postRepository.Query(c => c.Id == message.Id).SingleOrDefault();
                 if (post != null)
                 {
-                    post.ModifyDate = DateTime.Now;
-                    post.IsActive = message.IsActive;
-                    post.Order = message.Order;
-                    post.PostType = (PostTypeEnum)message.PostType;
-                    post.RowVersion = post.RowVersion + 1;
-                    post.Title = message.Title;
-                    post.Description = message.Description;
-                    post.CourseId = message.LessonId;
+                    post.AssignModifiedDate(DateTime.Now);
+                    post.AssignIsActive(message.IsActive);
+                    post.AssignOrder(message.Order);
+                    post.AssignPostType((ContentTypeEnum)message.PostType);
+                    post.IncreaseRowVersion();
+                    post.AssignTitle(message.Title);
+                    post.AssignDescription(message.Description);
+                    post.AssignCourse(message.LessonId);
 
                     _unitOfWork.postRepository.Update(post);
                     await _unitOfWork.CommitAsync();
                     return true;
                 }
 
-                var newPost = Post.DefaultFactory(message.Title, message.Order, (PostTypeEnum)message.PostType, message.LessonId);
-                newPost.Description = message.Description;
-
+                var newPost = Post.CreateInstance(null, message.Title, message.Order, (ContentTypeEnum)message.PostType, message.Content, message.LessonId, message.Description, message.IsActive);
+                
                 await _unitOfWork.postRepository.AddAsync(newPost);
                 await _unitOfWork.CommitAsync();
                 return true;

@@ -6,22 +6,36 @@ namespace Sofa.Teacher.Model
 {
     public class User : BaseEntity
     {
-        public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public LevelEnum Level { get; set; }
-        public Guid? LastCourseId { get; set; }
+        public string UserName { get; internal set; }
+        public string FirstName { get; internal set; }
+        public string LastName { get; internal set; }
+        public string PhoneNumber { get; internal set; }
+        public string Email { get; internal set; }
+        public LevelEnum Level { get; internal set; }
 
+        public Guid? LastCourseId { get; internal set; }
         public Course Course { get; set; }
 
-        public static User DefaultFactory(string firstName, string lastname, string emailAddress, string userName,
-            LevelEnum level, string phoneNo, bool isActive, Guid? lastCourseId)
+        internal User()
+        {
+
+        }
+
+        public void AssignUserName(string userName) { this.UserName = userName; }
+        public void AssignFirstName(string firsName) { this.FirstName = firsName; }
+        public void AssignLastName(string lastName) { this.LastName = lastName; }
+        public void AssignEmail(string email) { this.Email = email; }
+        public void AssignLevel(LevelEnum level) { this.Level = level; }
+        public void AssignPhoneNumber(string phoneNumber) { this.PhoneNumber = phoneNumber; }
+        public void AssignIsActive(bool isActive) { this.IsActive = isActive; }
+        public void AssignLastCourse(Guid lastCourseId) { this.LastCourseId = lastCourseId; }
+        public void AssignLastCourse(Course course) { this.LastCourseId = course.Id; this.Course = course; }
+        public static User CreateInstance(Guid? id, string firstName, string lastname, string emailAddress, string userName,
+            LevelEnum level, string phoneNo, bool isActive, Guid? lastCourseId, string description)
         {
             return new User
             {
-                Id = Guid.NewGuid(),
+                Id = id.HasValue ? id.Value : Guid.NewGuid(),
                 FirstName = firstName,
                 LastName = lastname,
                 UserName = userName,
@@ -31,9 +45,8 @@ namespace Sofa.Teacher.Model
                 CreateDate = DateTime.Now,
                 Level = level,
                 LastCourseId = lastCourseId,
-                ModifyDate = DateTime.Now,
-                Description = string.Empty,
-                RowVersion = 1
+                Description = description,
+                RowVersion = 0
             };
         }
     }

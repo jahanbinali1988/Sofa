@@ -31,7 +31,7 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
                 _termDomainService.CanAdd(request.Title);
 
-                var term = Term.CreateInstance(null, request.Title, request.IsActive, request.CourseId);
+                var term = Term.CreateInstance(null, request.Title, request.IsActive, request.CourseId, request.Description);
                 this._unitOfWork.termRepository.Add(term);
                 this._unitOfWork.Commit();
 
@@ -122,7 +122,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var term = Term.CreateInstance(request.Id, request.Title, request.IsActive, request.CourseId);
+                var term = Term.CreateInstance(request.Id, request.Title, request.IsActive, request.CourseId, request.Description);
                 this._unitOfWork.termRepository.Update(term);
                 this._unitOfWork.Commit();
 

@@ -7,26 +7,37 @@ namespace Sofa.CourseManagement.Model
 {
     public class User : BaseEntity
     {
-        public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string PasswordHash { get; set; }
-        public string Email { get; set; }
-        public UserRoleEnum Role { get; set; }
-        public LevelEnum Level { get; set; }
+        public string UserName { get; internal set; }
+        public string FirstName { get; internal set; }
+        public string LastName { get; internal set; }
+        public string PhoneNumber { get; internal set; }
+        public string PasswordHash { get; private set; }
+        public string Email { get; internal set; }
+        public UserRoleEnum Role { get; internal set; }
+        public LevelEnum Level { get; internal set; }
+
+        internal User()
+        {
+
+        }
 
         public void ChangePassword(string newPassword)
         {
             PasswordHash = SHA256HashGenerator.GenerateSHA256Hash(newPassword);
         }
-
-        public static User DefaultFactory(string firstName, string lastname, string rawPassword, string emailAddress, string userName,
-            UserRoleEnum role, string phoneNo, bool isActive)
+        public void AssignUserName(string userName) { this.UserName = userName; }
+        public void AssignFirstName(string firstName) { this.FirstName = firstName; }
+        public void AssignLastName(string lastName) { this.LastName = lastName; }
+        public void AssignPhoneNumber(string phoneNumber) { this.PhoneNumber = phoneNumber; }
+        public void AssignEmail(string email) { this.Email = email; }
+        public void AssignRole(UserRoleEnum role) { this.Role = role; }
+        public void AssignLevel(LevelEnum level) { this.Level = level; }
+        public static User CreateInstance(Guid? id, string firstName, string lastname, string rawPassword, string emailAddress, string userName,
+            UserRoleEnum role, string phoneNo, bool isActive, string description, LevelEnum level)
         {
             return new User
             {
-                Id = Guid.NewGuid(),
+                Id = id.HasValue ? id.Value : Guid.NewGuid(),
                 FirstName = firstName,
                 LastName = lastname,
                 PasswordHash = SHA256HashGenerator.GenerateSHA256Hash(rawPassword),
@@ -35,7 +46,11 @@ namespace Sofa.CourseManagement.Model
                 Role = role,
                 IsActive = isActive,
                 PhoneNumber = phoneNo,
-                CreateDate = DateTime.Now
+                CreateDate = DateTime.Now,
+                Description = description,
+                IsDeleted= false,
+                Level = level,
+                RowVersion = 0
             };
         }
     }

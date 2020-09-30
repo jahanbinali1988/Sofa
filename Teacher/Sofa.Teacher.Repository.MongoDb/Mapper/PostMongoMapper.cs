@@ -1,5 +1,4 @@
-﻿using Sofa.SharedKernel.Enum;
-using Sofa.SharedKernel.Mongo.Entity;
+﻿using Sofa.SharedKernel.Mongo.Entity;
 using Sofa.Teacher.Model;
 using System.Collections.Generic;
 
@@ -9,16 +8,8 @@ namespace Sofa.Teacher.Repository.MongoDb.Mapper
     {
         public static Post ToEntity(this PostMongo postMongo)
         {
-            return new Post
-            {
-                Description = postMongo.Description,
-                Id = postMongo.Id,
-                IsActive = postMongo.IsActive,
-                CourseId = postMongo.CourseId,
-                Order = postMongo.Order,
-                PostType = (PostTypeEnum)postMongo.PostType,
-                Title = postMongo.Title
-            };
+            Post post = Post.CreateInstance(postMongo.Id, postMongo.Title, postMongo.Order,postMongo.PostType, postMongo.PostContent, postMongo.CourseId, postMongo.Description, postMongo.IsActive);
+            return post;
         }
 
         public static IList<Post> ToEntity(this IEnumerable<PostMongo> postMongos)

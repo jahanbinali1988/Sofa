@@ -7,16 +7,46 @@ namespace Sofa.SharedKernel.BaseClasses
     {
         [Key]
         public virtual TKey Id { get; set; }
-        public string Description { get; set; }
-        public int RowVersion { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime ModifyDate { get; set; }
-        public bool IsDeleted { get; set; }
-        public bool IsActive { get; set; }
+        public string Description { get; protected set; }
+        public int RowVersion { get; protected set; }
+        public DateTime CreateDate { get; protected set; }
+        public DateTime ModifyDate { get; protected set; }
+        public bool IsDeleted { get; protected set; }
+        public bool IsActive { get; protected set; }
 
         public void Dispose()
         {
             this.Dispose();
+        }
+        public void IncreaseRowVersion()
+        {
+            RowVersion += 1;
+        }
+        public void AssignDescription(string description)
+        {
+            this.Description = description;
+        }
+        public void AssignIsActive(bool isActive) 
+        { 
+            this.IsActive = isActive;
+        }
+        public void AssignIsDeleted(bool isDeleted) 
+        { 
+            this.IsDeleted = isDeleted; 
+        }
+        public void AssignCreateDate(DateTime? createDate)
+        {
+            if (createDate.HasValue)
+                this.CreateDate = DateTime.Now;
+            else
+                this.CreateDate = createDate.Value;
+        }
+        public void AssignModifiedDate(DateTime? modifiedDate)
+        {
+            if (modifiedDate.HasValue)
+                this.ModifyDate = DateTime.Now;
+            else
+                this.ModifyDate = modifiedDate.Value;
         }
     }
 

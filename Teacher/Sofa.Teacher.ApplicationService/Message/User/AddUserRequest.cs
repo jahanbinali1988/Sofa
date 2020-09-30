@@ -11,6 +11,7 @@ namespace Sofa.Teacher.ApplicationService
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+        public string Description { get; set; }
         public LevelEnum Level { get; set; }
 
         public Guid LastCourseId { get; set; }

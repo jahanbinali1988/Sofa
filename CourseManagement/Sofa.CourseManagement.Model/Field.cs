@@ -1,18 +1,33 @@
 ﻿using Sofa.SharedKernel.BaseClasses;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sofa.CourseManagement.Model
 {
     public class Field : BaseEntity
     {
-        public string Title { get; private set; }
+        public string Title { get; internal set; }
 
-        public Guid InstituteId { get; set; }
-        public Institute Institute { get; set; }
+        public Guid InstituteId { get; internal set; }
+        public Institute Institute { get; internal set; }
+        public ICollection<Course> Courses { get; internal set; }
 
-        public ICollection<Course> Courses { get; set; }
+        internal Field()
+        {
 
+        }
+
+        public void AssignTitle(string title) { this.Title = title; }
+        public void AssignInstitute(Guid instituteId) { this.InstituteId = instituteId; }
+        public void AssignInstitute(Institute institute) { this.InstituteId = institute.Id; this.Institute = institute; }
+        public void AssignCourses(IEnumerable<Course> courses) 
+        {
+            if (Courses.Any())
+                this.Courses.ToList().AddRange(courses);
+            else
+                this.Courses = courses.ToArray(); 
+        }
         public static Field CreateInstance(Guid? id,string title, bool isActive, Guid instituteId)
         {
             return new Field()

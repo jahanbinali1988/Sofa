@@ -31,8 +31,8 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var user = User.DefaultFactory(request.FirstName, request.LastName, request.Password, request.Email, request.UserName,
-                    (UserRoleEnum)request.Role, request.PhoneNumber, request.IsActive);
+                var user = User.CreateInstance(null, request.FirstName, request.LastName, request.Password, request.Email, request.UserName,
+                    (UserRoleEnum)request.Role, request.PhoneNumber, request.IsActive, request.Description, (LevelEnum)request.Level); ;
                 this._userDomainService.CanAdd(user);
                 
                 this._unitOfWork.userRepository.Add(user);

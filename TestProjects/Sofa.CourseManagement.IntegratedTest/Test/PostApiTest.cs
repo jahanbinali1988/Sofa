@@ -1,5 +1,7 @@
 ﻿using Sofa.CourseManagement.ApplicationService;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
+using Sofa.SharedKernel;
+using Sofa.SharedKernel.Enum;
 using System;
 using System.Net.Http;
 using Xunit;
@@ -23,7 +25,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetById()
         {
-            var url = ConstantsUrl.GetPostByIdApiUrl + "";
+            var url = ConstantsUrl.GetPostByIdApiUrl + DefaultData.PostId;
             var result = unknownHttpClient.CallGetService<Messages.GetPostByIdResponse>(url);
             Assert.True(result.IsSuccess);
         }
@@ -33,13 +35,91 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Add()
         {
-            var request = new AddPostRequest()
+            var request = new AddPostRequest
             {
-                IsActive = false,
                 Title = Guid.NewGuid().ToString(),
+                LessonPlanId = DefaultData.LessonPlanId,
+                Order = 1,
+                ContentType = (short)ContentTypeEnum.Text,
+                Content = Guid.NewGuid().ToString(),
+                IsActive = false,
+                Description = Guid.NewGuid().ToString()
             };
 
             var result = sysAdminHttpClient.CallPostService<Messages.AddPostResponse>(ConstantsUrl.AddPostApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region GetAll
+        [Fact]
+        public void GetAll()
+        {
+            var request = new GetAllPostRequest
+            {
+                Accending = true,
+                OrderedBy = "Id",
+                PageIndex = 1,
+                PageSize = 10,
+                LessonPlanId = DefaultData.LessonPlanId
+            };
+
+            var result = sysAdminHttpClient.CallPostService<GetAllPostResponse>(ConstantsUrl.GetAllPostApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region Delete
+        [Fact]
+        public void Delete()
+        {
+            var addRequest = new AddPostRequest
+            {
+                Title = Guid.NewGuid().ToString(),
+                LessonPlanId = DefaultData.LessonPlanId,
+                Order = 1,
+                ContentType = (short)ContentTypeEnum.Text,
+                Content = Guid.NewGuid().ToString(),
+                IsActive = false,
+                Description = Guid.NewGuid().ToString()
+            };
+            var addResult = sysAdminHttpClient.CallPostService<AddPostResponse>(ConstantsUrl.AddPostApiUrl, addRequest);
+            Assert.True(addResult.IsSuccess);
+            Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
+
+            var request = new DeletePostRequest
+            {
+                Id = addResult.NewRecordedId
+            };
+            var result = sysAdminHttpClient.CallPostService<DeletePostResponse>(ConstantsUrl.DeletePostApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region Update
+        [Fact]
+        public void Update()
+        {
+            var addRequest = new AddPostRequest
+            {
+                Title = Guid.NewGuid().ToString(),
+                LessonPlanId = DefaultData.LessonPlanId,
+                Order = 1,
+                ContentType = (short)ContentTypeEnum.Text,
+                Content = Guid.NewGuid().ToString(),
+                IsActive = false,
+                Description = Guid.NewGuid().ToString()
+            };
+            var addResult = sysAdminHttpClient.CallPostService<AddPostResponse>(ConstantsUrl.AddPostApiUrl, addRequest);
+            Assert.True(addResult.IsSuccess);
+            Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
+
+            var request = new UpdatePostRequest
+            {
+                Id = addResult.NewRecordedId,
+                Title = Guid.NewGuid().ToString()
+            };
+            var result = sysAdminHttpClient.CallPostService<UpdatePostResponse>(ConstantsUrl.UpdatePostApiUrl, request);
             Assert.True(result.IsSuccess);
         }
         #endregion

@@ -4,6 +4,7 @@ using Sofa.Teacher.Model;
 using Sofa.Teacher.Repository;
 using System;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace Sofa.Teacher.Consumer.RegisterCourse
@@ -23,20 +24,20 @@ namespace Sofa.Teacher.Consumer.RegisterCourse
                 var course = _unitOfWork.courseRepository.Query(c => c.Id == message.Id).SingleOrDefault();
                 if (course != null)
                 {
-                    course.IsActive = message.IsActive;
-                    course.ModifyDate = DateTime.Now;
-                    course.Order = message.Order;
-                    course.RowVersion = ++course.RowVersion;
-                    course.SyllabusId = message.LessonPlanId;
-                    course.Description = message.Description;
-                    course.Title = message.Title;
+                    course.AssignIsActive(message.IsActive);
+                    course.AssignModifiedDate(DateTime.Now);
+                    course.AssignOrder(message.Order);
+                    course.IncreaseRowVersion();
+                    course.AssignSyllabus(message.LessonPlanId);
+                    course.AssignDescription(message.Description);
+                    course.AssignTitle(message.Title);
 
                     _unitOfWork.courseRepository.Update(course);
                     await _unitOfWork.CommitAsync();
                     return true;
                 }
 
-                var newCourse = Course.DefaultFactory(message.Title, message.Order, message.LessonPlanId, message.Description, message.IsActive);
+                var newCourse = Course.CreateInstance(null, message.Title, message.Order, message.LessonPlanId, message.Description, message.IsActive);
 
                 await _unitOfWork.courseRepository.AddAsync(newCourse);
                 await _unitOfWork.CommitAsync();

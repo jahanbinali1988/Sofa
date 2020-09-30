@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sofa.SharedKernel.Enum;
+using System;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
@@ -6,7 +7,7 @@ namespace Sofa.CourseManagement.ApplicationService
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public string AgeRange { get; set; }
+        public AgeRangeEnum AgeRange { get; set; }
         public bool IsActive { get; set; }
 
         public Guid FieldId { get; set; }

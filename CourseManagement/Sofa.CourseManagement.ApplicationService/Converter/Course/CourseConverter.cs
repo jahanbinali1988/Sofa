@@ -1,4 +1,5 @@
 ﻿using Sofa.CourseManagement.Model;
+using Sofa.SharedKernel.Enum;
 using System.Collections.Generic;
 using System.Linq;
 

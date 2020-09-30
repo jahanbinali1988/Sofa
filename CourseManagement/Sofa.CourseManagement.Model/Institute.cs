@@ -1,15 +1,17 @@
 ﻿using Sofa.SharedKernel.BaseClasses;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Sofa.CourseManagement.Model
 {
     public class Institute : BaseEntity
     {
-        public string Title { get; private set; }
-        public string WebsiteUrl { get; private set; }
-        public Address Address { get; private set; }
-        public string Code { get; private set; }
+        public string Title { get; internal set; }
+        public string WebsiteUrl { get; internal set; }
+        public Address Address { get; internal set; }
+        public string Code { get; internal set; }
 
         public ICollection<Field> Fields { get; set; }
 
@@ -31,22 +33,25 @@ namespace Sofa.CourseManagement.Model
                 this.Address = address;
             }
         }
-
         public void AssignTitle(string title)
         {
             this.Title = title;
         }
-
         public void AssignCode(string code)
         {
             this.Code = code;
         }
-
-        public void AssignActivityMode(bool isActive)
+        public void AssignWebsiteUrl(string websiteUrl)
         {
-            this.IsActive = isActive;
+            this.WebsiteUrl = websiteUrl;
         }
-
+        public void AssignFields(IEnumerable<Field> fields) 
+        {
+            if (this.Fields.Any())
+                this.Fields.ToList().AddRange(fields);
+            else
+                this.Fields = fields.ToArray();
+        }
         public static Institute CreateInstance(Guid? id, string title, bool isActive, string code)
         {
             return new Institute()

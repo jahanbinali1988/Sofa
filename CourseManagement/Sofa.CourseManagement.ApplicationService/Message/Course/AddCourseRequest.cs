@@ -1,4 +1,5 @@
 ﻿using Sofa.SharedKernel.BaseClasses.Message;
+using Sofa.SharedKernel.Enum;
 using Sofa.SharedKernel.Validation;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,7 @@ namespace Sofa.CourseManagement.ApplicationService
         public string Title { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن محدوده سنی الزامی است")]
-        public string AgeRange { get; set; }
+        public AgeRangeEnum AgeRange { get; set; }
         
         [Required(ErrorMessage = "وضعیت فعال بودن دوره را مشخص کنید")]
         public bool IsActive { get; set; }

@@ -22,25 +22,26 @@ namespace Sofa.Teacher.Consumer.RegisterUser
         {
             try
             {
-                var query = _unitOfWork.userRepository.Query(c=> c.UserName == message.UserName);
-                var user = query.SingleOrDefault();
+                var user = _unitOfWork.userRepository.Query(c=> c.UserName == message.UserName).SingleOrDefault();
 
                 if (user != null)
                 {
-                    user.FirstName = message.FirstName;
-                    user.LastName = message.LastName;
-                    user.PhoneNumber = message.PhoneNumber;
-                    user.Email = message.Email;
-                    user.CreateDate = DateTime.Now;
-
+                    user.AssignDescription(message.Description);
+                    user.AssignEmail(message.Email);
+                    user.AssignFirstName(message.FirstName);
+                    user.AssignIsActive(message.IsActive);
+                    user.AssignIsDeleted(message.IsDeleted);
+                    user.AssignLevel((LevelEnum)message.Level);
+                    user.AssignModifiedDate(DateTime.Now);
+                    user.AssignPhoneNumber(message.PhoneNumber);
+                    user.AssignUserName(message.UserName);
                     _unitOfWork.userRepository.Update(user);
                     await _unitOfWork.CommitAsync();
                     return true;
                 }
 
-                var newUser = User.DefaultFactory(message.FirstName, message.LastName, message.Email, message.UserName, (LevelEnum)message.Level, 
-                    message.PhoneNumber, message.IsActive, Guid.Empty);
-                newUser.Description = message.Description;
+                var newUser = User.CreateInstance(null, message.FirstName, message.LastName, message.Email, message.UserName, (LevelEnum)message.Level, 
+                    message.PhoneNumber, message.IsActive, Guid.Empty, message.Description);
 
                 await _unitOfWork.userRepository.AddAsync(newUser);
                 await _unitOfWork.CommitAsync();

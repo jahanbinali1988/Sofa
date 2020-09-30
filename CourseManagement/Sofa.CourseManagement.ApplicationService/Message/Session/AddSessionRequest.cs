@@ -7,6 +7,7 @@ namespace Sofa.CourseManagement.ApplicationService
     {
         public string Title { get; set; }
         public bool IsActive { get; set; }
+        public string Description { get; set; }
         public Guid TermId { get; set; }
         public Guid LessonPlanId { get; set; }
     }

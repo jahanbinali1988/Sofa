@@ -18,11 +18,15 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 Id = source.Id,
                 Title = source.Title,
-                PostType = source.PostType,
+                ContentType = source.ContentType,
                 Order = source.Order,
-                PostTypeCaption = source.PostType.GetDescription(),
+                Content = source.Content,
+                PostTypeCaption = source.ContentType.GetDescription(),
                 IsActive = source.IsActive,
-                LessonPlanId = source.LessonPlanId
+                LessonPlanId = source.LessonPlanId,
+                CreateDate = source.CreateDate,
+                ModifiedDate = source.ModifyDate,
+                Description = source.Description
             };
         }
 

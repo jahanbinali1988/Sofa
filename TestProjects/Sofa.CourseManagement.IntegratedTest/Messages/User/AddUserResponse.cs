@@ -1,9 +1,10 @@
 ﻿using Sofa.CourseManagement.IntegratedTest.Utilities;
+using System;
 
 namespace Sofa.CourseManagement.IntegratedTest
 {
     public class AddUserResponse : ResponseBase
     {
-        public string NewRecordedId { get; set; }
+        public Guid NewRecordedId { get; set; }
     }
 }

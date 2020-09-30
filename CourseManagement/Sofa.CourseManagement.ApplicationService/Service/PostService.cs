@@ -32,14 +32,14 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
 
                 this._postDomainService.CanAdd(request.Title);
-                var post = Post.CreateInstance(null, request.Title, request.Order, (PostTypeEnum)request.PostType, request.LessonId, request.IsActive);
+                var post = Post.CreateInstance(null, request.Title, request.Order, (ContentTypeEnum)request.ContentType, request.Content, request.LessonPlanId, request.IsActive, request.Description);
 
                 this._unitOfWork.postRepository.Add(post);
                 this._unitOfWork.Commit();
 
                 _busControl.Publish<RegisterPostEvent>(new RegisterPostEvent() {
                     Order = post.Order,
-                    PostType = (short)post.PostType,
+                    PostType = (short)post.ContentType,
                     Title = post.Title,
                     Description = "Created in CourseManagement Module",
                     Id = post.Id,
@@ -133,7 +133,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var post = Post.CreateInstance(request.Id, request.Title, request.Order, (PostTypeEnum)request.PostType, request.LessonId, request.IsActive);
+                var post = Post.CreateInstance(request.Id, request.Title, request.Order, (ContentTypeEnum)request.ContentType, request.Content, request.LessonPlanId, request.IsActive, request.Description);
                 this._unitOfWork.postRepository.Update(post);
                 this._unitOfWork.Commit();
 

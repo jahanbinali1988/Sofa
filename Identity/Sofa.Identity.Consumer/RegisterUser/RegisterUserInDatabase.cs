@@ -24,24 +24,21 @@ namespace Sofa.Identiity.Consumer.RegisterUser
                 var user = _unitOfWork.userRepository.GetByUserName(message.UserName);
                 if (user != null)
                 {
-                    user.FirstName = message.FirstName;
-                    user.LastName = message.LastName;
-                    user.PasswordHash = message.PasswordHash;
-                    user.PhoneNumber = message.PhoneNumber;
-                    user.Email = message.Email;
-                    user.CreateDate = DateTime.Now;
-                    user.Role = (UserRoleEnum)message.Role;
+                    user.AssignFirstName(message.FirstName);
+                    user.AssignLastName(message.LastName);
+                    user.ChangePassword(message.PasswordHash);
+                    user.AssignPhoneNumber(message.PhoneNumber);
+                    user.AssignEmail(message.Email);
+                    user.AssignModifiedDate(DateTime.Now);
+                    user.AssignRole((UserRoleEnum)message.Role);
 
                     _unitOfWork.userRepository.Update(user);
                     await _unitOfWork.CommitAsync();
                     return true;
                 }
-                
-                var newUser = User.DefaultFactory(message.FirstName, message.LastName, message.PasswordHash, message.Email, message.UserName,
-                    UserRoleEnum.Student, message.PhoneNumber, true, null, null);
 
-                newUser.PasswordHash = message.PasswordHash;
-                newUser.Description = message.Description;
+                var newUser = User.CreateInstance(null, message.FirstName, message.LastName, message.PasswordHash, message.Email, message.UserName,
+                    UserRoleEnum.Student, message.PhoneNumber, true, null, null, message.Description, (LevelEnum)message.Level);
 
                 await _unitOfWork.userRepository.AddAsync(newUser);
                 await _unitOfWork.CommitAsync();
