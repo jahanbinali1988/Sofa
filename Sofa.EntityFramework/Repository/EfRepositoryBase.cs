@@ -10,7 +10,7 @@ namespace Sofa.EntityFramework.Repository
 {
     public abstract class EfRepositoryBase<TEntity, TKey> : IEfRepositoryBase<TEntity, TKey>
             where TKey : struct
-            where TEntity : class, IBaseEntity<TKey>
+            where TEntity : BaseEntity, IBaseEntity<TKey>
     {
         protected DbContext _context { get; }
         protected DbSet<TEntity> _dbSet = null;
@@ -167,7 +167,7 @@ namespace Sofa.EntityFramework.Repository
                 _context.Entry<TEntity>(entity).State = EntityState.Deleted;
                 return true;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return false;
             }
@@ -208,13 +208,53 @@ namespace Sofa.EntityFramework.Repository
         {
             try
             {
-                //_context.Entry<TEntity>(entity).State = EntityState.Modified;
+                entity.AssignModifiedDate(DateTime.Now);
+                entity.IncreaseRowVersion();
                 _context.Update<TEntity>(entity);
                 return true;
             }
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public bool SafeDelete(TEntity entity)
+        {
+            try
+            {
+                entity.AssignIsDeleted(true);
+                entity.AssignModifiedDate(DateTime.Now);
+                entity.IncreaseRowVersion();
+                _context.Update<TEntity>(entity);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool SafeDelete(TKey id)
+        {
+            bool result = false;
+            try
+            {
+                var entity = _dbSet.SingleOrDefault<TEntity>(c => c.Id.Equals(id));
+                if (entity != null)
+                {
+                    entity.AssignIsDeleted(true);
+                    entity.AssignModifiedDate(DateTime.Now);
+                    entity.IncreaseRowVersion();
+                    _context.Update<TEntity>(entity);
+                    result = true;
+                }
+                
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return result;
             }
         }
     }

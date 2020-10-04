@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Course\" />
+    <Folder Include="Field\" />
+    <Folder Include="Institute\" />
+    <Folder Include="Term\" />
+    <Folder Include="Session\" />
+  </ItemGroup>
+
 </Project>

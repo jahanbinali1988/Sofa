@@ -49,29 +49,6 @@ namespace Sofa.CourseManagement.ApplicationService
             }
         }
 
-        public DeleteTermResponse Delete(DeleteTermRequest request)
-        {
-            try
-            {
-                request.Validate();
-
-                this._unitOfWork.termRepository.Remove(request.Id);
-                this._unitOfWork.Commit();
-
-                return new DeleteTermResponse(true, "حذف با موفقیت انجام شد");
-            }
-            catch (BusinessException e)
-            {
-                this._logger.Warning("Course Management-Term Service-Delete Term ", e.Message);
-                return new DeleteTermResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
-            }
-            catch (Exception e)
-            {
-                this._logger.Error("Course Management-Term Service-Delete Term ", e.Message);
-                return new DeleteTermResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
-            }
-        }
-
         public GetTermByIdResponse Get(GetTermByIdRequest request)
         {
             try
@@ -137,6 +114,29 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-Term Service-Update Term ", e.Message);
                 return new UpdateTermResponse(false, "ویرایش با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public DeleteTermResponse Delete(DeleteTermRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.termRepository.SafeDelete(request.Id);
+                this._unitOfWork.Commit();
+
+                return new DeleteTermResponse(true, "حذف با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Term Service-Delete Term ", e.Message);
+                return new DeleteTermResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Term Service-Delete Term ", e.Message);
+                return new DeleteTermResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
             }
         }
     }

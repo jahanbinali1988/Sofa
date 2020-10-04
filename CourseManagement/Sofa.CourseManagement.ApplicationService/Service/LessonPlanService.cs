@@ -61,7 +61,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                this._unitOfWork.lessonPlanRepository.Remove(request.Id);
+                this._unitOfWork.lessonPlanRepository.SafeDelete(request.Id);
                 this._unitOfWork.Commit();
 
                 return new DeleteLessonPlanResponse(true, "حذف با موفقیت انجام شد");

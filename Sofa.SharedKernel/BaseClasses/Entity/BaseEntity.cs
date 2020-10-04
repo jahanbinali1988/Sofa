@@ -26,27 +26,21 @@ namespace Sofa.SharedKernel.BaseClasses
         {
             this.Description = description;
         }
-        public void AssignIsActive(bool isActive) 
-        { 
+        public void AssignIsActive(bool isActive)
+        {
             this.IsActive = isActive;
         }
-        public void AssignIsDeleted(bool isDeleted) 
-        { 
-            this.IsDeleted = isDeleted; 
-        }
-        public void AssignCreateDate(DateTime? createDate)
+        public void AssignIsDeleted(bool isDeleted)
         {
-            if (createDate.HasValue)
-                this.CreateDate = DateTime.Now;
-            else
-                this.CreateDate = createDate.Value;
+            this.IsDeleted = isDeleted;
         }
-        public void AssignModifiedDate(DateTime? modifiedDate)
+        public void AssignCreateDate(DateTime createDate)
         {
-            if (modifiedDate.HasValue)
-                this.ModifyDate = DateTime.Now;
-            else
-                this.ModifyDate = modifiedDate.Value;
+            this.CreateDate = createDate;
+        }
+        public void AssignModifiedDate(DateTime modifiedDate)
+        {
+            this.ModifyDate = modifiedDate;
         }
     }
 

@@ -48,29 +48,6 @@ namespace Sofa.CourseManagement.ApplicationService
             }
         }
 
-        public DeleteSessionResponse Delete(DeleteSessionRequest request)
-        {
-            try
-            {
-                request.Validate();
-
-                this._unitOfWork.sessionRepository.Remove(request.Id);
-                this._unitOfWork.Commit();
-
-                return new DeleteSessionResponse(true, "حذف با موفقیت انجام شد");
-            }
-            catch (BusinessException e)
-            {
-                this._logger.Warning("Course Management-Session Service-Delete Session ", e.Message);
-                return new DeleteSessionResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
-            }
-            catch (Exception e)
-            {
-                this._logger.Error("Course Management-Session Service-Delete Session ", e.Message);
-                return new DeleteSessionResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
-            }
-        }
-
         public GetSessionByIdResponse Get(GetSessionByIdRequest request)
         {
             try
@@ -136,6 +113,29 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-Session Service-Update Session ", e.Message);
                 return new UpdateSessionResponse(false, "ویرایش با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public DeleteSessionResponse Delete(DeleteSessionRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.sessionRepository.SafeDelete(request.Id);
+                this._unitOfWork.Commit();
+
+                return new DeleteSessionResponse(true, "حذف با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Session Service-Delete Session ", e.Message);
+                return new DeleteSessionResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Session Service-Delete Session ", e.Message);
+                return new DeleteSessionResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
             }
         }
     }

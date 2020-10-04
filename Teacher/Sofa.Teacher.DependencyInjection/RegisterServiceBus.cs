@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using MassTransit;
 using Sofa.SharedKernel;
-using Sofa.Teacher.Consumer.RegisterCourse;
 using Sofa.Teacher.Consumer.RegisterSyllabus;
 using Sofa.Teacher.Consumer.RegisterUser;
 using Sofa.Teacher.Consumer.ReisterPost;
@@ -29,7 +28,6 @@ namespace Sofa.Teacher.DependencyResolver
                         x.Instance(new RegisterUserEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
                         x.Instance(new RegisterSyllabusEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
                         x.Instance(new ReisterPostEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
-                        x.Instance(new RegisterCourseEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
                     });
                 });
                 return busControl;

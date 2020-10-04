@@ -25,6 +25,8 @@ namespace Sofa.EntityFramework.Repository
         Task<IEnumerable<TEntity>> QueryPageAsync(int offset, int count, Expression<Func<TEntity, bool>> filter, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null, bool orderByDescending = true);
         bool Remove(TEntity entity);
         bool Remove(TKey id);
+        bool SafeDelete(TEntity entity);
+        bool SafeDelete(TKey id);
         bool SetUnchanged(TEntity entitieit);
         bool Update(TEntity entity);
     }

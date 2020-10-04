@@ -88,17 +88,72 @@ namespace Sofa.CourseManagement.ApplicationService
 
         public GetAllUserResponse GetAll(GetAllUserRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                request.Validate();
+
+                var user = this._unitOfWork.userRepository.GetAll();
+                var result = user.Convert();
+                return new GetAllUserResponse(true, "عملیات خواندن با موفقیت انجام شد", "") { Users = result };
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-User Service-GetAll User ", e.Message);
+                return new GetAllUserResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-User Service-GetAll User ", e.Message);
+                return new GetAllUserResponse(false, "عملیات خواندن با مشکل مواجه شد.", e.Message.ToString());
+            }
         }
 
         public UpdateUserResponse Update(UpdateUserRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                request.Validate();
+
+                var user = User.CreateInstance(request.Id, request.FirstName, request.LastName, request.Password, request.Email, request.UserName, (UserRoleEnum)request.Role,
+                    request.PhoneNumber, request.IsActive, request.Description, (LevelEnum)request.Level);
+                this._unitOfWork.userRepository.Update(user);
+                this._unitOfWork.Commit();
+
+                return new UpdateUserResponse(true, "ویرایش با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-User Service-Update User ", e.Message);
+                return new UpdateUserResponse(false, "ویرایش با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-User Service-Update User ", e.Message);
+                return new UpdateUserResponse(false, "ویرایش با مشکل مواجه شد.", e.Message.ToString());
+            }
         }
 
         public DeleteUserResponse Delete(DeleteUserRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.userRepository.SafeDelete(request.Id);
+                this._unitOfWork.Commit();
+
+                return new DeleteUserResponse(true, "حذف با موفقیت انجام شد");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-User Service-Delete User ", e.Message);
+                return new DeleteUserResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-User Service-Delete User ", e.Message);
+                return new DeleteUserResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
         }
     }
 }
