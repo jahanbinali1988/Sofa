@@ -1,11 +1,13 @@
 ﻿using System;
 
-namespace Sofa.Events.LessonPlan
+namespace Sofa.Events.Session
 {
-    public class RegisterLessonPlanEvent
+    public class RegisterSessionEvent
     {
         public Guid Id { get; set; }
-        public short Level { get; set; }
+        public string Title { get; set; }
+        public Guid TermId { get; set; }
+        public Guid LessonPlanId { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
