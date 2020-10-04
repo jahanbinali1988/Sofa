@@ -4,7 +4,7 @@ using System;
 
 namespace Sofa.Teacher.Repository
 {
-    public interface ISyllabusRepository : IEfRepositoryBase<Syllabus, Guid>
+    public interface ILessonPlanRepository : IEfRepositoryBase<LessonPlan, Guid>
     {
     }
 }

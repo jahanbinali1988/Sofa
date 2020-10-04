@@ -12,7 +12,7 @@ namespace Sofa.Teacher.Model
         public Guid SyllabusId { get; internal set; }
 
         public ICollection<Post> Posts { get; internal set; }
-        public Syllabus Syllabus { get; internal set; }
+        public LessonPlan Syllabus { get; internal set; }
 
         internal Course()
         {
@@ -22,7 +22,7 @@ namespace Sofa.Teacher.Model
         public void AssignTitle(string title) { this.Title = title; }
         public void AssignOrder(short order) { this.Order = order; }
         public void AssignSyllabus(Guid syllabusId) { this.SyllabusId = syllabusId; }
-        public void AssignSyllabus(Syllabus syllabus) { this.SyllabusId = syllabus.Id; this.Syllabus = syllabus; }
+        public void AssignSyllabus(LessonPlan syllabus) { this.SyllabusId = syllabus.Id; this.Syllabus = syllabus; }
         public void AssignPost(IEnumerable<Post> posts) 
         {
             if (Posts.Any())

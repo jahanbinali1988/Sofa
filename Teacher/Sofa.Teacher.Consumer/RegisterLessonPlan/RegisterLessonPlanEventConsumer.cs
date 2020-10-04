@@ -5,16 +5,16 @@ using Sofa.Teacher.Repository;
 using System;
 using System.Threading.Tasks;
 
-namespace Sofa.Teacher.Consumer.RegisterSyllabus
+namespace Sofa.Teacher.Consumer.RegisterLessonPlan
 {
-    public class RegisterSyllabusEventConsumer : IConsumer<RegisterLessonPlanEvent>
+    public class RegisterLessonPlanEventConsumer : IConsumer<RegisterLessonPlanEvent>
     {
-        private readonly RegisterSyllabusInDatabase _registerSyllabusInDatabase;
+        private readonly RegisterLessonPlanInDatabase _registerLessonPlanInDatabase;
         private readonly ILogger _logger;
 
-        public RegisterSyllabusEventConsumer(IUnitOfWork unitOfWork, ILogger logger)
+        public RegisterLessonPlanEventConsumer(IUnitOfWork unitOfWork, ILogger logger)
         {
-            _registerSyllabusInDatabase = new RegisterSyllabusInDatabase(unitOfWork);
+            _registerLessonPlanInDatabase = new RegisterLessonPlanInDatabase(unitOfWork);
             _logger = logger;
         }
 
@@ -22,11 +22,11 @@ namespace Sofa.Teacher.Consumer.RegisterSyllabus
         {
             try
             {
-                await _registerSyllabusInDatabase.Do(context.Message);
+                await _registerLessonPlanInDatabase.Do(context.Message);
             }
             catch (Exception exception)
             {
-                _logger.Exception(exception, "RegisterSyllabusEventConsumer.Consume");
+                _logger.Exception(exception, "RegisterLessonPlanEventConsumer.Consume");
                 _logger.Information("{@a}", context.Message);
                 throw exception;
             }

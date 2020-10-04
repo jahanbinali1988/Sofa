@@ -9,7 +9,7 @@ namespace Sofa.Teacher.DependencyResolver
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<SyllabusRepository>().As<ISyllabusRepository>();
+            builder.RegisterType<LessonPlanRepository>().As<ILessonPlanRepository>();
             builder.RegisterType<CourseRepository>().As<ICourseRepository>();
             builder.RegisterType<MongoPostRepository>().As<IPostMongoRepository>();
             builder.RegisterType<PostRepository>().As<IPostRepository>();

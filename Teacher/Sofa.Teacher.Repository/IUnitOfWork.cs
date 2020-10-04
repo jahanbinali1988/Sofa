@@ -6,7 +6,7 @@ namespace Sofa.Teacher.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
-        ISyllabusRepository syllabusRepository { get; }
+        ILessonPlanRepository lessonPlanRepository { get; }
         ICourseRepository courseRepository { get; }
         IPostRepository postRepository { get; }
         IUserRepository userRepository { get; }

@@ -5,9 +5,9 @@ using System;
 
 namespace Sofa.Teacher.Repository.EF
 {
-    public class SyllabusRepository : EfRepositoryBase<Syllabus, Guid>, ISyllabusRepository
+    public class LessonPlanRepository : EfRepositoryBase<LessonPlan, Guid>, ILessonPlanRepository
     {
-        public SyllabusRepository(ApplicationDbContext context) : base(context)
+        public LessonPlanRepository(ApplicationDbContext context) : base(context)
         {
         }
 

@@ -8,7 +8,7 @@ namespace Sofa.Teacher.Repository.EF
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-        ISyllabusRepository IUnitOfWork.syllabusRepository => new SyllabusRepository(_context);
+        ILessonPlanRepository IUnitOfWork.lessonPlanRepository => new LessonPlanRepository(_context);
         ICourseRepository IUnitOfWork.courseRepository => new CourseRepository(_context);
         IPostRepository IUnitOfWork.postRepository => new PostRepository(_context);
         IUserRepository IUnitOfWork.userRepository => new UserRepository(_context);

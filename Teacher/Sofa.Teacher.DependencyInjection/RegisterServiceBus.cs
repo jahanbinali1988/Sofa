@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using MassTransit;
 using Sofa.SharedKernel;
-using Sofa.Teacher.Consumer.RegisterSyllabus;
+using Sofa.Teacher.Consumer.RegisterLessonPlan;
 using Sofa.Teacher.Consumer.RegisterUser;
 using Sofa.Teacher.Consumer.ReisterPost;
 using Sofa.Teacher.Repository;
@@ -26,7 +26,7 @@ namespace Sofa.Teacher.DependencyResolver
 
                     cfg.ReceiveEndpoint(busSettings.QueueName, x => {
                         x.Instance(new RegisterUserEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
-                        x.Instance(new RegisterSyllabusEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
+                        x.Instance(new RegisterLessonPlanEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
                         x.Instance(new ReisterPostEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
                     });
                 });

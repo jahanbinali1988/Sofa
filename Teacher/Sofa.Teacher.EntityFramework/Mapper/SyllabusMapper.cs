@@ -5,9 +5,9 @@ using Sofa.Teacher.Model;
 
 namespace Sofa.Teacher.EntityFramework.Mapper
 {
-    public class SyllabusMapper : BaseEntityMap<Syllabus>
+    public class SyllabusMapper : BaseEntityMap<LessonPlan>
     {
-        public override void Map(EntityTypeBuilder<Syllabus> builder)
+        public override void Map(EntityTypeBuilder<LessonPlan> builder)
         {
             builder
                 .ToTable("Syllabus");

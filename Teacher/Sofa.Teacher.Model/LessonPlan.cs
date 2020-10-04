@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace Sofa.Teacher.Model
 {
-    public class Syllabus : BaseEntity
+    public class LessonPlan : BaseEntity
     {
         public string Title { get; internal set; }
 
         public ICollection<Course> Courses { get; internal set; }
 
-        internal Syllabus()
+        internal LessonPlan()
         {
 
         }
@@ -24,9 +24,9 @@ namespace Sofa.Teacher.Model
             else
                 this.Courses = courses.ToArray();
         }
-        public static Syllabus CreateInstance(Guid? id, string title, bool isActive, string description)
+        public static LessonPlan CreateInstance(Guid? id, string title, bool isActive, string description)
         {
-            return new Syllabus()
+            return new LessonPlan()
             {
                 Id = id.HasValue ? id.Value : Guid.NewGuid(),
                 Title = title,

@@ -39,7 +39,7 @@ namespace Sofa.CourseManagement.ApplicationService
 
                 _busControl.Publish<RegisterPostEvent>(new RegisterPostEvent() {
                     Order = post.Order,
-                    PostType = (short)post.ContentType,
+                    ContentType = (short)post.ContentType,
                     Title = post.Title,
                     Description = "Created in CourseManagement Module",
                     Id = post.Id,
