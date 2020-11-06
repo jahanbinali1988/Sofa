@@ -27,7 +27,8 @@ namespace Sofa.Web
             {
                 IList<Claim> claims = new List<Claim>{
                     new Claim("userId",response.UserId.ToString()),
-                    new Claim("userTitle", response.UserTitle)
+                    new Claim("userTitle", response.UserTitle),
+                    new Claim("userRole", response.UserRole)
                 };
 
                 var customResponse = new Dictionary<string, object>();

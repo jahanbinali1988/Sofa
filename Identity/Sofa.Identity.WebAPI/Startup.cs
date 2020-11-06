@@ -28,6 +28,20 @@ namespace Sofa.Identity.WebAPI
         [Obsolete]
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            // ********************
+            // Setup CORS
+            // ********************            
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                   name: "AllowOrigin",
+                   builder => {
+                       builder.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader();
+                   });
+            });
+
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
@@ -56,6 +70,8 @@ namespace Sofa.Identity.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowOrigin");
 
             // ********************
             // Start Bus
@@ -87,7 +103,7 @@ namespace Sofa.Identity.WebAPI
             services.AddDbContext<SofaIdentityDbContext>();
 
             container = new Container();
-            
+
             container.Configure(config =>
             {
                 config.For<IConfiguration>().Use(Configuration);

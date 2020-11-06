@@ -40,7 +40,7 @@ namespace Sofa.Identity.ApplicationService
                 if (!validUserPasswordSpec.IsSatisfiedBy(user))
                     throw new AccessDeniedException("نام کاربری یا کلمه عبور اشتباه است.");
 
-                return new GetUserCredentialValidationStatusResponse(true, "مشخصات ورود به حساب کاربری معتبر است.") { CredentialIsValid = true, UserTitle = user.UserTitle, UserId = user.Id };
+                return new GetUserCredentialValidationStatusResponse(true, "مشخصات ورود به حساب کاربری معتبر است.") { CredentialIsValid = true, UserTitle = user.UserTitle, UserId = user.Id, UserRole = user.Role.ToString() };
             }
             catch (AccessDeniedException ex)
             {

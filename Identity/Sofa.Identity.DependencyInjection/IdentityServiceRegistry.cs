@@ -8,6 +8,7 @@ namespace Sofa.Identity.DependencyInjection
         public IdentityServiceRegistry()
         {
             For<IAuthenticationService>().Use<AuthenticationService>().ContainerScoped();
+            For<IProfileService>().Use<ProfileService>();
         }
     }
 }

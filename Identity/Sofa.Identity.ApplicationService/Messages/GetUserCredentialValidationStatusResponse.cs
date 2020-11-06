@@ -15,6 +15,7 @@ namespace Sofa.Identity.ApplicationService
         }
         public bool CredentialIsValid { get; set; }
         public string UserTitle { get; set; }
+        public string UserRole { get; set; }
         public object UserId { get; set; }
     }
 }

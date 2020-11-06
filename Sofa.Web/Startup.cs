@@ -38,6 +38,7 @@ namespace Sofa.Web
         {
             app.UseMiddleware<EnableRewindableBodyStartup>();
 
+            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseCors("SiteCorsPolicy");
 
             if (env.IsDevelopment())
@@ -69,13 +70,14 @@ namespace Sofa.Web
             // ********************
             // Setup CORS
             // ********************            
+            //services.AddCors();
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
                     builder.SetIsOriginAllowed(_ => true)
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    //.AllowAnyOrigin()
+                    //.AllowAnyOrigin()//
                     .AllowCredentials()
                     );
             });

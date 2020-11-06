@@ -17,7 +17,8 @@ namespace Sofa.Identity.Repository.Dapper
         public User GetByUserName(string username)
         {
             var cmd = new CommandDefinition("select * from dbo.IDN_User where UserName = @Username", new { Username = username }, transaction: DbTransaction);
-            return Db.Context().QueryFirstOrDefault<User>(cmd);
+            var user = Db.Context().QueryFirstOrDefault<User>(cmd);
+            return user;
         }
     }
 }
