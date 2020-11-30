@@ -20,4 +20,4 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet publish ./sofa.sln -c Release -o out
+      run: dotnet publish .\sofa.sln -c Release -o out
