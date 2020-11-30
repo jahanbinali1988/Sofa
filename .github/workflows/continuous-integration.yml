@@ -20,6 +20,4 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet publish sofa.sln -c Release -o out
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet publish ./sofa.sln -c Release -o out
