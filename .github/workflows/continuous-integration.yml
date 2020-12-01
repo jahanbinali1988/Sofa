@@ -19,4 +19,4 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build ./sofa/sofa.sln --configuration Release --no-restore
+        run: dotnet build ./Sofa/Sofa.Web/Sofa.Web.csproj --configuration Release --no-restore
