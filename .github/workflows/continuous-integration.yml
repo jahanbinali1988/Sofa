@@ -19,6 +19,5 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build  ./Sofa/sofa.sln -c Release -o out
-    
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
