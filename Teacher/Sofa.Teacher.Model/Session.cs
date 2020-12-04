@@ -25,10 +25,8 @@ namespace Sofa.Teacher.Model
 
         public static Session CreateInstance(Guid? id, bool isActive, string description)
         {
-            var session = new Session()
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid()
-            };
+            var session = new Session();
+            session.Id = id.HasValue ? id.Value : Guid.NewGuid();
             session.AssignCreateDate(DateTime.Now);
             session.AssignFirstRowVersion();
             session.AssignIsActive(isActive);

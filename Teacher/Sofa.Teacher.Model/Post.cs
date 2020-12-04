@@ -31,10 +31,8 @@ namespace Sofa.Teacher.Model
 
         public static Post CreateInstance(Guid? id, bool isActive, string description)
         {
-            var post = new Post()
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid()
-            };
+            var post = new Post();
+            post.Id = id.HasValue ? id.Value : Guid.NewGuid();
             post.AssignCreateDate(DateTime.Now);
             post.AssignFirstRowVersion();
             post.AssignIsActive(isActive);
@@ -45,20 +43,14 @@ namespace Sofa.Teacher.Model
         }
         public static Post CreateInstance(Guid? id, string title, short order, ContentTypeEnum postType, string content, Guid lessonplanId, string description, bool isActive)
         {
-            return new Post()
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                Title = title,
-                Order = order,
-                Content = content,
-                PostType = postType,
-                LessonPlanId = lessonplanId,
-                IsActive = isActive,
-                Description = description,
-                RowVersion = 0,
-                IsDeleted = false,
-                CreateDate = DateTime.Now
-            };
+            var post = CreateInstance(id, isActive, description);
+            post.AssignTitle(title);
+            post.AssignOrder(order);
+            post.AssignPostType(postType);
+            post.AssignContent(content);
+            post.AssignLessonPlan(lessonplanId);
+
+            return post;
         }
     }
 }

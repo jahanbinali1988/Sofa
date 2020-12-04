@@ -32,10 +32,8 @@ namespace Sofa.Teacher.Model
 
         public static LessonPlan CreateInstance(Guid? id, bool isActive, string description)
         {
-            var lessonPlan = new LessonPlan()
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid()
-            };
+            var lessonPlan = new LessonPlan();
+            lessonPlan.Id = id.HasValue ? id.Value : Guid.NewGuid();
             lessonPlan.AssignCreateDate(DateTime.Now);
             lessonPlan.AssignFirstRowVersion();
             lessonPlan.AssignIsActive(isActive);
@@ -46,14 +44,10 @@ namespace Sofa.Teacher.Model
         }
         public static LessonPlan CreateInstance(Guid? id, LevelEnum level, bool isAvtive, string description)
         {
-            return new LessonPlan()
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                Level = level,
-                IsActive = isAvtive,
-                RowVersion = 0,
-                Description = description
-            };
+            var lessonPlan = CreateInstance(id, isAvtive, description);
+            lessonPlan.Level = level;
+
+            return lessonPlan;
         }
     }
 }
