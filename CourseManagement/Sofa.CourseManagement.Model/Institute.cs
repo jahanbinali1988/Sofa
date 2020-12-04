@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Sofa.CourseManagement.Model
 {
@@ -52,7 +51,7 @@ namespace Sofa.CourseManagement.Model
             else
                 this.Fields = fields.ToArray();
         }
-        public static Institute CreateInstance(Guid? id, string title, bool isActive, string code)
+        public static Institute CreateInstance(Guid? id, string title, bool isActive, string code, string websiteUrl, string description)
         {
             return new Institute()
             {
@@ -61,7 +60,9 @@ namespace Sofa.CourseManagement.Model
                 IsActive = isActive,
                 Title = title,
                 RowVersion = 0,
-                Code = code
+                Code = code,
+                WebsiteUrl = websiteUrl,
+                Description = description
             };
         }
     }

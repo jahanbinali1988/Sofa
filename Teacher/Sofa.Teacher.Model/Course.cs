@@ -1,4 +1,5 @@
 ﻿using Sofa.SharedKernel.BaseClasses;
+using Sofa.SharedKernel.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,11 @@ namespace Sofa.Teacher.Model
     public class Course : BaseEntity
     {
         public string Title { get; internal set; }
-        public short Order { get; internal set; }
-        public Guid SyllabusId { get; internal set; }
+        public AgeRangeEnum AgeRange { get; internal set; }
 
-        public ICollection<Post> Posts { get; internal set; }
-        public LessonPlan Syllabus { get; internal set; }
+        public Guid FieldId { get; internal set; }
+        public Field Field { get; internal set; }
+        public ICollection<Term> Terms { get; internal set; }
 
         internal Course()
         {
@@ -20,30 +21,39 @@ namespace Sofa.Teacher.Model
         }
 
         public void AssignTitle(string title) { this.Title = title; }
-        public void AssignOrder(short order) { this.Order = order; }
-        public void AssignSyllabus(Guid syllabusId) { this.SyllabusId = syllabusId; }
-        public void AssignSyllabus(LessonPlan syllabus) { this.SyllabusId = syllabus.Id; this.Syllabus = syllabus; }
-        public void AssignPost(IEnumerable<Post> posts) 
+        public void AssignAgeRange(AgeRangeEnum ageRange) { this.AgeRange = ageRange; }
+        public void AssignField(Guid fieldId) { this.FieldId = fieldId; }
+        public void AssignField(Field field) { this.Field = field; this.FieldId = field.Id; }
+        public void AssignTerms(IEnumerable<Term> terms)
         {
-            if (Posts.Any())
-                this.Posts.ToList().AddRange(posts);
+            if (Terms.Any())
+                this.Terms.ToList().AddRange(terms);
             else
-                this.Posts = posts.ToArray();
+                this.Terms = terms.ToArray();
         }
-        public static Course CreateInstance(Guid? id, string title, short order, Guid syllabusId, string description, bool isActive)
+
+        public static Course CreateInstance(Guid? id, bool isActive, string description)
         {
-            return new Course()
+            var course = new Course()
             {
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                Title = title,
-                Order = order,
-                SyllabusId = syllabusId,
-                CreateDate = DateTime.Now,
-                Description = description,
-                IsActive = isActive,
-                RowVersion = 1,
-                IsDeleted = false
+                Id = id.HasValue ? id.Value : Guid.NewGuid()
             };
+            course.AssignCreateDate(DateTime.Now);
+            course.AssignFirstRowVersion();
+            course.AssignIsActive(isActive);
+            course.AssignIsDeleted(false);
+            course.AssignDescription(description);
+
+            return course;
+        }
+        public static Course CreateInstance(Guid? id, string title, AgeRangeEnum ageRange, Guid fieldId, bool isActive, string description)
+        {
+            var course = CreateInstance(id, isActive, description);
+            course.AssignTitle(title);
+            course.AssignAgeRange(ageRange);
+            course.AssignField(fieldId);
+
+            return course;
         }
     }
 }

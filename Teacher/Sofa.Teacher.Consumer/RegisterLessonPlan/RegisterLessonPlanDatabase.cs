@@ -1,5 +1,6 @@
 ﻿using Sofa.Events.LessonPlan;
 using Sofa.SharedKernel.BaseClasses;
+using Sofa.SharedKernel.Enum;
 using Sofa.Teacher.Model;
 using Sofa.Teacher.Repository;
 using System;
@@ -28,13 +29,13 @@ namespace Sofa.Teacher.Consumer.RegisterLessonPlan
                     lessonPlan.IncreaseRowVersion();
                     lessonPlan.AssignDescription(message.Description);
                     lessonPlan.AssignIsActive(message.IsActive);
-
+                    
                     _unitOfWork.lessonPlanRepository.Update(lessonPlan);
                     await _unitOfWork.CommitAsync();
                     return true;
                 }
 
-                var newLessonPlan = LessonPlan.CreateInstance(null, string.Empty, message.IsActive, message.Description);
+                var newLessonPlan = LessonPlan.CreateInstance(null, (LevelEnum)message.Level, message.IsActive, message.Description);
 
                 await _unitOfWork.lessonPlanRepository.AddAsync(newLessonPlan);
                 await _unitOfWork.CommitAsync();

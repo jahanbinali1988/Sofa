@@ -27,7 +27,6 @@ namespace Sofa.Teacher.Model
         public void AssignEmail(string email) { this.Email = email; }
         public void AssignLevel(LevelEnum level) { this.Level = level; }
         public void AssignPhoneNumber(string phoneNumber) { this.PhoneNumber = phoneNumber; }
-        public void AssignIsActive(bool isActive) { this.IsActive = isActive; }
         public void AssignLastCourse(Guid lastCourseId) { this.LastCourseId = lastCourseId; }
         public void AssignLastCourse(Course course) { this.LastCourseId = course.Id; this.Course = course; }
         public static User CreateInstance(Guid? id, string firstName, string lastname, string emailAddress, string userName,

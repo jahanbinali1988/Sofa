@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sofa.CourseManagement.Model
+namespace Sofa.Teacher.Model
 {
     public class Term : BaseEntity
     {
@@ -21,26 +21,35 @@ namespace Sofa.CourseManagement.Model
         public void AssignTitle(string title) { this.Title = title; }
         public void AssignCourse(Guid courseId) { this.CourseId = courseId; }
         public void AssignCourse(Course course) { this.CourseId = course.Id; this.Course = course; }
-        public void AssignSessions(IEnumerable<Session> sessions) 
+        public void AssignSessions(IEnumerable<Session> sessions)
         {
             if (this.Sessions.Any())
                 this.Sessions.ToList().AddRange(sessions);
             else
                 this.Sessions = sessions.ToArray();
         }
+
+        public static Term CreateInstance(Guid? id, bool isActive, string description)
+        {
+            var term = new Term()
+            {
+                Id = id.HasValue ? id.Value : Guid.NewGuid()
+            };
+            term.AssignCreateDate(DateTime.Now);
+            term.AssignFirstRowVersion();
+            term.AssignIsActive(isActive);
+            term.AssignIsDeleted(false);
+            term.AssignDescription(description);
+
+            return term;
+        }
         public static Term CreateInstance(Guid? id, string title, bool isActive, Guid courseId, string description)
         {
-            return new Term()
-            {
-                CreateDate = DateTime.Now,
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                IsActive = isActive,
-                RowVersion = 0,
-                Title = title,
-                CourseId = courseId,
-                Description = description,
-                IsDeleted = false
-            };
+            var term = CreateInstance(id, isActive, description);
+            term.AssignTitle(title);
+            term.AssignCourse(courseId);
+
+            return term;
         }
     }
 }

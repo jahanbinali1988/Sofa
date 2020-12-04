@@ -18,5 +18,6 @@ namespace Sofa.CourseManagement.ApplicationService
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار کد موسسه الزامی است")]
         public string Code { get; set; }
 
+        public string Description { get; set; }
     }
 }

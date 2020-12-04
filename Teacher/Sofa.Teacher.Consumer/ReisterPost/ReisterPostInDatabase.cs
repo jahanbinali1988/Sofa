@@ -31,7 +31,8 @@ namespace Sofa.Teacher.Consumer.ReisterPost
                     post.IncreaseRowVersion();
                     post.AssignTitle(message.Title);
                     post.AssignDescription(message.Description);
-                    post.AssignCourse(message.LessonPlanId);
+                    post.AssignLessonPlan(message.LessonPlanId);
+                    post.AssignContent(message.Content);
 
                     _unitOfWork.postRepository.Update(post);
                     await _unitOfWork.CommitAsync();

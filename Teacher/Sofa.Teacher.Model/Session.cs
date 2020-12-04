@@ -1,7 +1,7 @@
 ﻿using Sofa.SharedKernel.BaseClasses;
 using System;
 
-namespace Sofa.CourseManagement.Model
+namespace Sofa.Teacher.Model
 {
     public class Session : BaseEntity
     {
@@ -22,20 +22,29 @@ namespace Sofa.CourseManagement.Model
         public void AssignTerm(Term term) { this.TermId = term.Id; this.Term = term; }
         public void AssignLessonPlan(Guid lessonPlanId) { this.LessonPlanId = lessonPlanId; }
         public void AssignLessonPlan(LessonPlan lessonPlan) { this.LessonPlanId = lessonPlan.Id; this.LessonPlan = lessonPlan; }
+
+        public static Session CreateInstance(Guid? id, bool isActive, string description)
+        {
+            var session = new Session()
+            {
+                Id = id.HasValue ? id.Value : Guid.NewGuid()
+            };
+            session.AssignCreateDate(DateTime.Now);
+            session.AssignFirstRowVersion();
+            session.AssignIsActive(isActive);
+            session.AssignIsDeleted(false);
+            session.AssignDescription(description);
+
+            return session;
+        }
         public static Session CreateInstance(Guid? id, string title, bool isActive, Guid lessonPlanId, Guid termId, string description)
         {
-            return new Session()
-            {
-                IsActive = isActive,
-                Title = title,
-                CreateDate = DateTime.Now,
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                RowVersion = 0,
-                LessonPlanId = lessonPlanId,
-                TermId = termId,
-                Description = description,
-                IsDeleted = false
-            };
+            var session = CreateInstance(id, isActive, description);
+            session.AssignTitle(title);
+            session.AssignLessonPlan(lessonPlanId);
+            session.AssignTerm(termId);
+
+            return session;
         }
     }
 }
