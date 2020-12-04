@@ -18,7 +18,7 @@ using Sofa.EntityFramework.Factory;
 using Sofa.EntityFramework.Seed;
 using Sofa.SharedKernel;
 using Sofa.Web.Middleware;
-using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.OpenApi.Models;
 
 namespace Sofa.Web
 {
@@ -38,8 +38,7 @@ namespace Sofa.Web
         {
             app.UseMiddleware<EnableRewindableBodyStartup>();
 
-            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseCors("SiteCorsPolicy");
+            app.UseCors("AllowAllOrigin");
 
             if (env.IsDevelopment())
             {
@@ -69,21 +68,48 @@ namespace Sofa.Web
 
             // ********************
             // Setup CORS
-            // ********************            
-            //services.AddCors();
+            // ********************        
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy(builder =>
-                    builder.SetIsOriginAllowed(_ => true)
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    //.AllowAnyOrigin()//
-                    .AllowCredentials()
-                    );
+                options.AddPolicy(
+                   name: "AllowAllOrigin",
+                   builder =>
+                   {
+                       builder.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader();
+                   });
             });
 
-            services.AddSwaggerGen();
-
+            // Enable Swagger   
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Sofa API",
+                    Version = "v1"
+                });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                   {
+                     new OpenApiSecurityScheme
+                     {
+                       Reference = new OpenApiReference
+                       {
+                         Type = ReferenceType.SecurityScheme,
+                         Id = "Bearer"
+                       }
+                     },
+                        new string[] { }
+                   }
+                });
+            });
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
                 .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())

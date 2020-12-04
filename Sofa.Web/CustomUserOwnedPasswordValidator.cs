@@ -31,19 +31,26 @@ namespace Sofa.Web
                     new Claim("userRole", response.UserRole)
                 };
 
-                var customResponse = new Dictionary<string, object>();
-                customResponse.Add("isSuccess", true);
-                customResponse.Add("message", response.Message);
+                //var customResponse = new Dictionary<string, object>();
+                //customResponse.Add("isSuccess", true);
+                //customResponse.Add("message", response.Message);
 
-                context.Result = new GrantValidationResult(response.UserId.ToString(), OidcConstants.AuthenticationMethods.Password, DateTime.Now, claims, customResponse: customResponse);
+                //context.Result = new GrantValidationResult(response.UserId.ToString(), OidcConstants.AuthenticationMethods.Password, DateTime.Now, claims, customResponse: customResponse);
+                //context.Request.ClientClaims.Add(new Claim("userId", response.UserId.ToString()));
+                //context.Request.ClientClaims.Add(new Claim("userTitle", response.UserTitle));
+                //context.Request.ClientClaims.Add(new Claim("userRole", response.UserRole));
+                context.Result = new GrantValidationResult(response.UserId.ToString(), OidcConstants.AuthenticationMethods.Password, DateTime.Now, claims);
+                context.Request.ClientClaims.Add(new Claim("userId", response.UserId.ToString()));
+                context.Request.ClientClaims.Add(new Claim("userTitle", response.UserTitle));
+                context.Request.ClientClaims.Add(new Claim("userRole", response.UserRole));
             }
-            else
-            {
-                var customResponse = new Dictionary<string, object>();
-                customResponse.Add("isSuccess", false);
-                customResponse.Add("message", response.Message);
-                context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "invalid custom credential", customResponse);
-            }
+            //else
+            //{
+            //    var customResponse = new Dictionary<string, object>();
+            //    customResponse.Add("isSuccess", false);
+            //    customResponse.Add("message", response.Message);
+            //    context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "invalid custom credential", customResponse);
+            //}
             return Task.CompletedTask;
         }
     }

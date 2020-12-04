@@ -72,12 +72,18 @@ namespace Sofa.EntityFramework.Repository
             return _dbSet.Where<TEntity>(c => c.Id.Equals(id)).Include(c => includes).SingleOrDefault();
         }
 
-        public IEnumerable<TEntity> GetAll(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null)
+        public IEnumerable<TEntity> GetAll(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null, int pageIndex = 1, int pageSize = 10)
         {
-            return _dbSet.OrderBy(o => orderBy).Include(i => includes).ToArray<TEntity>();
+            IQueryable<TEntity> result = _dbSet.AsQueryable<TEntity>();
+            if (orderBy != null)
+                result = result.OrderBy(o => orderBy);
+            if(includes != null)
+                result = result.Include(i => includes);
+            int skipSize = (pageIndex - 1) * pageSize;
+            return result.Skip(skipSize).Take(pageSize).ToList();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null)
+        public async Task<IEnumerable<TEntity>> GetAllAsync(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null, int pageIndex = 1, int pageSize = 10)
         {
             return await _dbSet.OrderBy(o => orderBy).Include(i => includes).ToArrayAsync<TEntity>();
         }

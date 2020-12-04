@@ -28,8 +28,10 @@ namespace Sofa.Web.Controllers
 
         [Route("Get")]
         [HttpGet]
-        public IActionResult Get([FromBody] GetUserByIdRequest request)
+        [Authorize]
+        public IActionResult Get([FromQuery] string id)
         {
+            var request = new GetUserByIdRequest() { UserId = Guid.Parse(id) };
             var response = _userService.Get(request);
             return new ObjectResult(response);
         }
