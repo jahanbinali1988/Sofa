@@ -1,10 +1,8 @@
-﻿using Sofa.SharedKernel;
-using MassTransit;
+﻿using MassTransit;
+using Sofa.Identiity.Consumer.RegisterUser;
+using Sofa.SharedKernel;
 using StructureMap;
 using System;
-using Sofa.Identiity.Consumer.RegisterUser;
-using Sofa.Identity.Repository;
-using Sofa.SharedKernel.Validation;
 
 namespace Sofa.Identity.DependencyInjection
 {

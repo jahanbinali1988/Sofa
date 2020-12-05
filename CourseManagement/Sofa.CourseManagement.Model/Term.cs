@@ -21,7 +21,7 @@ namespace Sofa.CourseManagement.Model
         public void AssignTitle(string title) { this.Title = title; }
         public void AssignCourse(Guid courseId) { this.CourseId = courseId; }
         public void AssignCourse(Course course) { this.CourseId = course.Id; this.Course = course; }
-        public void AssignSessions(IEnumerable<Session> sessions) 
+        public void AssignSessions(IEnumerable<Session> sessions)
         {
             if (this.Sessions.Any())
                 this.Sessions.ToList().AddRange(sessions);

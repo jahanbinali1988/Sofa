@@ -12,7 +12,7 @@ namespace Sofa.Teacher.Repository.EF
         ICourseRepository IUnitOfWork.courseRepository => new CourseRepository(_context);
         IPostRepository IUnitOfWork.postRepository => new PostRepository(_context);
         IUserRepository IUnitOfWork.userRepository => new UserRepository(_context);
-        
+
         public UnitOfWork(ApplicationDbContext context)
         {
             this._context = context;

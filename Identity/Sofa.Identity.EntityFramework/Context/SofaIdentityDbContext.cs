@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Sofa.Identity.EntityFramework.Extention;
 using Sofa.Identity.EntityFramework.Map;
 using Sofa.Identity.EntityFramework.Map.Mapper;
 using Sofa.Identity.EntityFramework.Seed;
+using System.Collections.Generic;
 
 namespace Sofa.Identity.EntityFramework.Context
 {

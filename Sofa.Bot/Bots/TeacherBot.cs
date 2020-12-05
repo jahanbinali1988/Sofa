@@ -1,15 +1,15 @@
 ﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
+using Sofa.SharedKernel.Enum;
+using Sofa.Teacher.ApplicationService;
+using Sofa.Teacher.ApplicationService.Service;
+using Sofa.Teacher.Mapper;
+using Sofa.Teacher.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Bot.Schema;
-using Sofa.Teacher.States;
-using Sofa.Teacher.Mapper;
-using Sofa.Teacher.ApplicationService.Service;
-using Sofa.Teacher.ApplicationService;
-using Sofa.SharedKernel.Enum;
 
 namespace Sofa.Teacher.Bots
 {

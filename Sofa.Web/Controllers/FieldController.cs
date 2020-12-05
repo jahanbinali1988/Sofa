@@ -19,7 +19,7 @@ namespace Sofa.Web.Controllers
         [HttpPost]
         [Route("Add")]
         [Authorize]
-        public ActionResult<AddFieldResponse> Add([FromBody]AddFieldRequest request)
+        public ActionResult<AddFieldResponse> Add([FromBody] AddFieldRequest request)
         {
             request.CommanderID = User.GetUserId();
             return _fieldService.AddField(request);
@@ -27,7 +27,7 @@ namespace Sofa.Web.Controllers
 
         [Route("Get")]
         [HttpGet]
-        public ActionResult<GetFieldByIdResponse> Get([FromQuery]string id)
+        public ActionResult<GetFieldByIdResponse> Get([FromQuery] string id)
         {
             GetFieldByIdRequest request = new GetFieldByIdRequest() { FieldId = Guid.Parse(id) };
             return _fieldService.Get(request);

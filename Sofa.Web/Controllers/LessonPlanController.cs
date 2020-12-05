@@ -26,7 +26,7 @@ namespace Sofa.Web.Controllers
 
         [Route("Get")]
         [HttpGet]
-        public ActionResult<GetLessonPlanByIdResponse> Get([FromQuery]string id)
+        public ActionResult<GetLessonPlanByIdResponse> Get([FromQuery] string id)
         {
             GetLessonPlanByIdRequest request = new GetLessonPlanByIdRequest() { LessonPlanId = Guid.Parse(id) };
             return _lessonPlanService.Get(request);

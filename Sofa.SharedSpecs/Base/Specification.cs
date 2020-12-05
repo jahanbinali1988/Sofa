@@ -43,7 +43,7 @@ namespace Sofa.SharedSpecs
         {
             return new OrSpecification<T>(this, specification);
         }
-        public NotSpecification<T> Not() 
+        public NotSpecification<T> Not()
         {
             return new NotSpecification<T>(this);
         }

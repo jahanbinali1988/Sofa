@@ -29,7 +29,7 @@ namespace Sofa.Teacher.Consumer.RegisterLessonPlan
                     lessonPlan.IncreaseRowVersion();
                     lessonPlan.AssignDescription(message.Description);
                     lessonPlan.AssignIsActive(message.IsActive);
-                    
+
                     _unitOfWork.lessonPlanRepository.Update(lessonPlan);
                     await _unitOfWork.CommitAsync();
                     return true;

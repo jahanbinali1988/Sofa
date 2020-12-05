@@ -19,7 +19,7 @@ namespace Sofa.Web.Controllers
         [HttpPost]
         [Route("Add")]
         [Authorize]
-        public ActionResult<AddTermResponse> Add([FromBody]AddTermRequest request)
+        public ActionResult<AddTermResponse> Add([FromBody] AddTermRequest request)
         {
             request.CommanderID = User.GetUserId();
             return _termService.AddTerm(request);
@@ -27,7 +27,7 @@ namespace Sofa.Web.Controllers
 
         [Route("Get")]
         [HttpGet]
-        public ActionResult<GetTermByIdResponse> Get([FromQuery]string id)
+        public ActionResult<GetTermByIdResponse> Get([FromQuery] string id)
         {
             GetTermByIdRequest request = new GetTermByIdRequest() { TermId = Guid.Parse(id) };
             return _termService.Get(request);

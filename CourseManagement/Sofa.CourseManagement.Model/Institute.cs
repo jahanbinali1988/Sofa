@@ -44,7 +44,7 @@ namespace Sofa.CourseManagement.Model
         {
             this.WebsiteUrl = websiteUrl;
         }
-        public void AssignFields(IEnumerable<Field> fields) 
+        public void AssignFields(IEnumerable<Field> fields)
         {
             if (this.Fields.Any())
                 this.Fields.ToList().AddRange(fields);

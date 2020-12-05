@@ -19,7 +19,7 @@ namespace Sofa.Web.Controllers
         [HttpPost]
         [Route("Add")]
         [Authorize]
-        public ActionResult<AddCourseResponse> Add([FromBody]AddCourseRequest request)
+        public ActionResult<AddCourseResponse> Add([FromBody] AddCourseRequest request)
         {
             request.CommanderID = User.GetUserId();
             return _courseService.AddCourse(request);
@@ -27,7 +27,7 @@ namespace Sofa.Web.Controllers
 
         [Route("Get")]
         [HttpGet]
-        public ActionResult<GetCourseByIdResponse> Get([FromQuery]string id)
+        public ActionResult<GetCourseByIdResponse> Get([FromQuery] string id)
         {
             GetCourseByIdRequest request = new GetCourseByIdRequest() { CourseId = Guid.Parse(id) };
             return _courseService.Get(request);

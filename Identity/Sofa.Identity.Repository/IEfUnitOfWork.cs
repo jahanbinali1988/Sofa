@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace Sofa.Identity.Repository

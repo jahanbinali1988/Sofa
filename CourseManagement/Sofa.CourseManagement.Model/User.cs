@@ -48,7 +48,7 @@ namespace Sofa.CourseManagement.Model
                 PhoneNumber = phoneNo,
                 CreateDate = DateTime.Now,
                 Description = description,
-                IsDeleted= false,
+                IsDeleted = false,
                 Level = level,
                 RowVersion = 0
             };

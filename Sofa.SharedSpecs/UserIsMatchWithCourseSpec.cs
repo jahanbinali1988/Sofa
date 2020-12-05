@@ -17,7 +17,7 @@ namespace Sofa.SharedSpecs
 
         public override Expression<Func<User, bool>> ToExpression()
         {
-            return x => x.UserCurrentCourseId == targetCourseId && x.UserCurrentSyllabusId == targetSyllabusId; 
+            return x => x.UserCurrentCourseId == targetCourseId && x.UserCurrentSyllabusId == targetSyllabusId;
         }
     }
 }

@@ -6,8 +6,6 @@ namespace Sofa.Events.Institute
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public string WebsiteUrl { get; set; }
-        public string Code { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }

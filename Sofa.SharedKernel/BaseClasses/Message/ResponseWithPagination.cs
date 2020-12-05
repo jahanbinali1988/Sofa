@@ -22,7 +22,7 @@ namespace Sofa.SharedKernel.BaseClasses.Message
                 temp = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList().OrderBy(o => o.GetType().GetProperty(orderBy));
             else
                 temp = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList().OrderByDescending(o => o.GetType().GetProperty(orderBy));
-            
+
             this.Result.AddRange(temp);
         }
 
@@ -36,9 +36,9 @@ namespace Sofa.SharedKernel.BaseClasses.Message
             this.PageSize = pageSize;
             this.PageIndex = pageIndex;
 
-            List<T> temp = new List<T>(); 
+            List<T> temp = new List<T>();
             if (accending)
-                temp = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).OrderBy(o=> o.GetType().GetProperty(orderBy)).ToList();
+                temp = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).OrderBy(o => o.GetType().GetProperty(orderBy)).ToList();
             else
                 temp = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).OrderByDescending(o => o.GetType().GetProperty(orderBy)).ToList();
 

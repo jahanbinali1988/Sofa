@@ -4,7 +4,6 @@ using Sofa.Dapper.Repository;
 using Sofa.Identity.Model;
 using System;
 using System.Data;
-using System.Linq;
 
 namespace Sofa.Identity.Repository.Dapper
 {

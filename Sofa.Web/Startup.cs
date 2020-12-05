@@ -1,15 +1,15 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Sofa.CourseManagement.DependencyResolver;
 using Sofa.CourseManagement.EntityFramework.Context;
 using Sofa.CourseManagement.EntityFramework.Factory;
@@ -18,7 +18,7 @@ using Sofa.EntityFramework.Factory;
 using Sofa.EntityFramework.Seed;
 using Sofa.SharedKernel;
 using Sofa.Web.Middleware;
-using Microsoft.OpenApi.Models;
+using System;
 
 namespace Sofa.Web
 {

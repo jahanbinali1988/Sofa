@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sofa.SharedKernel.BaseClasses
+﻿namespace Sofa.SharedKernel.BaseClasses
 {
     public class MongoDbSettings
     {

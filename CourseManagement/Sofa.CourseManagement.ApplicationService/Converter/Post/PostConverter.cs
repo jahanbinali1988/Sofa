@@ -1,7 +1,7 @@
 ﻿using Sofa.CourseManagement.Model;
+using Sofa.SharedKernel.Enum;
 using System.Collections.Generic;
 using System.Linq;
-using Sofa.SharedKernel.Enum;
 
 namespace Sofa.CourseManagement.ApplicationService
 {

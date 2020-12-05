@@ -20,13 +20,13 @@ namespace Sofa.Teacher.DomainService
             if (usernameExited)
                 throw new BusinessException("نام کاربری وارد شده تکراری است");
         }
-        
+
         public async Task<bool> Existance(string phoneNumber)
         {
             bool flag = true;
 
             var usernameExited = await _unitOfWork.userRepository.AnyAsync(c => c.PhoneNumber.Equals(phoneNumber));
-            if(!usernameExited)
+            if (!usernameExited)
                 flag = false;
 
             return flag;

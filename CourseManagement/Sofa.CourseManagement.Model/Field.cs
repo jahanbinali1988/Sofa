@@ -21,12 +21,12 @@ namespace Sofa.CourseManagement.Model
         public void AssignTitle(string title) { this.Title = title; }
         public void AssignInstitute(Guid instituteId) { this.InstituteId = instituteId; }
         public void AssignInstitute(Institute institute) { this.InstituteId = institute.Id; this.Institute = institute; }
-        public void AssignCourses(IEnumerable<Course> courses) 
+        public void AssignCourses(IEnumerable<Course> courses)
         {
             if (Courses.Any())
                 this.Courses.ToList().AddRange(courses);
             else
-                this.Courses = courses.ToArray(); 
+                this.Courses = courses.ToArray();
         }
 
         public static Field CreateInstance(Guid? id, bool isActive, string description)
@@ -41,7 +41,7 @@ namespace Sofa.CourseManagement.Model
 
             return field;
         }
-        public static Field CreateInstance(Guid? id,string title, bool isActive, Guid instituteId, string description)
+        public static Field CreateInstance(Guid? id, string title, bool isActive, Guid instituteId, string description)
         {
             var field = CreateInstance(id, isActive, description);
             field.AssignTitle(title);

@@ -21,7 +21,7 @@ namespace Sofa.Identity.PermissionChecker
             else if (user.Role == UserRoleEnum.Student)
             {
                 var isMatchForCourse = new UserIsMatchWithCourseSpec(levelId, courseId);
-                if(isMatchForCourse.IsSatisfiedBy(user))
+                if (isMatchForCourse.IsSatisfiedBy(user))
                     return false;
 
                 return true;

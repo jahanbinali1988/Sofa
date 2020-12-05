@@ -30,7 +30,7 @@ namespace Sofa.Identity.WebAPI
                     new Claim("userRole", response.UserRole)
                 };
 
-                context.Result = new GrantValidationResult(response.UserId.ToString(), OidcConstants.AuthenticationMethods.Password, DateTime.Now , claims);
+                context.Result = new GrantValidationResult(response.UserId.ToString(), OidcConstants.AuthenticationMethods.Password, DateTime.Now, claims);
                 context.Request.ClientClaims.Add(new Claim("userId", response.UserId.ToString()));
                 context.Request.ClientClaims.Add(new Claim("userTitle", response.UserTitle));
                 context.Request.ClientClaims.Add(new Claim("userRole", response.UserRole));

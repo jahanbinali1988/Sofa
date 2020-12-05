@@ -1,9 +1,9 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Dapper;
+using Dapper.Contrib.Extensions;
+using Sofa.SharedKernel.BaseClasses;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Dapper;
-using Sofa.SharedKernel.BaseClasses;
 
 namespace Sofa.Dapper.Repository
 {
@@ -78,7 +78,7 @@ namespace Sofa.Dapper.Repository
             catch (Exception ex)
             {
                 return false;
-            } 
+            }
         }
 
         public virtual bool Remove(TKey id)

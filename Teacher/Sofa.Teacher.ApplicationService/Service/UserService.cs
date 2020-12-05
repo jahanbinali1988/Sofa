@@ -1,5 +1,4 @@
 ﻿using MassTransit;
-using Sofa.Events.User;
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
 using Sofa.Teacher.DomainService;

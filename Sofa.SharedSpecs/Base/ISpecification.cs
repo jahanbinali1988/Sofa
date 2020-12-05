@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Sofa.SharedSpecs
 {
-    public interface ISpecification<T> 
+    public interface ISpecification<T>
     {
         Expression<Func<T, bool>> ToExpression();
 

@@ -1,7 +1,6 @@
 ﻿using Sofa.SharedKernel.BaseClasses;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Sofa.Teacher.ApplicationService
 {

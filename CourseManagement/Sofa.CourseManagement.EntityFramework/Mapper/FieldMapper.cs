@@ -12,7 +12,7 @@ namespace Sofa.CourseManagement.EntityFramework.Mapper
             builder.ToTable("Field");
             builder.HasKey(x => x.Id).HasName("PK_Field");
 
-            builder.HasOne<Institute>(c=> c.Institute);
+            builder.HasOne<Institute>(c => c.Institute);
             builder.HasMany<Course>(c => c.Courses);
         }
     }

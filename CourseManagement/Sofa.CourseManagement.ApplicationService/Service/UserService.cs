@@ -3,11 +3,11 @@ using Sofa.CourseManagement.DomainService;
 using Sofa.CourseManagement.Model;
 using Sofa.CourseManagement.Repository;
 using Sofa.Events.User;
+using Sofa.SharedKernel;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
 using Sofa.SharedKernel.Enum;
 using Sofa.SharedKernel.Validation;
 using System;
-using Sofa.SharedKernel;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
@@ -34,20 +34,21 @@ namespace Sofa.CourseManagement.ApplicationService
                 var user = User.CreateInstance(null, request.FirstName, request.LastName, request.Password, request.Email, request.UserName,
                     (UserRoleEnum)request.Role, request.PhoneNumber, request.IsActive, request.Description, (LevelEnum)request.Level); ;
                 this._userDomainService.CanAdd(user);
-                
+
                 this._unitOfWork.userRepository.Add(user);
                 this._unitOfWork.Commit();
 
-                this._busControl.Publish<RegisteredUserEvent>(new RegisteredUserEvent() {
+                this._busControl.Publish<RegisteredUserEvent>(new RegisteredUserEvent()
+                {
                     Description = "Created in CourseManagement Module",
                     Email = user.Email,
                     FirstName = user.FirstName,
                     Id = user.Id,
                     IsActive = user.IsActive,
-                    LastName= user.LastName,
+                    LastName = user.LastName,
                     PasswordHash = user.PasswordHash,
                     PhoneNumber = user.PhoneNumber,
-                    Role= (short)user.Role,
+                    Role = (short)user.Role,
                     UserName = user.UserName,
                     Level = (short)user.Level
                 });

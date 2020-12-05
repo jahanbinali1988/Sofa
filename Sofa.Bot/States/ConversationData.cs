@@ -1,5 +1,4 @@
 ﻿using Sofa.Teacher.Model;
-using System;
 using System.Collections.Generic;
 
 namespace Sofa.Teacher.States

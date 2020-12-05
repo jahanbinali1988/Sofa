@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
@@ -10,16 +11,15 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sofa.EntityFramework.Factory;
+using Sofa.EntityFramework.Seed;
+using Sofa.SharedKernel;
 using Sofa.Teacher.Bots;
 using Sofa.Teacher.DependencyResolver;
 using Sofa.Teacher.EntityFramework.Context;
 using Sofa.Teacher.EntityFramework.Factory;
 using Sofa.Teacher.EntityFramework.Seed;
-using Sofa.SharedKernel;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using System;
-using Sofa.EntityFramework.Seed;
-using Sofa.EntityFramework.Factory;
 
 namespace Sofa.Teacher
 {
@@ -32,7 +32,7 @@ namespace Sofa.Teacher
             Configuration = configuration;
             containerBuilder = new ContainerBuilder();
         }
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
@@ -42,7 +42,7 @@ namespace Sofa.Teacher
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();
             corsBuilder.AllowAnyMethod();
-            corsBuilder.AllowAnyOrigin();      
+            corsBuilder.AllowAnyOrigin();
             corsBuilder.AllowCredentials();
 
             services.AddHttpClient();

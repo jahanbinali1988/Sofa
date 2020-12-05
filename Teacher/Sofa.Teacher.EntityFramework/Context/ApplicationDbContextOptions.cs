@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sofa.EntityFramework.Map;
 using Sofa.EntityFramework.Seed;
-using Sofa.Teacher.EntityFramework.Context;
 using System.Collections.Generic;
 
 namespace Sofa.Teacher.EntityFramework.Context

@@ -1,5 +1,4 @@
-﻿using Sofa.SharedKernel;
-using StructureMap;
+﻿using StructureMap;
 using System.Collections.Generic;
 
 namespace Sofa.Identity.DependencyInjection

@@ -24,7 +24,7 @@ namespace Sofa.CourseManagement.Model
         public void AssignAgeRange(AgeRangeEnum ageRange) { this.AgeRange = ageRange; }
         public void AssignField(Guid fieldId) { this.FieldId = fieldId; }
         public void AssignField(Field field) { this.Field = field; this.FieldId = field.Id; }
-        public void AssignTerms(IEnumerable<Term> terms) 
+        public void AssignTerms(IEnumerable<Term> terms)
         {
             if (Terms.Any())
                 this.Terms.ToList().AddRange(terms);

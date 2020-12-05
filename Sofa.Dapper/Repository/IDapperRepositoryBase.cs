@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Sofa.Dapper.Repository
 {
-    public interface IDapperRepositoryBase<TEntity, TKey> 
+    public interface IDapperRepositoryBase<TEntity, TKey>
         where TKey : struct
         where TEntity : class, IDisposable, IBaseEntity<TKey>, new()
     {

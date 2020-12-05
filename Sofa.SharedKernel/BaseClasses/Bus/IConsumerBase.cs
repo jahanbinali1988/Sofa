@@ -1,5 +1,4 @@
 ﻿using MassTransit;
-using System.Threading.Tasks;
 
 namespace Sofa.SharedKernel.BaseClasses.Bus
 {

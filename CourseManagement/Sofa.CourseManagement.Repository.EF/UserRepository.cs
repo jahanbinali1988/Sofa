@@ -1,5 +1,5 @@
-﻿using Sofa.CourseManagement.Model;
-using Sofa.CourseManagement.EntityFramework.Context;
+﻿using Sofa.CourseManagement.EntityFramework.Context;
+using Sofa.CourseManagement.Model;
 using Sofa.EntityFramework.Repository;
 using System;
 using System.Linq;

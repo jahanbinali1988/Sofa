@@ -22,7 +22,7 @@ namespace Sofa.CourseManagement.Model
         public void AssignLevel(LevelEnum level) { this.Level = level; }
         public void AssignSession(Guid sessionId) { this.SessionId = sessionId; }
         public void AssignSession(Session session) { this.SessionId = session.Id; this.Session = session; }
-        public void AssignPosts(IEnumerable<Post> posts) 
+        public void AssignPosts(IEnumerable<Post> posts)
         {
             if (this.Posts.Any())
                 this.Posts.ToList().AddRange(posts);

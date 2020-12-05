@@ -21,7 +21,7 @@ namespace Sofa.SharedSpecs
             _spec1 = Spec1;
         }
 
-        ISpecification<T> IOrSpecification<T>.Spec1 =>  _spec1;
+        ISpecification<T> IOrSpecification<T>.Spec1 => _spec1;
         ISpecification<T> IOrSpecification<T>.Spec2 => _spec2;
         public Expression<Func<T, bool>> ToExpression()
         {

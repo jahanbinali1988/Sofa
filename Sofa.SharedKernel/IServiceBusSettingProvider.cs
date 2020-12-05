@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-
-namespace Sofa.SharedKernel
+﻿namespace Sofa.SharedKernel
 {
     public interface IServiceBusSettingProvider
     {

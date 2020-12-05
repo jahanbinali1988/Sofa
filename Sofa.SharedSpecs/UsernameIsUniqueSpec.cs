@@ -16,7 +16,7 @@ namespace Sofa.SharedSpecs
 
         public override Expression<Func<User, bool>> ToExpression()
         {
-            return x=> userRepository.GetByUserName(x.UserName) == null;
+            return x => userRepository.GetByUserName(x.UserName) == null;
         }
     }
 }

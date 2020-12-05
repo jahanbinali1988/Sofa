@@ -1,5 +1,5 @@
-﻿using Sofa.Teacher.States;
-using Sofa.Teacher.ApplicationService;
+﻿using Sofa.Teacher.ApplicationService;
+using Sofa.Teacher.States;
 using System.Collections.Generic;
 using System.Linq;
 

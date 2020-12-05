@@ -1,5 +1,5 @@
-﻿using Sofa.Teacher.EntityFramework.Context;
-using Sofa.EntityFramework.Repository;
+﻿using Sofa.EntityFramework.Repository;
+using Sofa.Teacher.EntityFramework.Context;
 using Sofa.Teacher.Model;
 using System;
 

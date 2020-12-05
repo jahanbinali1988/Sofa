@@ -1,5 +1,5 @@
-﻿using System;
-using Sofa.SharedKernel.BaseClasses;
+﻿using Sofa.SharedKernel.BaseClasses;
+using System;
 
 namespace Sofa.CourseManagement.ApplicationService
 {

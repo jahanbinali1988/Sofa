@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Sofa.SharedKernel.BaseClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Sofa.SharedKernel.BaseClasses;
 
 namespace Sofa.EntityFramework.Repository
 {
@@ -77,7 +77,7 @@ namespace Sofa.EntityFramework.Repository
             IQueryable<TEntity> result = _dbSet.AsQueryable<TEntity>();
             if (orderBy != null)
                 result = result.OrderBy(o => orderBy);
-            if(includes != null)
+            if (includes != null)
                 result = result.Include(i => includes);
             int skipSize = (pageIndex - 1) * pageSize;
             return result.Skip(skipSize).Take(pageSize).ToList();
@@ -173,7 +173,7 @@ namespace Sofa.EntityFramework.Repository
                 _context.Entry<TEntity>(entity).State = EntityState.Deleted;
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -235,7 +235,7 @@ namespace Sofa.EntityFramework.Repository
                 _context.Update<TEntity>(entity);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -255,7 +255,7 @@ namespace Sofa.EntityFramework.Repository
                     _context.Update<TEntity>(entity);
                     result = true;
                 }
-                
+
                 return result;
             }
             catch (Exception ex)

@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Data;
-using System.Data.Common;
+﻿using System.Data;
 using System.Data.SqlClient;
 
 namespace Sofa.Dapper

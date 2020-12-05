@@ -1,5 +1,4 @@
-﻿using HibernatingRhinos.Profiler.Appender;
-using Sofa.CourseManagement.ApplicationService;
+﻿using Sofa.CourseManagement.ApplicationService;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.Enum;

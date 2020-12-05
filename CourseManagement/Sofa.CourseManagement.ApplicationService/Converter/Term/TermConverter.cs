@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-public static class TermConverter
+    public static class TermConverter
     {
         public static TermDto Convert(this Term source)
         {

@@ -28,7 +28,7 @@ namespace Sofa.CourseManagement.Consumer.RegisterUser
                     user.AssignLastName(message.LastName);
                     user.ChangePassword(message.PasswordHash);
                     user.AssignPhoneNumber(message.PhoneNumber);
-                    user.AssignEmail( message.Email);
+                    user.AssignEmail(message.Email);
                     user.AssignModifiedDate(DateTime.Now);
                     user.AssignRole((UserRoleEnum)message.Role);
 

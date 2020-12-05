@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System;
 using System.Text;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 
 namespace Sofa.SharedKernel

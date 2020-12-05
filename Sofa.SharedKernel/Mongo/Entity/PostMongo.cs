@@ -20,8 +20,8 @@ namespace Sofa.SharedKernel.Mongo.Entity
         }
 
         public void AssignTitle(string title) { this.Title = title; }
-        public void AssignOrder(short order) { this.Order = order;  }
-        public void AssignPostType(ContentTypeEnum contentType) { this.PostType = contentType;  }
+        public void AssignOrder(short order) { this.Order = order; }
+        public void AssignPostType(ContentTypeEnum contentType) { this.PostType = contentType; }
         public void AssignPostContent(string content) { this.PostContent = content; }
         public void AssignCourseId(Guid courseId) { this.CourseId = courseId; }
         public void AssignDescription(string description) { this.Description = description; }

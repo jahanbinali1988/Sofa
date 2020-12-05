@@ -22,7 +22,7 @@ namespace Sofa.Teacher.Consumer.RegisterUser
         {
             try
             {
-                var user = _unitOfWork.userRepository.Query(c=> c.UserName == message.UserName).SingleOrDefault();
+                var user = _unitOfWork.userRepository.Query(c => c.UserName == message.UserName).SingleOrDefault();
 
                 if (user != null)
                 {
@@ -40,7 +40,7 @@ namespace Sofa.Teacher.Consumer.RegisterUser
                     return true;
                 }
 
-                var newUser = User.CreateInstance(null, message.FirstName, message.LastName, message.Email, message.UserName, (LevelEnum)message.Level, 
+                var newUser = User.CreateInstance(null, message.FirstName, message.LastName, message.Email, message.UserName, (LevelEnum)message.Level,
                     message.PhoneNumber, message.IsActive, Guid.Empty, message.Description);
 
                 await _unitOfWork.userRepository.AddAsync(newUser);

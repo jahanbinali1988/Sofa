@@ -46,7 +46,7 @@ namespace Sofa.Teacher.Model
             var field = CreateInstance(id, isActive, description);
             field.AssignTitle(title);
             field.AssignInstitute(instituteId);
-            
+
             return field;
         }
     }

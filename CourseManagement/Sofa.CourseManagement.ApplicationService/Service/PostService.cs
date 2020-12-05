@@ -3,11 +3,11 @@ using Sofa.CourseManagement.DomainService;
 using Sofa.CourseManagement.Model;
 using Sofa.CourseManagement.Repository;
 using Sofa.Events.Post;
+using Sofa.SharedKernel;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
 using Sofa.SharedKernel.Enum;
 using Sofa.SharedKernel.Validation;
 using System;
-using Sofa.SharedKernel;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
@@ -37,7 +37,8 @@ namespace Sofa.CourseManagement.ApplicationService
                 this._unitOfWork.postRepository.Add(post);
                 this._unitOfWork.Commit();
 
-                _busControl.Publish<RegisterPostEvent>(new RegisterPostEvent() {
+                _busControl.Publish<RegisterPostEvent>(new RegisterPostEvent()
+                {
                     Order = post.Order,
                     ContentType = (short)post.ContentType,
                     Title = post.Title,

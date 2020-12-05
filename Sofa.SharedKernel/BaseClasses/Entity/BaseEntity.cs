@@ -19,9 +19,9 @@ namespace Sofa.SharedKernel.BaseClasses
             this.Dispose();
         }
 
-        public void AssignFirstRowVersion() 
-        { 
-            RowVersion = 0; 
+        public void AssignFirstRowVersion()
+        {
+            RowVersion = 0;
         }
         public void IncreaseRowVersion()
         {

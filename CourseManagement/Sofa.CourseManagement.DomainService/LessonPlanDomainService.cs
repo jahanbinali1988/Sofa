@@ -1,5 +1,4 @@
-﻿using Sofa.SharedKernel.BaseClasses.Exceptions;
-using Sofa.CourseManagement.Repository;
+﻿using Sofa.CourseManagement.Repository;
 
 namespace Sofa.CourseManagement.DomainService
 {

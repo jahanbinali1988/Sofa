@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Sofa.Identity.Model;
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.Enum;
-using System;
 
 namespace Sofa.Identity.EntityFramework.Seed
 {

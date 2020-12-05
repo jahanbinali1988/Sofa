@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Sofa.SharedSpecs
 {
-    public class EntityIsDisableSpec<TEntity> : Specification<TEntity> where TEntity:BaseEntity
+    public class EntityIsDisableSpec<TEntity> : Specification<TEntity> where TEntity : BaseEntity
     {
         public override Expression<Func<TEntity, bool>> ToExpression()
         {

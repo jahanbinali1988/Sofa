@@ -1,9 +1,7 @@
-﻿using MassTransit;
-using Autofac;
-using System;
-using System.Threading.Tasks;
-using Sofa.Events.User;
+﻿using Autofac;
+using MassTransit;
 using Sofa.CourseManagement.Consumer.RegisterUser;
+using Sofa.Events.User;
 
 namespace Sofa.CourseManagement.DependencyResolver
 {

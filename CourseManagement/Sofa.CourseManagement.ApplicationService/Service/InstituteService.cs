@@ -82,7 +82,7 @@ namespace Sofa.CourseManagement.ApplicationService
 
                 var institute = this._unitOfWork.instituteRepository.Get(request.InstituteId);
                 var result = institute.Convert();
-                return new GetInstituteByIdResponse(true, "عملیات خواندن با موفقیت انجام شد", "") { Institute =  result};
+                return new GetInstituteByIdResponse(true, "عملیات خواندن با موفقیت انجام شد", "") { Institute = result };
             }
             catch (BusinessException e)
             {

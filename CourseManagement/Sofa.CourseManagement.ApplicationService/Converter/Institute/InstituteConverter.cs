@@ -1,5 +1,4 @@
 ﻿using Sofa.CourseManagement.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,11 +15,11 @@ namespace Sofa.CourseManagement.ApplicationService
 
             return new InstituteDto
             {
-                 Title = source.Title,
-                 Address = source.Address.Convert(),
-                 Id = source.Id,
-                 IsActive = source.IsActive,
-                 WebsiteUrl = source.WebsiteUrl
+                Title = source.Title,
+                Address = source.Address.Convert(),
+                Id = source.Id,
+                IsActive = source.IsActive,
+                WebsiteUrl = source.WebsiteUrl
             };
         }
 

@@ -1,5 +1,4 @@
-﻿using MassTransit.Initializers.Conventions;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Threading.Tasks;
 

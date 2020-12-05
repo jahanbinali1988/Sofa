@@ -40,7 +40,7 @@ namespace Sofa.Teacher.Consumer.ReisterPost
                 }
 
                 var newPost = Post.CreateInstance(null, message.Title, message.Order, (ContentTypeEnum)message.ContentType, message.Content, message.LessonPlanId, message.Description, message.IsActive);
-                
+
                 await _unitOfWork.postRepository.AddAsync(newPost);
                 await _unitOfWork.CommitAsync();
                 return true;

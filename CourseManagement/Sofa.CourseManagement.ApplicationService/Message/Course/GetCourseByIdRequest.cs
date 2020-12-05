@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sofa.CourseManagement.ApplicationService
 {
-    public class GetCourseByIdRequest :  RequestBase
+    public class GetCourseByIdRequest : RequestBase
     {
         [GuidValidator]
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار اندیس الزامی است")]

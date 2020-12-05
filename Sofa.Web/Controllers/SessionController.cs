@@ -19,7 +19,7 @@ namespace Sofa.Web.Controllers
         [HttpPost]
         [Route("Add")]
         [Authorize]
-        public ActionResult<AddSessionResponse> Add([FromBody]AddSessionRequest request)
+        public ActionResult<AddSessionResponse> Add([FromBody] AddSessionRequest request)
         {
             request.CommanderID = User.GetUserId();
             return _sessionService.AddSession(request);
@@ -27,7 +27,7 @@ namespace Sofa.Web.Controllers
 
         [Route("Get")]
         [HttpGet]
-        public ActionResult<GetSessionByIdResponse> Get([FromQuery]string id)
+        public ActionResult<GetSessionByIdResponse> Get([FromQuery] string id)
         {
             GetSessionByIdRequest request = new GetSessionByIdRequest() { SessionId = Guid.Parse(id) };
             return _sessionService.Get(request);

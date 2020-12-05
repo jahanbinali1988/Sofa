@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq.Expressions;
-using Sofa.Identity.Model;
+﻿using Sofa.Identity.Model;
 using Sofa.SharedKernel;
+using System;
+using System.Linq.Expressions;
 
 namespace Sofa.SharedSpecs
 {

@@ -9,7 +9,7 @@ namespace Sofa.CourseManagement.ApplicationService
     {
         [GuidValidator]
         public Guid Id { get; set; }
-        
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن مقدار نام کاربری الزامی است")]
         public string UserName { get; set; }
 

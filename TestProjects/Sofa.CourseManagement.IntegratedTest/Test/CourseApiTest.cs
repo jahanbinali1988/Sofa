@@ -37,10 +37,10 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         {
             var request = new AddCourseRequest()
             {
-                 FieldId = DefaultData.FieldId,
-                 AgeRange = AgeRangeEnum.Adults,
-                 IsActive = false,
-                 Title = Guid.NewGuid().ToString()
+                FieldId = DefaultData.FieldId,
+                AgeRange = AgeRangeEnum.Adults,
+                IsActive = false,
+                Title = Guid.NewGuid().ToString()
             };
 
             var result = sysAdminHttpClient.CallPostService<Messages.AddCourseResponse>(ConstantsUrl.AddCourseApiUrl, request);

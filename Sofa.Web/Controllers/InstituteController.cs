@@ -19,7 +19,7 @@ namespace Sofa.Web.Controllers
         [HttpPost]
         [Route("Add")]
         [Authorize]
-        public ActionResult<AddInstituteResponse> Add([FromBody]AddInstituteRequest request)
+        public ActionResult<AddInstituteResponse> Add([FromBody] AddInstituteRequest request)
         {
             request.CommanderID = User.GetUserId();
             var result = _instituteService.AddInstitute(request);
@@ -28,7 +28,7 @@ namespace Sofa.Web.Controllers
 
         [HttpGet]
         [Route("Get")]
-        public ActionResult<GetInstituteByIdResponse> Get([FromQuery]string id)
+        public ActionResult<GetInstituteByIdResponse> Get([FromQuery] string id)
         {
             GetInstituteByIdRequest request = new GetInstituteByIdRequest() { InstituteId = Guid.Parse(id) };
             return _instituteService.Get(request);
@@ -37,7 +37,7 @@ namespace Sofa.Web.Controllers
         [HttpPost]
         [Route("GetAll")]
         [Authorize]
-        public ActionResult<GetAllInstituteResponse> GetAll([FromBody]GetAllInstituteRequest request)
+        public ActionResult<GetAllInstituteResponse> GetAll([FromBody] GetAllInstituteRequest request)
         {
             var result = _instituteService.GetAll(request);
             return result;

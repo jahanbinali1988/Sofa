@@ -1,5 +1,4 @@
-﻿using Sofa.Identity.Model;
-using Sofa.SharedKernel.Enum;
+﻿using Sofa.SharedKernel.Enum;
 using System;
 
 namespace Sofa.Identity.ApplicationService

@@ -24,7 +24,8 @@ namespace Sofa.Teacher.DependencyResolver
                         h.Password(busSettings.Password);
                     });
 
-                    cfg.ReceiveEndpoint(busSettings.QueueName, x => {
+                    cfg.ReceiveEndpoint(busSettings.QueueName, x =>
+                    {
                         x.Instance(new RegisterUserEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
                         x.Instance(new RegisterLessonPlanEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));
                         x.Instance(new ReisterPostEventConsumer(context.Resolve<IUnitOfWork>(), context.Resolve<ILogger>()));

@@ -33,7 +33,7 @@ namespace Sofa.Identity.Model
         public void AssignRole(UserRoleEnum role) { this.Role = role; }
         public void AssignSyllabus(Guid syllabusId) { this.UserCurrentSyllabusId = syllabusId; }
         public void AssignCourse(Guid courseId) { this.UserCurrentCourseId = courseId; }
-        
+
         public static User CreateInstance(Guid? id, string firstName, string lastname, string rawPassword, string emailAddress, string userName, UserRoleEnum role,
             string phoneNo, bool isActive, Guid? userCurrentSyllabusId, Guid? userCurrentCourseId, string description, LevelEnum level)
         {

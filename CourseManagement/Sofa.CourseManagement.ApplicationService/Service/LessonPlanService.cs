@@ -35,7 +35,8 @@ namespace Sofa.CourseManagement.ApplicationService
                 this._unitOfWork.lessonPlanRepository.Add(lessonPlan);
                 this._unitOfWork.Commit();
 
-                _busControl.Publish<RegisterLessonPlanEvent>(new RegisterLessonPlanEvent() {
+                _busControl.Publish<RegisterLessonPlanEvent>(new RegisterLessonPlanEvent()
+                {
                     Description = "Created in CourseManagement Module",
                     Id = lessonPlan.Id,
                     IsActive = lessonPlan.IsActive,
@@ -46,7 +47,7 @@ namespace Sofa.CourseManagement.ApplicationService
             catch (BusinessException e)
             {
                 this._logger.Warning("Course Management-LessonPlan Service-Add LessonPlan ", e.Message);
-                return new AddLessonPlanResponse(false, "ثبت با مشکل مواجه شده است",e.Message);
+                return new AddLessonPlanResponse(false, "ثبت با مشکل مواجه شده است", e.Message);
             }
             catch (Exception e)
             {

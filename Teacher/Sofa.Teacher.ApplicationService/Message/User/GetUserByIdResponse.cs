@@ -1,6 +1,4 @@
 ﻿using Sofa.SharedKernel.BaseClasses;
-using Sofa.Teacher.Model;
-using System;
 
 namespace Sofa.Teacher.ApplicationService
 {

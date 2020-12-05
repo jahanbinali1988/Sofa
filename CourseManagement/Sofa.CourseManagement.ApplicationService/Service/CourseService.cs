@@ -35,7 +35,7 @@ namespace Sofa.CourseManagement.ApplicationService
                 this._unitOfWork.courseRepository.Add(course);
                 this._unitOfWork.Commit();
 
-                return new AddCourseResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = course.Id};
+                return new AddCourseResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = course.Id };
             }
             catch (BusinessException e)
             {

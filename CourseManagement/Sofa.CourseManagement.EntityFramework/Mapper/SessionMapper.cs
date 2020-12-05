@@ -13,7 +13,7 @@ namespace Sofa.CourseManagement.EntityFramework.Mapper
             builder.HasKey(x => x.Id).HasName("PK_Session");
 
             builder.HasOne<Term>(c => c.Term);
-            builder.HasOne(a => a.LessonPlan).WithOne(b => b.Session).HasForeignKey<LessonPlan>(c=> c.SessionId);
+            builder.HasOne(a => a.LessonPlan).WithOne(b => b.Session).HasForeignKey<LessonPlan>(c => c.SessionId);
         }
     }
 }

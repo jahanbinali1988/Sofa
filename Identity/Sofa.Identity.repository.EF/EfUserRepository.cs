@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using Sofa.Identity.EntityFramework.Context;
+﻿using Sofa.Identity.EntityFramework.Context;
 using Sofa.Identity.EntityFramework.Repository;
 using Sofa.Identity.Model;
 using Sofa.Identity.Repository;
+using System;
+using System.Linq;
 
 namespace Sofa.Identity.repository.EF
 {
