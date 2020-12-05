@@ -35,7 +35,7 @@ namespace Sofa.Teacher.Model
 
             return session;
         }
-        public static Session CreateInstance(Guid? id, string title, bool isActive, Guid lessonPlanId, Guid termId, string description)
+        public static Session CreateInstance(Guid? id, string title, Guid lessonPlanId, Guid termId, bool isActive, string description)
         {
             var session = CreateInstance(id, isActive, description);
             session.AssignTitle(title);

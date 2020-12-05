@@ -41,7 +41,7 @@ namespace Sofa.Teacher.Model
 
             return term;
         }
-        public static Term CreateInstance(Guid? id, string title, bool isActive, Guid courseId, string description)
+        public static Term CreateInstance(Guid? id, string title, Guid courseId, bool isActive, string description)
         {
             var term = CreateInstance(id, isActive, description);
             term.AssignTitle(title);

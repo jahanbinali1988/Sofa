@@ -22,6 +22,7 @@ namespace Sofa.Teacher.Model
 
         public void AssignTitle(string title) { this.Title = title; }
         public void AssignAgeRange(AgeRangeEnum ageRange) { this.AgeRange = ageRange; }
+        public void AssignAgeRange(short ageRange) { this.AgeRange = (AgeRangeEnum)ageRange; }
         public void AssignField(Guid fieldId) { this.FieldId = fieldId; }
         public void AssignField(Field field) { this.Field = field; this.FieldId = field.Id; }
         public void AssignTerms(IEnumerable<Term> terms)
@@ -45,6 +46,15 @@ namespace Sofa.Teacher.Model
             return course;
         }
         public static Course CreateInstance(Guid? id, string title, AgeRangeEnum ageRange, Guid fieldId, bool isActive, string description)
+        {
+            var course = CreateInstance(id, isActive, description);
+            course.AssignTitle(title);
+            course.AssignAgeRange(ageRange);
+            course.AssignField(fieldId);
+
+            return course;
+        }
+        public static Course CreateInstance(Guid? id, string title, short ageRange, Guid fieldId, bool isActive, string description)
         {
             var course = CreateInstance(id, isActive, description);
             course.AssignTitle(title);

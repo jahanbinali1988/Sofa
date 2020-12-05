@@ -22,6 +22,7 @@ namespace Sofa.Teacher.Model
         public void AssignOrder(short order) { this.Order = order; }
         public void AssignContent(string content) { this.Content = content; }
         public void AssignPostType(ContentTypeEnum contentType) { this.PostType = contentType; }
+        public void AssignPostType(short contentType) { this.PostType = (ContentTypeEnum)contentType; }
         public void AssignLessonPlan(Guid lessonplanId) { this.LessonPlanId = lessonplanId; }
         public void AssignLessonPlan(LessonPlan lessonPlan) { this.LessonPlan = lessonPlan; }
 
@@ -37,7 +38,18 @@ namespace Sofa.Teacher.Model
 
             return post;
         }
-        public static Post CreateInstance(Guid? id, string title, short order, ContentTypeEnum postType, string content, Guid lessonplanId, string description, bool isActive)
+        public static Post CreateInstance(Guid? id, string title, short order, ContentTypeEnum postType, string content, Guid lessonplanId, bool isActive, string description)
+        {
+            var post = CreateInstance(id, isActive, description);
+            post.AssignTitle(title);
+            post.AssignOrder(order);
+            post.AssignPostType(postType);
+            post.AssignContent(content);
+            post.AssignLessonPlan(lessonplanId);
+
+            return post;
+        }
+        public static Post CreateInstance(Guid? id, string title, short order, short postType, string content, Guid lessonplanId, bool isActive, string description)
         {
             var post = CreateInstance(id, isActive, description);
             post.AssignTitle(title);

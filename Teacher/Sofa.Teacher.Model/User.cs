@@ -26,27 +26,50 @@ namespace Sofa.Teacher.Model
         public void AssignLastName(string lastName) { this.LastName = lastName; }
         public void AssignEmail(string email) { this.Email = email; }
         public void AssignLevel(LevelEnum level) { this.Level = level; }
+        public void AssignLevel(short level) { this.Level = (LevelEnum)level; }
         public void AssignPhoneNumber(string phoneNumber) { this.PhoneNumber = phoneNumber; }
         public void AssignLastCourse(Guid lastCourseId) { this.LastCourseId = lastCourseId; }
         public void AssignLastCourse(Course course) { this.LastCourseId = course.Id; this.Course = course; }
-        public static User CreateInstance(Guid? id, string firstName, string lastname, string emailAddress, string userName,
-            LevelEnum level, string phoneNo, bool isActive, Guid? lastCourseId, string description)
+
+        public static User CreateInstance(Guid? id, bool isActive, string description)
         {
-            return new User
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                FirstName = firstName,
-                LastName = lastname,
-                UserName = userName,
-                Email = emailAddress,
-                IsActive = isActive,
-                PhoneNumber = phoneNo,
-                CreateDate = DateTime.Now,
-                Level = level,
-                LastCourseId = lastCourseId,
-                Description = description,
-                RowVersion = 0
-            };
+            var user = new User();
+            user.Id = id.HasValue ? id.Value : Guid.Empty;
+            user.AssignCreateDate(DateTime.Now);
+            user.AssignFirstRowVersion();
+            user.AssignIsActive(isActive);
+            user.AssignIsDeleted(false);
+            user.AssignDescription(description);
+
+            return user;
+        }
+        public static User CreateInstance(Guid? id, string firstName, string lastname, string emailAddress, string userName,
+            LevelEnum level, string phoneNo, Guid lastCourseId, bool isActive, string description)
+        {
+            var user = CreateInstance(id, isActive, description);
+            user.AssignFirstName(firstName);
+            user.AssignLastName(lastname);
+            user.AssignEmail(emailAddress);
+            user.AssignUserName(userName);
+            user.AssignLevel(level);
+            user.AssignPhoneNumber(phoneNo);
+            user.AssignLastCourse(lastCourseId);
+
+            return user;
+        }
+        public static User CreateInstance(Guid? id, string firstName, string lastname, string emailAddress, string userName,
+            short level, string phoneNo, Guid lastCourseId, bool isActive, string description)
+        {
+            var user = CreateInstance(id, isActive, description);
+            user.AssignFirstName(firstName);
+            user.AssignLastName(lastname);
+            user.AssignEmail(emailAddress);
+            user.AssignUserName(userName);
+            user.AssignLevel(level);
+            user.AssignPhoneNumber(phoneNo);
+            user.AssignLastCourse(lastCourseId);
+
+            return user;
         }
     }
 }

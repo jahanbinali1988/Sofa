@@ -8,7 +8,7 @@ namespace Sofa.Teacher.Repository.MongoDb.Mapper
     {
         public static Post ToEntity(this PostMongo postMongo)
         {
-            Post post = Post.CreateInstance(postMongo.Id, postMongo.Title, postMongo.Order, postMongo.PostType, postMongo.PostContent, postMongo.CourseId, postMongo.Description, postMongo.IsActive);
+            Post post = Post.CreateInstance(postMongo.Id, postMongo.Title, postMongo.Order, postMongo.PostType, postMongo.PostContent, postMongo.CourseId, postMongo.IsActive, postMongo.Description);
             return post;
         }
 

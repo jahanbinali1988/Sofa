@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Sofa.Teacher.Consumer.ReisterPost
 {
-    public class ReisterPostInDatabase : IUnitOfBusiness<RegisterPostEvent, bool>
+    public class RegisterPostInDatabase : IUnitOfBusiness<RegisterPostEvent, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ReisterPostInDatabase(IUnitOfWork unitOfWork)
+        public RegisterPostInDatabase(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
@@ -39,7 +39,7 @@ namespace Sofa.Teacher.Consumer.ReisterPost
                     return true;
                 }
 
-                var newPost = Post.CreateInstance(null, message.Title, message.Order, (ContentTypeEnum)message.ContentType, message.Content, message.LessonPlanId, message.Description, message.IsActive);
+                var newPost = Post.CreateInstance(null, message.Title, message.Order, (ContentTypeEnum)message.ContentType, message.Content, message.LessonPlanId, message.IsActive, message.Description);
 
                 await _unitOfWork.postRepository.AddAsync(newPost);
                 await _unitOfWork.CommitAsync();

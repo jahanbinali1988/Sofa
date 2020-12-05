@@ -20,6 +20,7 @@ namespace Sofa.Teacher.Model
         }
 
         public void AssignLevel(LevelEnum level) { this.Level = level; }
+        public void AssignLevel(short level) { this.Level = (LevelEnum)level; }
         public void AssignSession(Guid sessionId) { this.SessionId = sessionId; }
         public void AssignSession(Session session) { this.SessionId = session.Id; this.Session = session; }
         public void AssignPosts(IEnumerable<Post> posts)
@@ -42,10 +43,19 @@ namespace Sofa.Teacher.Model
 
             return lessonPlan;
         }
-        public static LessonPlan CreateInstance(Guid? id, LevelEnum level, bool isAvtive, string description)
+        public static LessonPlan CreateInstance(Guid? id, LevelEnum level, Guid sessionId, bool isAvtive, string description)
         {
             var lessonPlan = CreateInstance(id, isAvtive, description);
-            lessonPlan.Level = level;
+            lessonPlan.AssignSession(sessionId);
+            lessonPlan.AssignLevel(level);
+
+            return lessonPlan;
+        }
+        public static LessonPlan CreateInstance(Guid? id, short level, Guid sessionId, bool isAvtive, string description)
+        {
+            var lessonPlan = CreateInstance(id, isAvtive, description);
+            lessonPlan.AssignSession(sessionId);
+            lessonPlan.AssignLevel(level);
 
             return lessonPlan;
         }

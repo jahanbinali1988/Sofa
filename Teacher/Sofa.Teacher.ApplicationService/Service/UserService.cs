@@ -49,7 +49,7 @@ namespace Sofa.Teacher.ApplicationService.Service
             try
             {
                 var user = User.CreateInstance(null, request.FirstName, request.LastName, request.Email, request.UserName, request.Level,
-                    request.PhoneNumber, true, null, request.Description);
+                    request.PhoneNumber, Guid.Empty, true, request.Description);
                 await _userDomainService.CanAdd(user);
 
                 _unitOfWork.userRepository.Add(user);

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Sofa.Teacher.Consumer.ReisterPost
 {
-    public class ReisterPostEventConsumer : IConsumer<RegisterPostEvent>
+    public class RegisterPostEventConsumer : IConsumer<RegisterPostEvent>
     {
-        private readonly ReisterPostInDatabase _registerPostInDatabase;
+        private readonly RegisterPostInDatabase _registerPostInDatabase;
         private readonly ILogger _logger;
 
-        public ReisterPostEventConsumer(IUnitOfWork unitOfWork, ILogger logger)
+        public RegisterPostEventConsumer(IUnitOfWork unitOfWork, ILogger logger)
         {
-            _registerPostInDatabase = new ReisterPostInDatabase(unitOfWork);
+            _registerPostInDatabase = new RegisterPostInDatabase(unitOfWork);
             _logger = logger;
         }
 

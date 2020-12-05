@@ -1,41 +1,42 @@
 ﻿using Sofa.Events.LessonPlan;
 using Sofa.SharedKernel.BaseClasses;
-using Sofa.SharedKernel.Enum;
 using Sofa.Teacher.Model;
 using Sofa.Teacher.Repository;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sofa.Teacher.Consumer.RegisterLessonPlan
 {
-    class RegisterLessonPlanInDatabase : IUnitOfBusiness<RegisterLessonPlanEvent, bool>
+    public class RegisterLessonPlanInDatabase : IUnitOfBusiness<RegisterLessonPlanEvent, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public RegisterLessonPlanInDatabase(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<bool> Do(RegisterLessonPlanEvent message)
         {
             try
             {
-                var lessonPlan = _unitOfWork.lessonPlanRepository.Query(c => c.Id == message.Id).SingleOrDefault();
-
-                if (lessonPlan != null)
+                if (message.Id != null && message.Id != Guid.Empty)
                 {
-                    lessonPlan.AssignModifiedDate(DateTime.Now);
-                    lessonPlan.IncreaseRowVersion();
+                    LessonPlan lessonPlan = _unitOfWork.lessonPlanRepository.Get(message.Id);
+
                     lessonPlan.AssignDescription(message.Description);
                     lessonPlan.AssignIsActive(message.IsActive);
+                    lessonPlan.AssignIsDeleted(message.IsDeleted);
+                    lessonPlan.AssignModifiedDate(DateTime.Now);
+                    lessonPlan.IncreaseRowVersion();
+                    lessonPlan.AssignSession(message.SessionId);
+                    lessonPlan.AssignLevel(message.Level);
 
                     _unitOfWork.lessonPlanRepository.Update(lessonPlan);
                     await _unitOfWork.CommitAsync();
                     return true;
                 }
-
-                var newLessonPlan = LessonPlan.CreateInstance(null, (LevelEnum)message.Level, message.IsActive, message.Description);
+                LessonPlan newLessonPlan = LessonPlan.CreateInstance(null, message.Level, message.SessionId, message.IsActive, message.Description);
 
                 await _unitOfWork.lessonPlanRepository.AddAsync(newLessonPlan);
                 await _unitOfWork.CommitAsync();
