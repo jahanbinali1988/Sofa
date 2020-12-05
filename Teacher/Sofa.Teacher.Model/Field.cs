@@ -32,7 +32,7 @@ namespace Sofa.Teacher.Model
         public static Field CreateInstance(Guid? id, bool isActive, string description)
         {
             var field = new Field();
-            field.Id = id.HasValue ? id.Value : Guid.NewGuid();
+            field.Id = id.HasValue ? id.Value : Guid.Empty;
             field.AssignCreateDate(DateTime.Now);
             field.AssignFirstRowVersion();
             field.AssignIsActive(isActive);

@@ -13,13 +13,13 @@ namespace Sofa.CourseManagement.IntegratedTest.Utilities
         {
             var defaultInstitute = Institute.CreateInstance(DefaultData.InstituteId, "TestInstitute", true, Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
 
-            var defaultField = Field.CreateInstance(DefaultData.FieldId, "DefaultField", true, defaultInstitute.Id);
+            var defaultField = Field.CreateInstance(DefaultData.FieldId, "DefaultField", true, defaultInstitute.Id, string.Empty);
 
-            var defaultCourse = Course.CreateInstance(DefaultData.CourseId, "DefaultCourse", AgeRangeEnum.Adults, true, defaultField.Id);
+            var defaultCourse = Course.CreateInstance(DefaultData.CourseId, "DefaultCourse", AgeRangeEnum.Adults, true, defaultField.Id, string.Empty);
 
             var defaultTerm = Term.CreateInstance(DefaultData.TermId, "DefaultTerm", true, defaultCourse.Id, string.Empty);
 
-            var defaultLessonPlan = LessonPlan.CreateInstance(DefaultData.LessonPlanId, SharedKernel.Enum.LevelEnum.Begginer, true);
+            var defaultLessonPlan = LessonPlan.CreateInstance(DefaultData.LessonPlanId, SharedKernel.Enum.LevelEnum.Begginer, true, string.Empty);
 
             var defaultSession = Session.CreateInstance(DefaultData.SessionId, "DefaultSession", true, defaultLessonPlan.Id, defaultTerm.Id, string.Empty);
 

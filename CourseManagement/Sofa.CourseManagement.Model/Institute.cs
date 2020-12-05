@@ -51,19 +51,27 @@ namespace Sofa.CourseManagement.Model
             else
                 this.Fields = fields.ToArray();
         }
+
+        public static Institute CreateInstance(Guid? id, bool isActive, string description)
+        {
+            var institute = new Institute();
+            institute.Id = id.HasValue ? id.Value : Guid.Empty;
+            institute.AssignCreateDate(DateTime.Now);
+            institute.AssignFirstRowVersion();
+            institute.AssignIsActive(isActive);
+            institute.AssignIsDeleted(false);
+            institute.AssignDescription(description);
+
+            return institute;
+        }
         public static Institute CreateInstance(Guid? id, string title, bool isActive, string code, string websiteUrl, string description)
         {
-            return new Institute()
-            {
-                CreateDate = DateTime.Now,
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                IsActive = isActive,
-                Title = title,
-                RowVersion = 0,
-                Code = code,
-                WebsiteUrl = websiteUrl,
-                Description = description
-            };
+            var institute = CreateInstance(id, isActive, description);
+            institute.AssignTitle(title);
+            institute.AssignCode(code);
+            institute.AssignWebsiteUrl(websiteUrl);
+
+            return institute;
         }
     }
 }

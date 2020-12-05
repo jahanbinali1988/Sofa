@@ -31,7 +31,7 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
                 _courseDomainService.CanAdd(request.Title);
 
-                var course = Course.CreateInstance(null, request.Title, request.AgeRange, request.IsActive, request.FieldId);
+                var course = Course.CreateInstance(null, request.Title, request.AgeRange, request.IsActive, request.FieldId, string.Empty);
                 this._unitOfWork.courseRepository.Add(course);
                 this._unitOfWork.Commit();
 
@@ -122,7 +122,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var course = Course.CreateInstance(request.Id, request.Title, request.AgeRange, request.IsActive, request.FieldId);
+                var course = Course.CreateInstance(request.Id, request.Title, request.AgeRange, request.IsActive, request.FieldId, string.Empty);
                 this._unitOfWork.courseRepository.Update(course);
                 this._unitOfWork.Commit();
 

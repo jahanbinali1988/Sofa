@@ -25,22 +25,29 @@ namespace Sofa.CourseManagement.Model
         public void AssignTitle(string title) { Title = title; }
         public void AssignLessonPlan(Guid lessonPlanId) { LessonPlanId = lessonPlanId; }
         public void AssignLessonPlan(LessonPlan lessonPlan) { LessonPlanId = lessonPlan.Id; LessonPlan = lessonPlan; }
+
+        public static Post CreateInstance(Guid? id, bool isActive, string description)
+        {
+            var post = new Post();
+            post.Id = id.HasValue ? id.Value : Guid.Empty;
+            post.AssignCreateDate(DateTime.Now);
+            post.AssignFirstRowVersion();
+            post.AssignIsActive(isActive);
+            post.AssignIsDeleted(false);
+            post.AssignDescription(description);
+
+            return post;
+        }
         public static Post CreateInstance(Guid? id, string title, short order, ContentTypeEnum contentType, string content, Guid LessonPlanId, bool isActive, string description)
         {
-            return new Post()
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                Title = title,
-                Order = order,
-                ContentType = contentType,
-                Content = content,
-                LessonPlanId = LessonPlanId,
-                IsActive = isActive,
-                RowVersion = 0,
-                CreateDate = DateTime.Now,
-                IsDeleted = false,
-                Description = description
-            };
+            var post = CreateInstance(id, isActive, description);
+            post.AssignTitle(title);
+            post.AssignOrder(order);
+            post.AssignContentType(contentType);
+            post.AssignContent(content);
+            post.AssignLessonPlan(LessonPlanId);
+
+            return post;
         }
     }
 }

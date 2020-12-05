@@ -28,19 +28,26 @@ namespace Sofa.CourseManagement.Model
             else
                 this.Sessions = sessions.ToArray();
         }
+
+        public static Term CreateInstance(Guid? id, bool isActive, string description)
+        {
+            var term = new Term();
+            term.Id = id.HasValue ? id.Value : Guid.Empty;
+            term.AssignCreateDate(DateTime.Now);
+            term.AssignFirstRowVersion();
+            term.AssignIsActive(isActive);
+            term.AssignIsDeleted(false);
+            term.AssignDescription(description);
+
+            return term;
+        }
         public static Term CreateInstance(Guid? id, string title, bool isActive, Guid courseId, string description)
         {
-            return new Term()
-            {
-                CreateDate = DateTime.Now,
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                IsActive = isActive,
-                RowVersion = 0,
-                Title = title,
-                CourseId = courseId,
-                Description = description,
-                IsDeleted = false
-            };
+            var term = CreateInstance(id, isActive, description);
+            term.AssignTitle(title);
+            term.AssignCourse(courseId);
+
+            return term;
         }
     }
 }

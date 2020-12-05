@@ -33,7 +33,7 @@ namespace Sofa.Teacher.Model
         public static LessonPlan CreateInstance(Guid? id, bool isActive, string description)
         {
             var lessonPlan = new LessonPlan();
-            lessonPlan.Id = id.HasValue ? id.Value : Guid.NewGuid();
+            lessonPlan.Id = id.HasValue ? id.Value : Guid.Empty;
             lessonPlan.AssignCreateDate(DateTime.Now);
             lessonPlan.AssignFirstRowVersion();
             lessonPlan.AssignIsActive(isActive);

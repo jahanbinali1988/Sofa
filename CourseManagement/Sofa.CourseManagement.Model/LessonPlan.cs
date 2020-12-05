@@ -29,15 +29,25 @@ namespace Sofa.CourseManagement.Model
             else
                 this.Posts = posts.ToArray();
         }
-        public static LessonPlan CreateInstance(Guid? id, LevelEnum level, bool isAvtive)
+
+        public static LessonPlan CreateInstance(Guid? id, bool isActive, string description)
         {
-            return new LessonPlan()
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                Level = level,
-                IsActive = isAvtive,
-                RowVersion = 0
-            };
+            var lessonPlan = new LessonPlan();
+            lessonPlan.Id = id.HasValue ? id.Value : Guid.Empty;
+            lessonPlan.AssignCreateDate(DateTime.Now);
+            lessonPlan.AssignFirstRowVersion();
+            lessonPlan.AssignIsActive(isActive);
+            lessonPlan.AssignIsDeleted(false);
+            lessonPlan.AssignDescription(description);
+
+            return lessonPlan;
+        }
+        public static LessonPlan CreateInstance(Guid? id, LevelEnum level, bool isActive, string description)
+        {
+            var lessonPlan = CreateInstance(id, isActive, description);
+            lessonPlan.AssignLevel(level);
+
+            return lessonPlan;
         }
     }
 }

@@ -28,17 +28,26 @@ namespace Sofa.CourseManagement.Model
             else
                 this.Courses = courses.ToArray(); 
         }
-        public static Field CreateInstance(Guid? id,string title, bool isActive, Guid instituteId)
+
+        public static Field CreateInstance(Guid? id, bool isActive, string description)
         {
-            return new Field()
-            {
-                CreateDate = DateTime.Now,
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                IsActive = isActive,
-                Title = title,
-                RowVersion = 0,
-                InstituteId = instituteId
-            };
+            var field = new Field();
+            field.Id = id.HasValue ? id.Value : Guid.Empty;
+            field.AssignCreateDate(DateTime.Now);
+            field.AssignFirstRowVersion();
+            field.AssignIsActive(isActive);
+            field.AssignIsDeleted(false);
+            field.AssignDescription(description);
+
+            return field;
+        }
+        public static Field CreateInstance(Guid? id,string title, bool isActive, Guid instituteId, string description)
+        {
+            var field = CreateInstance(id, isActive, description);
+            field.AssignTitle(title);
+            field.AssignInstitute(instituteId);
+
+            return field;
         }
     }
 }

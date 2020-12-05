@@ -31,18 +31,27 @@ namespace Sofa.CourseManagement.Model
             else
                 this.Terms = terms.ToArray();
         }
-        public static Course CreateInstance(Guid? id, string title, AgeRangeEnum ageRange, bool isActive, Guid fieldId)
+
+        public static Course CreateInstance(Guid? id, bool isActive, string description)
         {
-            return new Course()
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                Title = title,
-                CreateDate = DateTime.Now,
-                AgeRange = ageRange,
-                IsActive = isActive,
-                RowVersion = 0,
-                FieldId = fieldId
-            };
+            var course = new Course();
+            course.Id = id.HasValue ? id.Value : Guid.Empty;
+            course.AssignCreateDate(DateTime.Now);
+            course.AssignFirstRowVersion();
+            course.AssignIsActive(isActive);
+            course.AssignIsDeleted(false);
+            course.AssignDescription(description);
+
+            return course;
+        }
+        public static Course CreateInstance(Guid? id, string title, AgeRangeEnum ageRange, bool isActive, Guid fieldId, string description)
+        {
+            var course = CreateInstance(id, isActive, description);
+            course.AssignTitle(title);
+            course.AssignAgeRange(ageRange);
+            course.AssignField(fieldId);
+
+            return course;
         }
     }
 }

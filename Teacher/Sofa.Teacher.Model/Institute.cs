@@ -29,7 +29,7 @@ namespace Sofa.Teacher.Model
         public static Institute CreateInstance(Guid? id, bool isActive, string description)
         {
             var institute = new Institute();
-            institute.Id = id.HasValue ? id.Value : Guid.NewGuid();
+            institute.Id = id.HasValue ? id.Value : Guid.Empty;
             institute.AssignCreateDate(DateTime.Now);
             institute.AssignFirstRowVersion();
             institute.AssignIsActive(isActive);
