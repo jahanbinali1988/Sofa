@@ -36,7 +36,7 @@ namespace Sofa.Dapper.Repository
                 Db.Context().Insert(entity);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -49,7 +49,7 @@ namespace Sofa.Dapper.Repository
                 Db.Context().Insert(entities);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -62,7 +62,7 @@ namespace Sofa.Dapper.Repository
                 Db.Context().Update(entity);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -75,7 +75,7 @@ namespace Sofa.Dapper.Repository
                 Db.Context().Update(entities);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

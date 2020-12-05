@@ -173,7 +173,7 @@ namespace Sofa.EntityFramework.Repository
                 _context.Entry<TEntity>(entity).State = EntityState.Deleted;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -191,7 +191,7 @@ namespace Sofa.EntityFramework.Repository
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -204,7 +204,7 @@ namespace Sofa.EntityFramework.Repository
                 _context.Entry<TEntity>(entity).State = EntityState.Unchanged;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -227,18 +227,19 @@ namespace Sofa.EntityFramework.Repository
 
         public bool SafeDelete(TEntity entity)
         {
+            bool result = false;
             try
             {
                 entity.AssignIsDeleted(true);
                 entity.AssignModifiedDate(DateTime.Now);
                 entity.IncreaseRowVersion();
                 _context.Update<TEntity>(entity);
-                return true;
+                result= true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return false;
             }
+            return result;
         }
 
         public bool SafeDelete(TKey id)
@@ -253,15 +254,51 @@ namespace Sofa.EntityFramework.Repository
                     entity.AssignModifiedDate(DateTime.Now);
                     entity.IncreaseRowVersion();
                     _context.Update<TEntity>(entity);
-                    result = true;
                 }
-
-                return result;
+                result = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return result;
             }
+            return result;
+        }
+
+        public bool ChangeActiveStatus(TEntity entity)
+        {
+            bool result = false;
+            try
+            {
+                entity.AssignIsActive();
+                entity.AssignModifiedDate(DateTime.Now);
+                entity.IncreaseRowVersion();
+                _context.Update<TEntity>(entity);
+                result= true;
+            }
+            catch (Exception)
+            {
+            }
+            return result;
+        }
+
+        public bool ChangeActiveStatus(TKey id)
+        {
+            bool result = false;
+            try
+            {
+                var entity = _dbSet.SingleOrDefault<TEntity>(c => c.Id.Equals(id));
+                if (entity != null)
+                {
+                    entity.AssignIsActive();
+                    entity.AssignModifiedDate(DateTime.Now);
+                    entity.IncreaseRowVersion();
+                    _context.Update<TEntity>(entity);
+                }
+                result = true;
+            }
+            catch (Exception)
+            {
+            }
+            return result;
         }
     }
 }

@@ -35,6 +35,10 @@ namespace Sofa.SharedKernel.BaseClasses
         {
             this.IsActive = isActive;
         }
+        public void AssignIsActive()
+        {
+            this.IsActive = !this.IsActive;
+        }
         public void AssignIsDeleted(bool isDeleted)
         {
             this.IsDeleted = isDeleted;

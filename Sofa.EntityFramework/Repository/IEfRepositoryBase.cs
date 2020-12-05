@@ -29,5 +29,7 @@ namespace Sofa.EntityFramework.Repository
         bool SafeDelete(TKey id);
         bool SetUnchanged(TEntity entitieit);
         bool Update(TEntity entity);
+        bool ChangeActiveStatus(TEntity entity);
+        bool ChangeActiveStatus(TKey id);
     }
 }

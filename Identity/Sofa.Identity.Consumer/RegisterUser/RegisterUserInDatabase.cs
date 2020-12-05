@@ -44,7 +44,7 @@ namespace Sofa.Identiity.Consumer.RegisterUser
                 await _unitOfWork.CommitAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _unitOfWork.Dispose();
                 return false;

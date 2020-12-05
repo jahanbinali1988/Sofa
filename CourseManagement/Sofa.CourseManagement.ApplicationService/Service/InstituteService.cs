@@ -2,6 +2,7 @@
 using Sofa.CourseManagement.DomainService;
 using Sofa.CourseManagement.Model;
 using Sofa.CourseManagement.Repository;
+using Sofa.Events.Institute;
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
 using Sofa.SharedKernel.Validation;
@@ -16,7 +17,7 @@ namespace Sofa.CourseManagement.ApplicationService
         private readonly IBusControl _busControl;
         private readonly ILogger _logger;
 
-        public InstituteService(IUnitOfWork unitOfWork, IInstituteDomainService instituteDomainService, IBusControl busControl, ILogger logger)//
+        public InstituteService(IUnitOfWork unitOfWork, IInstituteDomainService instituteDomainService, IBusControl busControl, ILogger logger)
         {
             this._unitOfWork = unitOfWork;
             this._instituteDomainService = instituteDomainService;
@@ -36,6 +37,16 @@ namespace Sofa.CourseManagement.ApplicationService
                 institute.AssignAddress(address);
                 this._unitOfWork.instituteRepository.Add(institute);
                 this._unitOfWork.Commit();
+                _busControl.Publish<RegisterInstituteEvent>(new RegisterInstituteEvent()
+                {
+                     CreateDate = institute.CreateDate,
+                     Description = institute.Description,
+                     Id = institute.Id,
+                     IsActive = institute.IsActive,
+                     IsDeleted = institute.IsDeleted,
+                     ModifiedDate = institute.ModifyDate,
+                     Title = institute.Title
+                });
 
                 return new AddInstituteResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = institute.Id };
             }

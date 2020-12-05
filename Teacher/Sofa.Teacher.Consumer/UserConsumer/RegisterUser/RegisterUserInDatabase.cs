@@ -1,12 +1,13 @@
-﻿using Sofa.CourseManagement.Model;
-using Sofa.CourseManagement.Repository;
-using Sofa.Events.User;
+﻿using Sofa.Events.User;
 using Sofa.SharedKernel.BaseClasses;
 using Sofa.SharedKernel.Enum;
+using Sofa.Teacher.Model;
+using Sofa.Teacher.Repository;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sofa.CourseManagement.Consumer.RegisterUser
+namespace Sofa.Teacher.Consumer.UserConsumer.RegisterUser
 {
     public class RegisterUserInDatabase : IUnitOfBusiness<RegisteredUserEvent, bool>
     {
@@ -21,24 +22,26 @@ namespace Sofa.CourseManagement.Consumer.RegisterUser
         {
             try
             {
-                var user = _unitOfWork.userRepository.GetByUserName(message.UserName);
+                var user = _unitOfWork.userRepository.Query(c => c.UserName == message.UserName).SingleOrDefault();
+
                 if (user != null)
                 {
-                    user.AssignFirstName(message.FirstName);
-                    user.AssignLastName(message.LastName);
-                    user.ChangePassword(message.PasswordHash);
-                    user.AssignPhoneNumber(message.PhoneNumber);
+                    user.AssignDescription(message.Description);
                     user.AssignEmail(message.Email);
+                    user.AssignFirstName(message.FirstName);
+                    user.AssignIsActive(message.IsActive);
+                    user.AssignIsDeleted(message.IsDeleted);
+                    user.AssignLevel((LevelEnum)message.Level);
                     user.AssignModifiedDate(DateTime.Now);
-                    user.AssignRole((UserRoleEnum)message.Role);
-
+                    user.AssignPhoneNumber(message.PhoneNumber);
+                    user.AssignUserName(message.UserName);
                     _unitOfWork.userRepository.Update(user);
                     await _unitOfWork.CommitAsync();
                     return true;
                 }
 
-                var newUser = User.CreateInstance(null, message.FirstName, message.LastName, message.PasswordHash, message.Email, message.UserName,
-                    (UserRoleEnum)message.Role, message.PhoneNumber, message.IsActive, message.Description, (LevelEnum)message.Level);
+                var newUser = User.CreateInstance(null, message.FirstName, message.LastName, message.Email, message.UserName, message.Level,
+                    message.PhoneNumber, Guid.Empty, message.IsActive, message.Description);
 
                 await _unitOfWork.userRepository.AddAsync(newUser);
                 await _unitOfWork.CommitAsync();

@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using MassTransit;
 using Sofa.SharedKernel;
-using Sofa.Teacher.Consumer.RegisterLessonPlan;
-using Sofa.Teacher.Consumer.RegisterUser;
+using Sofa.Teacher.Consumer.LessonPlanConsumer.RegisterLessonPlan;
+using Sofa.Teacher.Consumer.UserConsumer.RegisterUser;
 using Sofa.Teacher.Consumer.ReisterPost;
 using Sofa.Teacher.Repository;
 

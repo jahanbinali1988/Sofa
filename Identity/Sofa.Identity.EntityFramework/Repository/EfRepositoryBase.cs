@@ -134,7 +134,7 @@ namespace Sofa.Identity.EntityFramework.Repository
                 _context.Entry<TEntity>(entity).State = EntityState.Deleted;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -152,7 +152,7 @@ namespace Sofa.Identity.EntityFramework.Repository
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -165,7 +165,7 @@ namespace Sofa.Identity.EntityFramework.Repository
                 _context.Entry<TEntity>(entity).State = EntityState.Unchanged;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
