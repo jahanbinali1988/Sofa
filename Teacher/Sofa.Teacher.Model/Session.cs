@@ -1,5 +1,6 @@
 ﻿using Sofa.SharedKernel.BaseClasses;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sofa.Teacher.Model
 {
@@ -10,6 +11,7 @@ namespace Sofa.Teacher.Model
         public Guid TermId { get; internal set; }
         public Term Term { get; internal set; }
         public Guid LessonPlanId { get; internal set; }
+        [NotMapped]
         public LessonPlan LessonPlan { get; internal set; }
 
         internal Session()

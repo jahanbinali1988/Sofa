@@ -20,6 +20,7 @@ using Sofa.Teacher.EntityFramework.Context;
 using Sofa.Teacher.EntityFramework.Factory;
 using Sofa.Teacher.EntityFramework.Seed;
 using System;
+using Microsoft.Extensions.Hosting;
 
 namespace Sofa.Teacher
 {
@@ -46,12 +47,22 @@ namespace Sofa.Teacher
             corsBuilder.AllowCredentials();
 
             services.AddHttpClient();
+            // ********************
+            // Setup CORS
+            // ********************        
             services.AddCors(options =>
             {
-                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+                options.AddPolicy(
+                   name: "AllowAllOrigin",
+                   builder =>
+                   {
+                       builder.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader();
+                   });
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
@@ -96,9 +107,9 @@ namespace Sofa.Teacher
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
         {
-            app.UseCors("SiteCorsPolicy");
+            app.UseCors("AllowAllOrigin");
 
             if (env.IsDevelopment())
             {
@@ -112,7 +123,7 @@ namespace Sofa.Teacher
 
             app.UseIdentityServer();
 
-            app.UseMvc();
+            //app.UseMvc();
         }
 
         private IServiceProvider ConfigurationIoc(IServiceCollection services)

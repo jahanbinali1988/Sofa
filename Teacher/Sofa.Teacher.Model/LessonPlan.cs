@@ -2,6 +2,7 @@
 using Sofa.SharedKernel.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Sofa.Teacher.Model
@@ -11,6 +12,7 @@ namespace Sofa.Teacher.Model
         public LevelEnum Level { get; internal set; }
 
         public Guid SessionId { get; internal set; }
+        [NotMapped]
         public Session Session { get; internal set; }
         public ICollection<Post> Posts { get; internal set; }
 

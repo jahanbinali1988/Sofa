@@ -20,10 +20,9 @@ namespace Sofa.Teacher.Consumer.FieldConsumer.RegisterField
         {
             try
             {
-                if (message.Id != null && message.Id != Guid.Empty)
+                Field field = _unitOfWork.fieldRepository.Get(message.Id);
+                if (field != null)
                 {
-                    Field field = _unitOfWork.fieldRepository.Get(message.Id);
-
                     field.AssignDescription(message.Description);
                     field.AssignIsActive(message.IsActive);
                     field.AssignIsDeleted(message.IsDeleted);

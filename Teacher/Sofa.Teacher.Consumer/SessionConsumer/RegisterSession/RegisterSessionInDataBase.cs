@@ -20,10 +20,9 @@ namespace Sofa.Teacher.Consumer.SessionConsumer.RegisterSession
         {
             try
             {
-                if (message.Id != null && message.Id != Guid.Empty)
+                Session session = _unitOfWork.sessionRepository.Get(message.Id);
+                if (session != null)
                 {
-                    Session session = _unitOfWork.sessionRepository.Get(message.Id);
-
                     session.AssignDescription(message.Description);
                     session.AssignIsActive(message.IsActive);
                     session.AssignIsDeleted(message.IsDeleted);

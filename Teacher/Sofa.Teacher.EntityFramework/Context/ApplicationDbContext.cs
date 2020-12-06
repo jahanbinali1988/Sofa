@@ -15,7 +15,7 @@ namespace Sofa.Teacher.EntityFramework.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.AddConfiguration(new SyllabusMapper());
+            builder.AddConfiguration(new LessonPlanMapper());
             builder.AddConfiguration(new CourseMapper());
             builder.AddConfiguration(new PostMapper());
             builder.AddConfiguration(new UserMapper());

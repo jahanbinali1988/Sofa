@@ -23,7 +23,6 @@ namespace Sofa.Teacher.Consumer.UserConsumer.RegisterUser
             try
             {
                 var user = _unitOfWork.userRepository.Query(c => c.UserName == message.UserName).SingleOrDefault();
-
                 if (user != null)
                 {
                     user.AssignDescription(message.Description);

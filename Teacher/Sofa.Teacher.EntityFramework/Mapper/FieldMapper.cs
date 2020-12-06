@@ -1,20 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sofa.EntityFramework.Map;
-using Sofa.Teacher.Model;
 
 namespace Sofa.Teacher.EntityFramework.Mapper
 {
-    public class SyllabusMapper : BaseEntityMap<LessonPlan>
+    public class FieldMapper : BaseEntityMap<Model.Field>
     {
-        public override void Map(EntityTypeBuilder<LessonPlan> builder)
+        public override void Map(EntityTypeBuilder<Model.Field> builder)
         {
             builder
-                .ToTable("Syllabus");
+                .ToTable("Field");
 
             builder
                 .HasKey(x => x.Id)
-                .HasName("PK_Syllabus");
+                .HasName("PK_Field");
 
             builder.Property(x => x.Id)
                 .HasColumnName("Id")

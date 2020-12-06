@@ -20,10 +20,9 @@ namespace Sofa.Teacher.Consumer.TermConsumer.RegisterTerm
         {
             try
             {
-                if (message.Id != null && message.Id != Guid.Empty)
+                Term term = _unitOfWork.termRepository.Get(message.Id);
+                if (term != null)
                 {
-                    Term term = _unitOfWork.termRepository.Get(message.Id);
-
                     term.AssignDescription(message.Description);
                     term.AssignIsActive(message.IsActive);
                     term.AssignIsDeleted(message.IsDeleted);

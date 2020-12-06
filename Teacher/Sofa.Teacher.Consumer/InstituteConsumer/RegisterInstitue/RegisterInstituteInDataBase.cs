@@ -20,10 +20,9 @@ namespace Sofa.Teacher.Consumer.InstituteConsumer.RegisterInstitute
         {
             try
             {
-                if (message.Id != null && message.Id != Guid.Empty)
+                Institute institute = _unitOfWork.instituteRepository.Get(message.Id);
+                if (institute != null)
                 {
-                    Institute institute = _unitOfWork.instituteRepository.Get(message.Id);
-
                     institute.AssignDescription(message.Description);
                     institute.AssignIsActive(message.IsActive);
                     institute.AssignIsDeleted(message.IsDeleted);

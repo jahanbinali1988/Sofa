@@ -20,10 +20,9 @@ namespace Sofa.Teacher.Consumer.CourseConsumer.RegisterCourse
         {
             try
             {
-                if (message.Id != null && message.Id != Guid.Empty)
+                var course = _unitOfWork.courseRepository.Get(message.Id);
+                if (course != null)
                 {
-                    var course = _unitOfWork.courseRepository.Get(message.Id);
-             
                     course.AssignDescription(message.Description);
                     course.AssignIsActive(message.IsActive);
                     course.AssignIsDeleted(message.IsDeleted);

@@ -27,11 +27,12 @@ namespace Sofa.CourseManagement.IntegratedTest
             var connectionString = new ConnectionStringProvider(configuration).GetConnectionString();
             var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseSqlServer(connectionString, x => x.MigrationsAssembly("Sofa.CourseManagement.EntityFramework"))
+                .EnableSensitiveDataLogging()
                 .Options;
             var testSeed = new TestDBContextSeed();
             var mapperList = new List<IEntityTypeMap>();
 
-            var applicationContextOptions = new ApplicationDbContextOptions(dbContextOptions, testSeed, mapperList);
+            var applicationContextOptions = new ApplicationDbContextOptions(dbContextOptions, null, null);
             var contextFactory = new ApplicationDbContextFactory(applicationContextOptions);
             var sofaTestContext = contextFactory.Create();
         }

@@ -20,10 +20,9 @@ namespace Sofa.Teacher.Consumer.LessonPlanConsumer.RegisterLessonPlan
         {
             try
             {
-                if (message.Id != null && message.Id != Guid.Empty)
+                LessonPlan lessonPlan = _unitOfWork.lessonPlanRepository.Get(message.Id);
+                if (lessonPlan != null)
                 {
-                    LessonPlan lessonPlan = _unitOfWork.lessonPlanRepository.Get(message.Id);
-
                     lessonPlan.AssignDescription(message.Description);
                     lessonPlan.AssignIsActive(message.IsActive);
                     lessonPlan.AssignIsDeleted(message.IsDeleted);
