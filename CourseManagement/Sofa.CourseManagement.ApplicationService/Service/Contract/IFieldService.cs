@@ -7,5 +7,7 @@
         GetAllFieldResponse GetAll(GetAllFieldRequest request);
         UpdateFieldResponse Update(UpdateFieldRequest request);
         DeleteFieldResponse Delete(DeleteFieldRequest request);
+        ChangeActiveStatusFieldResponse ChangeActiveStatus(ChangeActiveStatusFieldRequest request);
+        SearchFieldResponse Search(SearchFieldRequest request);
     }
 }

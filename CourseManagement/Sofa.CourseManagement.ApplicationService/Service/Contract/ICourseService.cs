@@ -7,5 +7,7 @@
         GetAllCourseResponse GetAll(GetAllCourseRequest request);
         UpdateCourseResponse Update(UpdateCourseRequest request);
         DeleteCourseResponse Delete(DeleteCourseRequest request);
+        ChangeActiveStatusCourseResponse ChangeActiveStatus(ChangeActiveStatusCourseRequest request);
+        SearchCourseResponse Search(SearchCourseRequest request);
     }
 }

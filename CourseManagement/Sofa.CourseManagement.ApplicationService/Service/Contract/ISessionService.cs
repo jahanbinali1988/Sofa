@@ -7,5 +7,7 @@
         GetAllSessionResponse GetAll(GetAllSessionRequest request);
         UpdateSessionResponse Update(UpdateSessionRequest request);
         DeleteSessionResponse Delete(DeleteSessionRequest request);
+        ChangeActiveStatusSessionResponse ChangeActiveStatus(ChangeActiveStatusSessionRequest request);
+        SearchSessionResponse Search(SearchSessionRequest request);
     }
 }
