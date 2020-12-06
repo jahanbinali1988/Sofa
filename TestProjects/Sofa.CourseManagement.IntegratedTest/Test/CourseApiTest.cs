@@ -114,5 +114,13 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(result.IsSuccess);
         }
         #endregion
+
+        #region ChangeActiveStatus
+
+        #endregion
+
+        #region Search
+
+        #endregion
     }
 }
