@@ -34,14 +34,18 @@ namespace Sofa.CourseManagement.ApplicationService
                 var lessonPlan = LessonPlan.CreateInstance(null, (LevelEnum)request.Level, request.IsActive, string.Empty);
                 this._unitOfWork.lessonPlanRepository.Add(lessonPlan);
                 this._unitOfWork.Commit();
-
                 _busControl.Publish<RegisterLessonPlanEvent>(new RegisterLessonPlanEvent()
                 {
-                    Description = "Created in CourseManagement Module",
+                    Description = "Created in CourseManagement module",
                     Id = lessonPlan.Id,
                     IsActive = lessonPlan.IsActive,
-                    Level = (short)lessonPlan.Level
+                    Level = (short)lessonPlan.Level,
+                    CreateDate = lessonPlan.CreateDate,
+                    ModifiedDate = lessonPlan.ModifyDate,
+                    IsDeleted = lessonPlan.IsDeleted,
+                    SessionId = lessonPlan.SessionId
                 });
+
                 return new AddLessonPlanResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = lessonPlan.Id };
             }
             catch (BusinessException e)
@@ -64,6 +68,10 @@ namespace Sofa.CourseManagement.ApplicationService
 
                 this._unitOfWork.lessonPlanRepository.SafeDelete(request.Id);
                 this._unitOfWork.Commit();
+                this._busControl.Publish<UpdateLessonPlanIsDeletedStatusEvent>(new UpdateLessonPlanIsDeletedStatusEvent()
+                {
+                    Id = request.Id
+                });
 
                 return new DeleteLessonPlanResponse(true, "حذف با موفقیت انجام شد");
             }
@@ -131,6 +139,17 @@ namespace Sofa.CourseManagement.ApplicationService
                 var lessonPlan = LessonPlan.CreateInstance(request.Id, (LevelEnum)request.Level, request.IsActive, string.Empty);
                 this._unitOfWork.lessonPlanRepository.Update(lessonPlan);
                 this._unitOfWork.Commit();
+                _busControl.Publish<RegisterLessonPlanEvent>(new RegisterLessonPlanEvent()
+                {
+                    Description = "Updated in CourseManagement module",
+                    Id = lessonPlan.Id,
+                    IsActive = lessonPlan.IsActive,
+                    Level = (short)lessonPlan.Level,
+                    CreateDate = lessonPlan.CreateDate,
+                    ModifiedDate = lessonPlan.ModifyDate,
+                    IsDeleted = lessonPlan.IsDeleted,
+                    SessionId = lessonPlan.SessionId
+                });
 
                 return new UpdateLessonPlanResponse(true, "به روز رسانی با موفقیت انجام شد");
             }
@@ -143,6 +162,54 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-LessonPlan Service-Update LessonPlan ", e.Message);
                 return new UpdateLessonPlanResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public ChangeActiveStatusLessonPlanResponse ChangeActiveStatus(ChangeActiveStatusLessonPlanRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.lessonPlanRepository.ChangeActiveStatus(request.Id);
+                this._unitOfWork.Commit();
+                this._busControl.Publish<UpdateLessonPlanIsActiveStatusEvent>(new UpdateLessonPlanIsActiveStatusEvent()
+                {
+                    Id = request.Id
+                });
+
+                return new ChangeActiveStatusLessonPlanResponse(true, "به روزرسانی با موفقیت انجام شد.");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-LessonPlan Service-ChangeActiveStatus ", e.Message);
+                return new ChangeActiveStatusLessonPlanResponse(false, "به روزرسانی با موفقیت انجام شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-LessonPlan Service-ChangeActiveStatus ", e.Message);
+                return new ChangeActiveStatusLessonPlanResponse(false, "به روزرسانی با موفقیت انجام شد.", e.Message.ToString());
+            }
+        }
+
+        public SearchLessonPlanResponse Search(SearchLessonPlanRequest request)
+        {
+            try
+            {
+                var user = this._unitOfWork.lessonPlanRepository.QueryPage(request.PageIndex, request.PageSize,
+                    (c => c.Description.StartsWith(request.Caption)));
+                var result = user.Convert();
+                return new SearchLessonPlanResponse(true, "عملیات خواندن با موفقیت انجام شد") { LessonPlans = result };
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-LessonPlan Service-Search ", e.Message);
+                return new SearchLessonPlanResponse(false, "عملیات خواندن با موفقیت انجام شد", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-LessonPlan Service-Search ", e.Message);
+                return new SearchLessonPlanResponse(false, "عملیات خواندن با موفقیت انجام شد", e.Message.ToString());
             }
         }
     }

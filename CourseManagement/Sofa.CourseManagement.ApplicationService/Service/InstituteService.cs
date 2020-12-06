@@ -39,13 +39,13 @@ namespace Sofa.CourseManagement.ApplicationService
                 this._unitOfWork.Commit();
                 _busControl.Publish<RegisterInstituteEvent>(new RegisterInstituteEvent()
                 {
-                     CreateDate = institute.CreateDate,
-                     Description = institute.Description,
-                     Id = institute.Id,
-                     IsActive = institute.IsActive,
-                     IsDeleted = institute.IsDeleted,
-                     ModifiedDate = institute.ModifyDate,
-                     Title = institute.Title
+                    CreateDate = institute.CreateDate,
+                    Description = "Created in CourseManagement module",
+                    Id = institute.Id,
+                    IsActive = institute.IsActive,
+                    IsDeleted = institute.IsDeleted,
+                    ModifiedDate = institute.ModifyDate,
+                    Title = institute.Title
                 });
 
                 return new AddInstituteResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = institute.Id };
@@ -70,6 +70,10 @@ namespace Sofa.CourseManagement.ApplicationService
 
                 this._unitOfWork.instituteRepository.SafeDelete(request.Id);
                 this._unitOfWork.Commit();
+                this._busControl.Publish<UpdateInstituteIsDeletedStatusEvent>(new UpdateInstituteIsDeletedStatusEvent()
+                {
+                    Id = request.Id
+                });
 
                 return new DeleteInstituteResponse(true, "حذف با موفقیت انجام شد");
             }
@@ -138,6 +142,16 @@ namespace Sofa.CourseManagement.ApplicationService
                 var institute = Institute.CreateInstance(request.Id, request.Title, request.IsActive, request.Code, request.WebsiteUrl, request.Description);
                 this._unitOfWork.instituteRepository.Update(institute);
                 this._unitOfWork.Commit();
+                _busControl.Publish<RegisterInstituteEvent>(new RegisterInstituteEvent()
+                {
+                    CreateDate = institute.CreateDate,
+                    Description = "Updated in CourseManagement module",
+                    Id = institute.Id,
+                    IsActive = institute.IsActive,
+                    IsDeleted = institute.IsDeleted,
+                    ModifiedDate = institute.ModifyDate,
+                    Title = institute.Title
+                });
 
                 return new UpdateInstituteResponse(true, "به روز رسانی با موفقیت انجام شد");
             }
@@ -150,6 +164,54 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-Institute Service-Update Institute ", e.Message);
                 return new UpdateInstituteResponse(false, "به روز رسانی با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public ChangeActiveStatusInstituteResponse ChangeActiveStatus(ChangeActiveStatusInstituteRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.instituteRepository.ChangeActiveStatus(request.Id);
+                this._unitOfWork.Commit();
+                this._busControl.Publish<UpdateInstituteIsActiveStatusEvent>(new UpdateInstituteIsActiveStatusEvent()
+                {
+                    Id = request.Id
+                });
+
+                return new ChangeActiveStatusInstituteResponse(true, "به روزرسانی با موفقیت انجام شد.");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Institute Service-ChangeActiveStatus ", e.Message);
+                return new ChangeActiveStatusInstituteResponse(false, "به روزرسانی با موفقیت انجام شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Institute Service-ChangeActiveStatus ", e.Message);
+                return new ChangeActiveStatusInstituteResponse(false, "به روزرسانی با موفقیت انجام شد.", e.Message.ToString());
+            }
+        }
+
+        public SearchInstituteResponse Search(SearchInstituteRequest request)
+        {
+            try
+            {
+                var institute = this._unitOfWork.instituteRepository.QueryPage(request.PageIndex, request.PageSize,
+                    (c => c.Title.StartsWith(request.Caption) || c.Code.StartsWith(request.Caption)));
+                var result = institute.Convert();
+                return new SearchInstituteResponse(true, "عملیات خواندن با موفقیت انجام شد") { Institutes = result };
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Institute Service-Search ", e.Message);
+                return new SearchInstituteResponse(false, "عملیات خواندن با موفقیت انجام شد", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Institute Service-Search ", e.Message);
+                return new SearchInstituteResponse(false, "عملیات خواندن با موفقیت انجام شد", e.Message.ToString());
             }
         }
     }

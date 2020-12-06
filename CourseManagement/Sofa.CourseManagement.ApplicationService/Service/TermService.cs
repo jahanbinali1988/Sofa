@@ -2,6 +2,7 @@
 using Sofa.CourseManagement.DomainService;
 using Sofa.CourseManagement.Model;
 using Sofa.CourseManagement.Repository;
+using Sofa.Events.Term;
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.BaseClasses.Exceptions;
 using Sofa.SharedKernel.Validation;
@@ -34,6 +35,17 @@ namespace Sofa.CourseManagement.ApplicationService
                 var term = Term.CreateInstance(null, request.Title, request.IsActive, request.CourseId, request.Description);
                 this._unitOfWork.termRepository.Add(term);
                 this._unitOfWork.Commit();
+                this._busControl.Publish<RegisterTermEvent>(new RegisterTermEvent()
+                {
+                    Description = "Created in CourseManagement module",
+                    CourseId = term.CourseId,
+                    Id = term.Id,
+                    CreateDate = term.CreateDate,
+                    IsActive = term.IsActive,
+                    IsDeleted = term.IsDeleted,
+                    ModifiedDate = term.ModifyDate,
+                    Title = term.Title
+                });
 
                 return new AddTermResponse(true, "ثبت با موفقیت انجام شد") { NewRecordedId = term.Id };
             }
@@ -102,6 +114,17 @@ namespace Sofa.CourseManagement.ApplicationService
                 var term = Term.CreateInstance(request.Id, request.Title, request.IsActive, request.CourseId, request.Description);
                 this._unitOfWork.termRepository.Update(term);
                 this._unitOfWork.Commit();
+                this._busControl.Publish<RegisterTermEvent>(new RegisterTermEvent()
+                {
+                    Description = "Updated in CourseManagement module",
+                    CourseId = term.CourseId,
+                    Id = term.Id,
+                    CreateDate = term.CreateDate,
+                    IsActive = term.IsActive,
+                    IsDeleted = term.IsDeleted,
+                    ModifiedDate = term.ModifyDate,
+                    Title = term.Title
+                });
 
                 return new UpdateTermResponse(true, "ویرایش با موفقیت انجام شد");
             }
@@ -125,6 +148,10 @@ namespace Sofa.CourseManagement.ApplicationService
 
                 this._unitOfWork.termRepository.SafeDelete(request.Id);
                 this._unitOfWork.Commit();
+                this._busControl.Publish<UpdateTermIsDeletedStatusEvent>(new UpdateTermIsDeletedStatusEvent()
+                {
+                    Id = request.Id
+                });
 
                 return new DeleteTermResponse(true, "حذف با موفقیت انجام شد");
             }
@@ -137,6 +164,54 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-Term Service-Delete Term ", e.Message);
                 return new DeleteTermResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public ChangeActiveStatusTermResponse ChangeActiveStatus(ChangeActiveStatusTermRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.userRepository.ChangeActiveStatus(request.Id);
+                this._unitOfWork.Commit();
+                this._busControl.Publish<UpdateTermIsActiveStatusEvent>(new UpdateTermIsActiveStatusEvent()
+                {
+                    Id = request.Id
+                });
+
+                return new ChangeActiveStatusTermResponse(true, "به روزرسانی با موفقیت انجام شد.");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Term Service-ChangeActiveStatus ", e.Message);
+                return new ChangeActiveStatusTermResponse(false, "به روزرسانی با موفقیت انجام شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Term Service-ChangeActiveStatus ", e.Message);
+                return new ChangeActiveStatusTermResponse(false, "به روزرسانی با موفقیت انجام شد.", e.Message.ToString());
+            }
+        }
+
+        public SearchTermResponse Search(SearchUserRequest request)
+        {
+            try
+            {
+                var terms = this._unitOfWork.termRepository.QueryPage(request.PageIndex, request.PageSize,
+                    (c => c.Title.StartsWith(request.Caption)));
+                var result = terms.Convert();
+                return new SearchTermResponse(true, "عملیات خواندن با موفقیت انجام شد") { Terms = result };
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-Term Service-Search ", e.Message);
+                return new SearchTermResponse(false, "عملیات خواندن با موفقیت انجام شد", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-Term Service-Search ", e.Message);
+                return new SearchTermResponse(false, "عملیات خواندن با موفقیت انجام شد", e.Message.ToString());
             }
         }
     }
