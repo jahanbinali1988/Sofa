@@ -142,6 +142,10 @@ namespace Sofa.CourseManagement.ApplicationService
 
                 this._unitOfWork.userRepository.SafeDelete(request.Id);
                 this._unitOfWork.Commit();
+                this._busControl.Publish<UpdateUserIsDeletedStatusEvent>(new UpdateUserIsDeletedStatusEvent()
+                {
+                    Id = request.Id
+                });
 
                 return new DeleteUserResponse(true, "حذف با موفقیت انجام شد");
             }
@@ -154,6 +158,54 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 this._logger.Error("Course Management-User Service-Delete User ", e.Message);
                 return new DeleteUserResponse(false, "حذف با مشکل مواجه شد.", e.Message.ToString());
+            }
+        }
+
+        public ChangeActiveStatusFieldResponse ChangeActiveStatus(ChangeActiveStatusFieldRequest request)
+        {
+            try
+            {
+                request.Validate();
+
+                this._unitOfWork.userRepository.ChangeActiveStatus(request.Id);
+                this._unitOfWork.Commit();
+                this._busControl.Publish<UpdateUserIsActiveStatusEvent>(new UpdateUserIsActiveStatusEvent()
+                {
+                    Id = request.Id
+                });
+
+                return new ChangeActiveStatusFieldResponse(true, "به روزرسانی با موفقیت انجام شد.");
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-User Service-ChangeActiveStatus ", e.Message);
+                return new ChangeActiveStatusFieldResponse(false, "به روزرسانی با موفقیت انجام شد.", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-User Service-ChangeActiveStatus ", e.Message);
+                return new ChangeActiveStatusFieldResponse(false, "به روزرسانی با موفقیت انجام شد.", e.Message.ToString());
+            }
+        }
+
+        public SearchInstituteResponse SearchUser(SearchInstituteRequest request)
+        {
+            try
+            {
+                var user = this._unitOfWork.userRepository.QueryPage(request.PageIndex, request.PageSize, 
+                    (c=> c.UserName.StartsWith(request.Caption) || c.FirstName.StartsWith(request.Caption) || c.LastName.StartsWith(request.Caption)));
+                var result = user.Convert();
+                return new SearchInstituteResponse(true, "عملیات خواندن با موفقیت انجام شد") { Users = result };
+            }
+            catch (BusinessException e)
+            {
+                this._logger.Warning("Course Management-User Service-ChangeActiveStatus ", e.Message);
+                return new SearchInstituteResponse(false, "عملیات خواندن با موفقیت انجام شد", e.Message.ToString());
+            }
+            catch (Exception e)
+            {
+                this._logger.Error("Course Management-User Service-ChangeActiveStatus ", e.Message);
+                return new SearchInstituteResponse(false, "عملیات خواندن با موفقیت انجام شد", e.Message.ToString());
             }
         }
     }
