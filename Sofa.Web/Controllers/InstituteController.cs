@@ -62,5 +62,24 @@ namespace Sofa.Web.Controllers
             var result = _instituteService.Update(request);
             return result;
         }
+
+        [HttpPost]
+        [Route("ChangeActiveStatus")]
+        [Authorize]
+        public ActionResult<ChangeActiveStatusInstituteResponse> ChangeActiveStatus([FromBody] ChangeActiveStatusInstituteRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _instituteService.ChangeActiveStatus(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Search")]
+        [Authorize]
+        public ActionResult<SearchInstituteResponse> Search([FromBody] SearchInstituteRequest request)
+        {
+            var result = _instituteService.Search(request);
+            return result;
+        }
     }
 }

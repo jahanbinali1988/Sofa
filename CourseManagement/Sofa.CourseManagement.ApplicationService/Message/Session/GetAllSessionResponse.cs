@@ -1,5 +1,4 @@
-﻿using Sofa.CourseManagement.ApplicationServic;
-using Sofa.SharedKernel.BaseClasses;
+﻿using Sofa.SharedKernel.BaseClasses;
 using System.Collections.Generic;
 
 namespace Sofa.CourseManagement.ApplicationService

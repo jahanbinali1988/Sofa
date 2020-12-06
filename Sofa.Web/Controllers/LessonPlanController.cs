@@ -61,5 +61,24 @@ namespace Sofa.Web.Controllers
             return result;
         }
 
+        [HttpPost]
+        [Route("ChangeActiveStatus")]
+        [Authorize]
+        public ActionResult<ChangeActiveStatusLessonPlanResponse> ChangeActiveStatus([FromBody] ChangeActiveStatusLessonPlanRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _lessonPlanService.ChangeActiveStatus(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Search")]
+        [Authorize]
+        public ActionResult<SearchLessonPlanResponse> Search([FromBody] SearchLessonPlanRequest request)
+        {
+            var result = _lessonPlanService.Search(request);
+            return result;
+        }
+
     }
 }

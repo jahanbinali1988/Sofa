@@ -61,5 +61,24 @@ namespace Sofa.Web.Controllers
             var result = _termService.Update(request);
             return result;
         }
+
+        [HttpPost]
+        [Route("ChangeActiveStatus")]
+        [Authorize]
+        public ActionResult<ChangeActiveStatusTermResponse> ChangeActiveStatus([FromBody] ChangeActiveStatusTermRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _termService.ChangeActiveStatus(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Search")]
+        [Authorize]
+        public ActionResult<SearchTermResponse> Search([FromBody] SearchTermRequest request)
+        {
+            var result = _termService.Search(request);
+            return result;
+        }
     }
 }

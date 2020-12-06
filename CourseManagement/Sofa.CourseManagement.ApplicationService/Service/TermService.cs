@@ -194,7 +194,7 @@ namespace Sofa.CourseManagement.ApplicationService
             }
         }
 
-        public SearchTermResponse Search(SearchUserRequest request)
+        public SearchTermResponse Search(SearchTermRequest request)
         {
             try
             {

@@ -61,5 +61,24 @@ namespace Sofa.Web.Controllers
             var result = _fieldService.Update(request);
             return result;
         }
+
+        [HttpPost]
+        [Route("ChangeActiveStatus")]
+        [Authorize]
+        public ActionResult<ChangeActiveStatusFieldResponse> ChangeActiveStatus([FromBody] ChangeActiveStatusFieldRequest request)
+        {
+            request.CommanderID = User.GetUserId();
+            var result = _fieldService.ChangeActiveStatus(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("Search")]
+        [Authorize]
+        public ActionResult<SearchFieldResponse> Search([FromBody] SearchFieldRequest request)
+        {
+            var result = _fieldService.Search(request);
+            return result;
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Sofa.CourseManagement.ApplicationServic;
-using Sofa.CourseManagement.Model;
+﻿using Sofa.CourseManagement.Model;
 using System.Collections.Generic;
 using System.Linq;
 
