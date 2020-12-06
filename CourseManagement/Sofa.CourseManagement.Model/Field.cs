@@ -41,7 +41,7 @@ namespace Sofa.CourseManagement.Model
 
             return field;
         }
-        public static Field CreateInstance(Guid? id, string title, bool isActive, Guid instituteId, string description)
+        public static Field CreateInstance(Guid? id, string title, Guid instituteId, bool isActive, string description)
         {
             var field = CreateInstance(id, isActive, description);
             field.AssignTitle(title);

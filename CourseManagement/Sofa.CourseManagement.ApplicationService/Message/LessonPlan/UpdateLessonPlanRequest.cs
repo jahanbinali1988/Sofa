@@ -15,5 +15,7 @@ namespace Sofa.CourseManagement.ApplicationService
 
         [Required(ErrorMessage = "وضعیت فعال بودن برنامه آموزش را مشخص کنید")]
         public bool IsActive { get; set; }
+
+        public string Description { get; set; }
     }
 }

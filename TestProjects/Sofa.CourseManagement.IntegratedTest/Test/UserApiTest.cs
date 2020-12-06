@@ -33,7 +33,9 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
                 Password = Guid.NewGuid().ToString(),
                 PhoneNumber = Guid.NewGuid().ToString(),
                 UserName = Guid.NewGuid().ToString(),
-                Role = 2
+                Role = 2,
+                Description = string.Empty,
+                Level = 1
             };
 
             var result = sysAdminHttpClient.CallPostService<AddUserResponse>(ConstantsUrl.AddUserApiUrl, request);
@@ -52,7 +54,9 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
                 Password = Guid.NewGuid().ToString(),
                 PhoneNumber = Guid.NewGuid().ToString(),
                 UserName = Guid.NewGuid().ToString(),
-                Role = 2
+                Role = 2,
+                Description = string.Empty,
+                Level = 1
             };
 
             var httpClient = testContext.GetHttpClient();
@@ -100,7 +104,9 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
                 Password = Guid.NewGuid().ToString(),
                 PhoneNumber = Guid.NewGuid().ToString(),
                 UserName = Guid.NewGuid().ToString(),
-                Role = 2
+                Role = 2,
+                Description = string.Empty,
+                Level = 1
             };
             var addResult = sysAdminHttpClient.CallPostService<AddUserResponse>(ConstantsUrl.AddUserApiUrl, addRequest);
             Assert.True(addResult.IsSuccess);
@@ -128,7 +134,9 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
                 Password = Guid.NewGuid().ToString(),
                 PhoneNumber = Guid.NewGuid().ToString(),
                 UserName = Guid.NewGuid().ToString(),
-                Role = 2
+                Role = 2,
+                Description = string.Empty,
+                Level = 1
             };
             var addResult = sysAdminHttpClient.CallPostService<AddUserResponse>(ConstantsUrl.AddUserApiUrl, addRequest);
             Assert.True(addResult.IsSuccess);
@@ -140,6 +148,54 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
                 Email = Guid.NewGuid().ToString() + "@gmail.com",
             };
             var result = sysAdminHttpClient.CallPostService<UpdateUserResponse>(ConstantsUrl.UpdateUserApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region ChangeActiveStatus
+        [Fact]
+        public void ChangeActiveStatus()
+        {
+            var addRequest = new AddUserRequest
+            {
+                Email = Guid.NewGuid().ToString() + "@gmail.com",
+                FirstName = Guid.NewGuid().ToString(),
+                IsActive = true,
+                LastName = Guid.NewGuid().ToString(),
+                Password = Guid.NewGuid().ToString(),
+                PhoneNumber = Guid.NewGuid().ToString(),
+                UserName = Guid.NewGuid().ToString(),
+                Role = 2,
+                Description = string.Empty,
+                Level = 1
+            };
+            var addResult = sysAdminHttpClient.CallPostService<AddUserResponse>(ConstantsUrl.AddUserApiUrl, addRequest);
+            Assert.True(addResult.IsSuccess);
+            Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
+
+            var request = new ChangeActiveStatusUserRequest
+            {
+                Id = addResult.NewRecordedId
+            };
+            var result = sysAdminHttpClient.CallPostService<ChangeActiveStatusUserResponse>(ConstantsUrl.ChangeActiveStatusUserApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region Search
+        [Fact]
+        public void Search()
+        {
+            var request = new SearchUserRequest
+            {
+                Accending = true,
+                OrderedBy = "Id",
+                PageIndex = 1,
+                PageSize = 10,
+                Caption = DefaultData.StudentUsername
+            };
+
+            var result = sysAdminHttpClient.CallPostService<SearchUserResponse>(ConstantsUrl.SearchUserApiUrl, request);
             Assert.True(result.IsSuccess);
         }
         #endregion

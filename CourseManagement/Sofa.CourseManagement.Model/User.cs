@@ -32,26 +32,33 @@ namespace Sofa.CourseManagement.Model
         public void AssignEmail(string email) { this.Email = email; }
         public void AssignRole(UserRoleEnum role) { this.Role = role; }
         public void AssignLevel(LevelEnum level) { this.Level = level; }
-        public static User CreateInstance(Guid? id, string firstName, string lastname, string rawPassword, string emailAddress, string userName,
-            UserRoleEnum role, string phoneNo, bool isActive, string description, LevelEnum level)
+
+        public static User CreateInstance(Guid? id, bool isActive, string description)
         {
-            return new User
-            {
-                Id = id.HasValue ? id.Value : Guid.NewGuid(),
-                FirstName = firstName,
-                LastName = lastname,
-                PasswordHash = SHA256HashGenerator.GenerateSHA256Hash(rawPassword),
-                UserName = userName,
-                Email = emailAddress,
-                Role = role,
-                IsActive = isActive,
-                PhoneNumber = phoneNo,
-                CreateDate = DateTime.Now,
-                Description = description,
-                IsDeleted = false,
-                Level = level,
-                RowVersion = 0
-            };
+            var user = new User();
+            user.Id = id.HasValue ? id.Value : Guid.Empty;
+            user.AssignCreateDate(DateTime.Now);
+            user.AssignFirstRowVersion();
+            user.AssignIsActive(isActive);
+            user.AssignIsDeleted(false);
+            user.AssignDescription(description);
+
+            return user;
+        }
+        public static User CreateInstance(Guid? id, string firstName, string lastname, string rawPassword, string emailAddress, string userName,
+            UserRoleEnum role, string phoneNo, LevelEnum level, bool isActive, string description)
+        {
+            var user = CreateInstance(id, isActive, description);
+            user.AssignFirstName(firstName);
+            user.AssignLastName(lastname);
+            user.ChangePassword(rawPassword);
+            user.AssignEmail(emailAddress);
+            user.AssignUserName(userName);
+            user.AssignRole(role);
+            user.AssignPhoneNumber(phoneNo);
+            user.AssignLevel(level);
+
+            return user;
         }
     }
 }

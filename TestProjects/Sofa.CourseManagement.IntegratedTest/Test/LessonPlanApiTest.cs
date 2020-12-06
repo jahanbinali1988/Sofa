@@ -111,5 +111,46 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(result.IsSuccess);
         }
         #endregion
+
+        #region ChangeActiveStatus
+        [Fact]
+        public void ChangeActiveStatus()
+        {
+            var addRequest = new AddLessonPlanRequest
+            {
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Level = (short)LevelEnum.Advanced
+            };
+            var addResult = sysAdminHttpClient.CallPostService<AddLessonPlanResponse>(ConstantsUrl.AddLessonPlanApiUrl, addRequest);
+            Assert.True(addResult.IsSuccess);
+            Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
+
+            var request = new DeleteLessonPlanRequest
+            {
+                Id = addResult.NewRecordedId
+            };
+            var result = sysAdminHttpClient.CallPostService<ChangeActiveStatusLessonPlanResponse>(ConstantsUrl.ChangeActiveStatusLessonPlanApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region Search
+        [Fact]
+        public void Search()
+        {
+            var request = new SearchLessonPlanRequest
+            {
+                Accending = true,
+                OrderedBy = "Id",
+                PageIndex = 1,
+                PageSize = 10,
+                Caption = ""
+            };
+
+            var result = sysAdminHttpClient.CallPostService<SearchLessonPlanResponse>(ConstantsUrl.SearchLessonPlanApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
     }
 }

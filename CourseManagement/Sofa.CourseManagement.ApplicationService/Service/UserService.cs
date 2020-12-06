@@ -32,7 +32,7 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
 
                 var user = User.CreateInstance(null, request.FirstName, request.LastName, request.Password, request.Email, request.UserName,
-                    (UserRoleEnum)request.Role, request.PhoneNumber, request.IsActive, request.Description, (LevelEnum)request.Level); ;
+                    (UserRoleEnum)request.Role, request.PhoneNumber, (LevelEnum)request.Level, request.IsActive, request.Description);
                 this._userDomainService.CanAdd(user);
 
                 this._unitOfWork.userRepository.Add(user);
@@ -116,7 +116,7 @@ namespace Sofa.CourseManagement.ApplicationService
                 request.Validate();
 
                 var user = User.CreateInstance(request.Id, request.FirstName, request.LastName, request.Password, request.Email, request.UserName, (UserRoleEnum)request.Role,
-                    request.PhoneNumber, request.IsActive, request.Description, (LevelEnum)request.Level);
+                    request.PhoneNumber, (LevelEnum)request.Level, request.IsActive, request.Description);
                 this._unitOfWork.userRepository.Update(user);
                 this._unitOfWork.Commit();
                 this._busControl.Publish<RegisteredUserEvent>(new RegisteredUserEvent()

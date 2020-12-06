@@ -44,7 +44,7 @@ namespace Sofa.CourseManagement.Model
 
             return course;
         }
-        public static Course CreateInstance(Guid? id, string title, AgeRangeEnum ageRange, bool isActive, Guid fieldId, string description)
+        public static Course CreateInstance(Guid? id, string title, AgeRangeEnum ageRange, Guid fieldId, bool isActive, string description)
         {
             var course = CreateInstance(id, isActive, description);
             course.AssignTitle(title);

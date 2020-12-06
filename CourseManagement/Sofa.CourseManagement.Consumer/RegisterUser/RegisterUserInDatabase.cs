@@ -38,7 +38,7 @@ namespace Sofa.CourseManagement.Consumer.RegisterUser
                 }
 
                 var newUser = User.CreateInstance(null, message.FirstName, message.LastName, message.PasswordHash, message.Email, message.UserName,
-                    (UserRoleEnum)message.Role, message.PhoneNumber, message.IsActive, message.Description, (LevelEnum)message.Level);
+                    (UserRoleEnum)message.Role, message.PhoneNumber, (LevelEnum)message.Level, message.IsActive, message.Description);
 
                 await _unitOfWork.userRepository.AddAsync(newUser);
                 await _unitOfWork.CommitAsync();

@@ -9,10 +9,13 @@ namespace Sofa.CourseManagement.ApplicationService
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن عنوان الزامی است")]
         public string Title { get; set; }
-        [Required(ErrorMessage = "وضعیت فعال بودن رشته را مشخص کنید")]
-        public bool IsActive { get; set; }
 
         [GuidValidator]
         public Guid InstituteId { get; set; }
+
+        [Required(ErrorMessage = "وضعیت فعال بودن را مشخص کنید")]
+        public bool IsActive { get; set; }
+
+        public string Description { get; set; }
     }
 }

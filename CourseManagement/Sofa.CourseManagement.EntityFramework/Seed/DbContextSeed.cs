@@ -19,23 +19,23 @@ namespace Sofa.CourseManagement.EntityFramework.Seed
 
         public void Seed(ModelBuilder modelBuilder)
         {
-            var userSysAdmin = User.CreateInstance(DefaultData.SysAdminId, "Ali", "Jahanbin", DefaultData.SysAdminPassword, "jahanbin.ali1988@gmail.com", DefaultData.SysAdminUsername, UserRoleEnum.SysAdmin, "09224957626", true, string.Empty, LevelEnum.Intermediate);
-            var userTeacher = User.CreateInstance(DefaultData.TeacherUserId, "Ali", "Jahanbin", DefaultData.TeacherPassword, "jahanbin.ali1988@gmail.com", DefaultData.TeacherUsername, UserRoleEnum.Teacher, "09224957626", true, string.Empty, LevelEnum.Advanced);
-            var userStudent = User.CreateInstance(DefaultData.StudentId, "Ali", "Jahanbin", DefaultData.SysAdminPassword, "jahanbin.ali1988@gmail.com", DefaultData.SysAdminUsername, UserRoleEnum.Student, "09224957626", true, string.Empty, LevelEnum.Begginer);
+            var userSysAdmin = User.CreateInstance(DefaultData.SysAdminId, "Ali", "Jahanbin", DefaultData.SysAdminPassword, "jahanbin.ali1988@gmail.com", DefaultData.SysAdminUsername, UserRoleEnum.SysAdmin, "09224957626", LevelEnum.Intermediate, true, string.Empty);
+            var userTeacher = User.CreateInstance(DefaultData.TeacherUserId, "Ali", "Jahanbin", DefaultData.TeacherPassword, "jahanbin.ali1988@gmail.com", DefaultData.TeacherUsername, UserRoleEnum.Teacher, "09224957626", LevelEnum.Advanced, true, string.Empty);
+            var userStudent = User.CreateInstance(DefaultData.StudentId, "Ali", "Jahanbin", DefaultData.SysAdminPassword, "jahanbin.ali1988@gmail.com", DefaultData.SysAdminUsername, UserRoleEnum.Student, "09224957626", LevelEnum.Begginer, true, string.Empty);
 
-            var defaultInstitute = Institute.CreateInstance(DefaultData.InstituteId, "TestInstitute", true, Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+            var defaultInstitute = Institute.CreateInstance(DefaultData.InstituteId, "TestInstitute", Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), true, Guid.NewGuid().ToString());
 
-            var defaultField = Field.CreateInstance(DefaultData.FieldId, "DefaultField", true, defaultInstitute.Id, string.Empty);
+            var defaultField = Field.CreateInstance(DefaultData.FieldId, "DefaultField", defaultInstitute.Id, true, string.Empty);
 
-            var defaultCourse = Course.CreateInstance(DefaultData.CourseId, "DefaultCourse", AgeRangeEnum.Adults, true, defaultField.Id, string.Empty);
+            var defaultCourse = Course.CreateInstance(DefaultData.CourseId, "DefaultCourse", AgeRangeEnum.Adults, defaultField.Id, true, string.Empty);
 
-            var defaultTerm = Term.CreateInstance(DefaultData.TermId, "DefaultTerm", true, defaultCourse.Id, string.Empty);
+            var defaultTerm = Term.CreateInstance(DefaultData.TermId, "DefaultTerm", defaultCourse.Id, true, string.Empty);
 
-            var defaultLessonPlan = LessonPlan.CreateInstance(DefaultData.LessonPlanId, SharedKernel.Enum.LevelEnum.Begginer, true, string.Empty);
+            var defaultLessonPlan = LessonPlan.CreateInstance(DefaultData.LessonPlanId, LevelEnum.Begginer, true, string.Empty);
 
-            var defaultSession = Session.CreateInstance(DefaultData.SessionId, "DefaultSession", true, defaultLessonPlan.Id, defaultTerm.Id, string.Empty);
+            var defaultSession = Session.CreateInstance(DefaultData.SessionId, "DefaultSession", defaultLessonPlan.Id, defaultTerm.Id, true, string.Empty);
 
-            var defaultPost = Post.CreateInstance(DefaultData.PostId, "DefaultPost", 1, SharedKernel.Enum.ContentTypeEnum.Text, "Sample Content", defaultLessonPlan.Id, true, string.Empty);
+            var defaultPost = Post.CreateInstance(DefaultData.PostId, "DefaultPost", 1, ContentTypeEnum.Text, "Sample Content", defaultLessonPlan.Id, true, string.Empty);
 
             modelBuilder.Entity<Institute>().HasData(defaultInstitute);
             modelBuilder.Entity<Field>().HasData(defaultField);

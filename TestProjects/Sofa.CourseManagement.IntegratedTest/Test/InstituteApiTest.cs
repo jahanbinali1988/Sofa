@@ -136,5 +136,55 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(result.IsSuccess);
         }
         #endregion
+
+        #region ChangeActiveStatus
+        [Fact]
+        public void ChangeActiveStatus()
+        {
+            var addRequest = new AddInstituteRequest
+            {
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Code = Guid.NewGuid().ToString(),
+                Address = new AddressDto()
+                {
+                    City = Guid.NewGuid().ToString(),
+                    ZipCode = Guid.NewGuid().ToString(),
+                    Country = Guid.NewGuid().ToString(),
+                    State = Guid.NewGuid().ToString(),
+                    Street = Guid.NewGuid().ToString()
+                },
+                WebsiteUrl = "www." + Guid.NewGuid().ToString() + ".com"
+            };
+            var addResult = sysAdminHttpClient.CallPostService<AddInstituteResponse>(ConstantsUrl.AddInstituteApiUrl, addRequest);
+            Assert.True(addResult.IsSuccess);
+            Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
+
+            var request = new ChangeActiveStatusCourseRequest
+            {
+                Id = addResult.NewRecordedId
+            };
+            var result = sysAdminHttpClient.CallPostService<ChangeActiveStatusInstituteResponse>(ConstantsUrl.ChangeActiveStatusInstituteApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
+
+        #region Search
+        [Fact]
+        public void Search()
+        {
+            var request = new SearchInstituteRequest
+            {
+                Accending = true,
+                OrderedBy = "Id",
+                PageIndex = 1,
+                PageSize = 10,
+                Caption = ""
+            };
+
+            var result = sysAdminHttpClient.CallPostService<SearchInstituteResponse>(ConstantsUrl.SearchInstituteApiUrl, request);
+            Assert.True(result.IsSuccess);
+        }
+        #endregion
     }
 }

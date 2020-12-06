@@ -31,7 +31,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var session = Session.CreateInstance(null, request.Title, request.IsActive, request.TermId, request.LessonPlanId, request.Description);
+                var session = Session.CreateInstance(null, request.Title, request.TermId, request.LessonPlanId, request.IsActive, request.Description);
                 this._unitOfWork.sessionRepository.Add(session);
                 this._unitOfWork.Commit();
                 _busControl.Publish<RegisterSessionEvent>(new RegisterSessionEvent ()
@@ -111,7 +111,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var session = Session.CreateInstance(request.Id, request.Title, request.IsActive, request.LessonPlanId, request.TermId, request.Description);
+                var session = Session.CreateInstance(request.Id, request.Title, request.LessonPlanId, request.TermId, request.IsActive, request.Description);
                 this._unitOfWork.sessionRepository.Update(session);
                 this._unitOfWork.Commit();
                 _busControl.Publish<RegisterSessionEvent>(new RegisterSessionEvent()

@@ -11,17 +11,17 @@ namespace Sofa.CourseManagement.IntegratedTest.Utilities
     {
         public void Seed(ModelBuilder modelBuilder)
         {
-            var defaultInstitute = Institute.CreateInstance(DefaultData.InstituteId, "TestInstitute", true, Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+            var defaultInstitute = Institute.CreateInstance(DefaultData.InstituteId, "TestInstitute", Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), true, Guid.NewGuid().ToString());
 
-            var defaultField = Field.CreateInstance(DefaultData.FieldId, "DefaultField", true, defaultInstitute.Id, string.Empty);
+            var defaultField = Field.CreateInstance(DefaultData.FieldId, "DefaultField", defaultInstitute.Id, true, string.Empty);
 
-            var defaultCourse = Course.CreateInstance(DefaultData.CourseId, "DefaultCourse", AgeRangeEnum.Adults, true, defaultField.Id, string.Empty);
+            var defaultCourse = Course.CreateInstance(DefaultData.CourseId, "DefaultCourse", AgeRangeEnum.Adults, defaultField.Id, true, string.Empty);
 
-            var defaultTerm = Term.CreateInstance(DefaultData.TermId, "DefaultTerm", true, defaultCourse.Id, string.Empty);
+            var defaultTerm = Term.CreateInstance(DefaultData.TermId, "DefaultTerm", defaultCourse.Id, true, string.Empty);
 
-            var defaultLessonPlan = LessonPlan.CreateInstance(DefaultData.LessonPlanId, SharedKernel.Enum.LevelEnum.Begginer, true, string.Empty);
+            var defaultLessonPlan = LessonPlan.CreateInstance(DefaultData.LessonPlanId, LevelEnum.Begginer, true, string.Empty);
 
-            var defaultSession = Session.CreateInstance(DefaultData.SessionId, "DefaultSession", true, defaultLessonPlan.Id, defaultTerm.Id, string.Empty);
+            var defaultSession = Session.CreateInstance(DefaultData.SessionId, "DefaultSession", defaultLessonPlan.Id, defaultTerm.Id, true, string.Empty);
 
             var defaultPost = Post.CreateInstance(DefaultData.PostId, "DefaultPost", 1, ContentTypeEnum.Text, Guid.NewGuid().ToString(), defaultLessonPlan.Id, true, string.Empty);
 

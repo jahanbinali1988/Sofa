@@ -31,7 +31,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var lessonPlan = LessonPlan.CreateInstance(null, (LevelEnum)request.Level, request.IsActive, string.Empty);
+                var lessonPlan = LessonPlan.CreateInstance(null, (LevelEnum)request.Level, request.IsActive, request.Description);
                 this._unitOfWork.lessonPlanRepository.Add(lessonPlan);
                 this._unitOfWork.Commit();
                 _busControl.Publish<RegisterLessonPlanEvent>(new RegisterLessonPlanEvent()
@@ -136,7 +136,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var lessonPlan = LessonPlan.CreateInstance(request.Id, (LevelEnum)request.Level, request.IsActive, string.Empty);
+                var lessonPlan = LessonPlan.CreateInstance(request.Id, (LevelEnum)request.Level, request.IsActive, request.Description);
                 this._unitOfWork.lessonPlanRepository.Update(lessonPlan);
                 this._unitOfWork.Commit();
                 _busControl.Publish<RegisterLessonPlanEvent>(new RegisterLessonPlanEvent()

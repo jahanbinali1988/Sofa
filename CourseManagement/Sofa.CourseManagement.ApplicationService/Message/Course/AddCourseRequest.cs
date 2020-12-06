@@ -14,10 +14,12 @@ namespace Sofa.CourseManagement.ApplicationService
         [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن محدوده سنی الزامی است")]
         public AgeRangeEnum AgeRange { get; set; }
 
+        [GuidValidator]
+        public Guid FieldId { get; set; }
+
         [Required(ErrorMessage = "وضعیت فعال بودن دوره را مشخص کنید")]
         public bool IsActive { get; set; }
 
-        [GuidValidator]
-        public Guid FieldId { get; set; }
+        public string Description { get; set; }
     }
 }
