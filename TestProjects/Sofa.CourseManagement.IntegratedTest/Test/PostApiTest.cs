@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.ApplicationService;
+﻿using Sofa.CourseManagement.IntegratedTest.Messages;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.Enum;
@@ -35,7 +35,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Add()
         {
-            var request = new AddPostRequest
+            var request = new ApplicationService.AddPostRequest
             {
                 Title = Guid.NewGuid().ToString(),
                 LessonPlanId = DefaultData.LessonPlanId,
@@ -55,7 +55,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetAll()
         {
-            var request = new GetAllPostRequest
+            var request = new ApplicationService.GetAllPostRequest
             {
                 Accending = true,
                 OrderedBy = "Id",
@@ -73,7 +73,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Delete()
         {
-            var addRequest = new AddPostRequest
+            var addRequest = new ApplicationService.AddPostRequest
             {
                 Title = Guid.NewGuid().ToString(),
                 LessonPlanId = DefaultData.LessonPlanId,
@@ -87,7 +87,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new DeletePostRequest
+            var request = new ApplicationService.DeletePostRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -100,7 +100,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Update()
         {
-            var addRequest = new AddPostRequest
+            var addRequest = new ApplicationService.AddPostRequest
             {
                 Title = Guid.NewGuid().ToString(),
                 LessonPlanId = DefaultData.LessonPlanId,
@@ -114,10 +114,16 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new UpdatePostRequest
+            var request = new ApplicationService.UpdatePostRequest
             {
                 Id = addResult.NewRecordedId,
-                Title = Guid.NewGuid().ToString()
+                Title = Guid.NewGuid().ToString(),
+                LessonPlanId = DefaultData.LessonPlanId,
+                Order = 1,
+                ContentType = (short)ContentTypeEnum.Text,
+                Content = Guid.NewGuid().ToString(),
+                IsActive = false,
+                Description = Guid.NewGuid().ToString()
             };
             var result = sysAdminHttpClient.CallPostService<UpdatePostResponse>(ConstantsUrl.UpdatePostApiUrl, request);
             Assert.True(result.IsSuccess);
@@ -128,7 +134,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void ChangeActiveStatus()
         {
-            var addRequest = new AddPostRequest
+            var addRequest = new ApplicationService.AddPostRequest
             {
                 Title = Guid.NewGuid().ToString(),
                 LessonPlanId = DefaultData.LessonPlanId,
@@ -142,7 +148,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new DeletePostRequest
+            var request = new ApplicationService.DeletePostRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -155,7 +161,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Search()
         {
-            var request = new SearchPostRequest
+            var request = new ApplicationService.SearchPostRequest
             {
                 Accending = true,
                 OrderedBy = "Id",

@@ -13,6 +13,9 @@ namespace Sofa.CourseManagement.ApplicationService
         [Range(0, 2, ErrorMessage = "مفدار وارد شده خارج از حد مجاز است")]
         public short Level { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "وارد کردن جلسه الزامی است")]
+        public Guid SessionId { get; set; }
+
         [Required(ErrorMessage = "وضعیت فعال بودن برنامه آموزش را مشخص کنید")]
         public bool IsActive { get; set; }
 

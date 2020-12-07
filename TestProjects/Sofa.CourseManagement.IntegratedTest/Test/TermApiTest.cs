@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.ApplicationService;
+﻿using Sofa.CourseManagement.IntegratedTest.Messages;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
 using Sofa.SharedKernel;
 using System;
@@ -34,11 +34,12 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Add()
         {
-            var request = new AddTermRequest()
+            var request = new ApplicationService.AddTermRequest()
             {
-                Title = "Sample",
+                Description = Guid.NewGuid().ToString(),
                 CourseId = DefaultData.CourseId,
-                IsActive = false
+                IsActive = false,
+                Title = Guid.NewGuid().ToString()
             };
 
             var result = sysAdminHttpClient.CallPostService<Messages.AddTermResponse>(ConstantsUrl.AddTermApiUrl, request);
@@ -50,7 +51,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetAll()
         {
-            var request = new GetAllTermRequest
+            var request = new ApplicationService.GetAllTermRequest
             {
                 Accending = true,
                 OrderedBy = "Id",
@@ -67,17 +68,18 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Delete()
         {
-            var addRequest = new AddTermRequest
+            var addRequest = new ApplicationService.AddTermRequest
             {
-                Title = "Sample",
+                Description = Guid.NewGuid().ToString(),
                 CourseId = DefaultData.CourseId,
-                IsActive = false
+                IsActive = false,
+                Title = Guid.NewGuid().ToString()
             };
             var addResult = sysAdminHttpClient.CallPostService<AddTermResponse>(ConstantsUrl.AddTermApiUrl, addRequest);
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new DeleteTermRequest
+            var request = new ApplicationService.DeleteTermRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -90,22 +92,25 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Update()
         {
-            var addRequest = new AddTermRequest
+            var addRequest = new ApplicationService.AddTermRequest
             {
-                Title = Guid.NewGuid().ToString(),
+                Description = Guid.NewGuid().ToString(),
                 CourseId = DefaultData.CourseId,
-                IsActive = false
+                IsActive = false,
+                Title = Guid.NewGuid().ToString()
             };
             var addResult = sysAdminHttpClient.CallPostService<AddTermResponse>(ConstantsUrl.AddTermApiUrl, addRequest);
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new UpdateTermRequest
+            var request = new ApplicationService.UpdateTermRequest
             {
                 Id = addResult.NewRecordedId,
-                Title = Guid.NewGuid().ToString()
+                Title = Guid.NewGuid().ToString(),
+                CourseId = DefaultData.CourseId,
+                IsActive = false
             };
-            var result = sysAdminHttpClient.CallPostService<UpdateUserResponse>(ConstantsUrl.UpdateUserApiUrl, request);
+            var result = sysAdminHttpClient.CallPostService<UpdateUserResponse>(ConstantsUrl.UpdateTermApiUrl, request);
             Assert.True(result.IsSuccess);
         }
         #endregion
@@ -114,17 +119,18 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void ChangeActiveStatus()
         {
-            var addRequest = new AddTermRequest()
+            var addRequest = new ApplicationService.AddTermRequest()
             {
-                Title = Guid.NewGuid().ToString(),
+                Description = Guid.NewGuid().ToString(),
                 CourseId = DefaultData.CourseId,
-                IsActive = false
+                IsActive = false,
+                Title = Guid.NewGuid().ToString()
             };
             var addResult = sysAdminHttpClient.CallPostService<AddTermResponse>(ConstantsUrl.AddTermApiUrl, addRequest);
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new ChangeActiveStatusTermRequest
+            var request = new ApplicationService.ChangeActiveStatusTermRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -137,7 +143,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Search()
         {
-            var request = new SearchTermRequest
+            var request = new ApplicationService.SearchTermRequest
             {
                 Accending = true,
                 OrderedBy = "Id",

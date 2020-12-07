@@ -19,7 +19,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Utilities
 
             var defaultTerm = Term.CreateInstance(DefaultData.TermId, "DefaultTerm", defaultCourse.Id, true, string.Empty);
 
-            var defaultLessonPlan = LessonPlan.CreateInstance(DefaultData.LessonPlanId, LevelEnum.Begginer, true, string.Empty);
+            var defaultLessonPlan = LessonPlan.CreateInstance(DefaultData.LessonPlanId, LevelEnum.Begginer, DefaultData.SessionId, true, string.Empty);
 
             var defaultSession = Session.CreateInstance(DefaultData.SessionId, "DefaultSession", defaultLessonPlan.Id, defaultTerm.Id, true, string.Empty);
 

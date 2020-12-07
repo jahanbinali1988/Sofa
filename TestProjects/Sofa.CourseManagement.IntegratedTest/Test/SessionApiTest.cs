@@ -1,6 +1,7 @@
-﻿using Sofa.CourseManagement.ApplicationService;
+﻿using Sofa.CourseManagement.IntegratedTest.Messages;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
 using Sofa.SharedKernel;
+using Sofa.SharedKernel.Enum;
 using System;
 using System.Net.Http;
 using Xunit;
@@ -24,7 +25,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetById()
         {
-            var url = ConstantsUrl.GetSessionByIdApiUrl + "";
+            var url = ConstantsUrl.GetSessionByIdApiUrl + DefaultData.SessionId;
             var result = unknownHttpClient.CallGetService<Messages.GetSessionByIdResponse>(url);
             Assert.True(result.IsSuccess);
         }
@@ -34,10 +35,23 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Add()
         {
-            var request = new AddSessionRequest()
+            var addLessonPlanRequest = new ApplicationService.AddLessonPlanRequest()
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
+                Level = (short)LevelEnum.Advanced
+            };
+
+            var addLessonPlanResult = sysAdminHttpClient.CallPostService<Messages.AddLessonPlanResponse>(ConstantsUrl.AddLessonPlanApiUrl, addLessonPlanRequest);
+            Assert.True(addLessonPlanResult.IsSuccess);
+
+            var request = new ApplicationService.AddSessionRequest()
+            {
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Description = Guid.NewGuid().ToString(),
+                LessonPlanId = addLessonPlanResult.NewRecordedId,
+                TermId = DefaultData.TermId
             };
 
             var result = sysAdminHttpClient.CallPostService<Messages.AddSessionResponse>(ConstantsUrl.AddSessionApiUrl, request);
@@ -49,7 +63,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetAll()
         {
-            var request = new GetAllTermRequest
+            var request = new ApplicationService.GetAllTermRequest
             {
                 Accending = true,
                 OrderedBy = "Id",
@@ -66,21 +80,33 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Delete()
         {
-            var addRequest = new AddTermRequest
+            var addLessonPlanRequest = new ApplicationService.AddLessonPlanRequest()
             {
-                Title = "Sample",
-                CourseId = DefaultData.CourseId,
-                IsActive = false
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Level = (short)LevelEnum.Advanced
             };
-            var addResult = sysAdminHttpClient.CallPostService<AddTermResponse>(ConstantsUrl.AddTermApiUrl, addRequest);
+
+            var addLessonPlanResult = sysAdminHttpClient.CallPostService<Messages.AddLessonPlanResponse>(ConstantsUrl.AddLessonPlanApiUrl, addLessonPlanRequest);
+            Assert.True(addLessonPlanResult.IsSuccess);
+
+            var addRequest = new ApplicationService.AddSessionRequest
+            {
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Description = Guid.NewGuid().ToString(),
+                LessonPlanId = addLessonPlanResult.NewRecordedId,
+                TermId = DefaultData.TermId
+            };
+            var addResult = sysAdminHttpClient.CallPostService<AddSessionResponse>(ConstantsUrl.AddSessionApiUrl, addRequest);
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new DeleteTermRequest
+            var request = new ApplicationService.DeleteSessionRequest
             {
                 Id = addResult.NewRecordedId
             };
-            var result = sysAdminHttpClient.CallPostService<DeleteTermResponse>(ConstantsUrl.DeleteTermApiUrl, request);
+            var result = sysAdminHttpClient.CallPostService<DeleteSessionResponse>(ConstantsUrl.DeleteSessionApiUrl, request);
             Assert.True(result.IsSuccess);
         }
         #endregion
@@ -89,22 +115,38 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Update()
         {
-            var addRequest = new AddTermRequest
+            var addLessonPlanRequest = new ApplicationService.AddLessonPlanRequest()
             {
-                Title = "Sample",
-                CourseId = DefaultData.CourseId,
-                IsActive = false
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Level = (short)LevelEnum.Advanced
             };
-            var addResult = sysAdminHttpClient.CallPostService<AddTermResponse>(ConstantsUrl.AddTermApiUrl, addRequest);
+
+            var addLessonPlanResult = sysAdminHttpClient.CallPostService<Messages.AddLessonPlanResponse>(ConstantsUrl.AddLessonPlanApiUrl, addLessonPlanRequest);
+            Assert.True(addLessonPlanResult.IsSuccess);
+
+            var addRequest = new ApplicationService.AddSessionRequest
+            {
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Description = Guid.NewGuid().ToString(),
+                LessonPlanId = addLessonPlanResult.NewRecordedId,
+                TermId = DefaultData.TermId
+            };
+            var addResult = sysAdminHttpClient.CallPostService<AddSessionResponse>(ConstantsUrl.AddSessionApiUrl, addRequest);
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new UpdateTermRequest
+            var request = new ApplicationService.UpdateSessionRequest
             {
                 Id = addResult.NewRecordedId,
-                Title = Guid.NewGuid().ToString()
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Description = Guid.NewGuid().ToString(),
+                LessonPlanId = addLessonPlanResult.NewRecordedId,
+                TermId = DefaultData.TermId
             };
-            var result = sysAdminHttpClient.CallPostService<UpdateUserResponse>(ConstantsUrl.UpdateUserApiUrl, request);
+            var result = sysAdminHttpClient.CallPostService<UpdateSessionResponse>(ConstantsUrl.UpdateSessionApiUrl, request);
             Assert.True(result.IsSuccess);
         }
         #endregion
@@ -113,16 +155,29 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void ChangeActiveStatus()
         {
-            var addRequest = new AddSessionRequest
+            var addLessonPlanRequest = new ApplicationService.AddLessonPlanRequest()
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
+                Level = (short)LevelEnum.Advanced
+            };
+
+            var addLessonPlanResult = sysAdminHttpClient.CallPostService<Messages.AddLessonPlanResponse>(ConstantsUrl.AddLessonPlanApiUrl, addLessonPlanRequest);
+            Assert.True(addLessonPlanResult.IsSuccess);
+
+            var addRequest = new ApplicationService.AddSessionRequest
+            {
+                IsActive = false,
+                Title = Guid.NewGuid().ToString(),
+                Description = Guid.NewGuid().ToString(),
+                LessonPlanId = addLessonPlanResult.NewRecordedId,
+                TermId = DefaultData.TermId
             };
             var addResult = sysAdminHttpClient.CallPostService<AddSessionResponse>(ConstantsUrl.AddSessionApiUrl, addRequest);
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new DeleteSessionRequest
+            var request = new ApplicationService.ChangeActiveStatusSessionRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -135,7 +190,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Search()
         {
-            var request = new SearchSessionRequest
+            var request = new ApplicationService.SearchSessionRequest
             {
                 Accending = true,
                 OrderedBy = "Id",

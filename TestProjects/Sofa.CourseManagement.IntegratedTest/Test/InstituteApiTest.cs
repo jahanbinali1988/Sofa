@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.ApplicationService;
+﻿using Sofa.CourseManagement.IntegratedTest.Messages;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
 using Sofa.SharedKernel;
 using System;
@@ -34,12 +34,12 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Add()
         {
-            var request = new AddInstituteRequest()
+            var request = new ApplicationService.AddInstituteRequest()
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
                 Code = Guid.NewGuid().ToString(),
-                Address = new AddressDto()
+                Address = new ApplicationService.AddressDto()
                 {
                     City = Guid.NewGuid().ToString(),
                     ZipCode = Guid.NewGuid().ToString(),
@@ -59,7 +59,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetAll()
         {
-            var request = new GetAllInstituteRequest
+            var request = new ApplicationService.GetAllInstituteRequest
             {
                 Accending = true,
                 OrderedBy = "Id",
@@ -76,12 +76,12 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Delete()
         {
-            var addRequest = new AddInstituteRequest()
+            var addRequest = new ApplicationService.AddInstituteRequest()
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
                 Code = Guid.NewGuid().ToString(),
-                Address = new AddressDto()
+                Address = new ApplicationService.AddressDto()
                 {
                     City = Guid.NewGuid().ToString(),
                     ZipCode = Guid.NewGuid().ToString(),
@@ -95,7 +95,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new DeleteInstituteRequest
+            var request = new ApplicationService.DeleteInstituteRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -108,12 +108,12 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Update()
         {
-            var addRequest = new AddInstituteRequest()
+            var addRequest = new ApplicationService.AddInstituteRequest()
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
                 Code = Guid.NewGuid().ToString(),
-                Address = new AddressDto()
+                Address = new ApplicationService.AddressDto()
                 {
                     City = Guid.NewGuid().ToString(),
                     ZipCode = Guid.NewGuid().ToString(),
@@ -127,7 +127,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new UpdateInstituteRequest
+            var request = new ApplicationService.UpdateInstituteRequest
             {
                 Id = addResult.NewRecordedId,
                 Title = Guid.NewGuid().ToString()
@@ -141,12 +141,12 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void ChangeActiveStatus()
         {
-            var addRequest = new AddInstituteRequest
+            var addRequest = new ApplicationService.AddInstituteRequest
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
                 Code = Guid.NewGuid().ToString(),
-                Address = new AddressDto()
+                Address = new ApplicationService.AddressDto()
                 {
                     City = Guid.NewGuid().ToString(),
                     ZipCode = Guid.NewGuid().ToString(),
@@ -160,7 +160,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new ChangeActiveStatusCourseRequest
+            var request = new ApplicationService.ChangeActiveStatusCourseRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -173,7 +173,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Search()
         {
-            var request = new SearchInstituteRequest
+            var request = new ApplicationService.SearchInstituteRequest
             {
                 Accending = true,
                 OrderedBy = "Id",

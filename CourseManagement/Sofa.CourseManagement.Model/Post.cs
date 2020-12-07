@@ -29,7 +29,7 @@ namespace Sofa.CourseManagement.Model
         public static Post CreateInstance(Guid? id, bool isActive, string description)
         {
             var post = new Post();
-            post.Id = id.HasValue ? id.Value : Guid.Empty;
+            post.Id = id.HasValue ? id.Value : Guid.NewGuid();
             post.AssignCreateDate(DateTime.Now);
             post.AssignFirstRowVersion();
             post.AssignIsActive(isActive);

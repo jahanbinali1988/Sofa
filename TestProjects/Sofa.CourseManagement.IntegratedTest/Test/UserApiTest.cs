@@ -1,4 +1,5 @@
-﻿using Sofa.CourseManagement.ApplicationService;
+﻿using Sofa.CourseManagement.IntegratedTest.Messages;
+using Sofa.CourseManagement.IntegratedTest.Messages.User;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
 using Sofa.SharedKernel;
 using System;
@@ -24,7 +25,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Add()
         {
-            var request = new AddUserRequest
+            var request = new ApplicationService.AddUserRequest
             {
                 Email = Guid.NewGuid().ToString() + "@gmail.com",
                 FirstName = Guid.NewGuid().ToString(),
@@ -45,7 +46,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Add_UserDontLogin_UnauthorizedError()
         {
-            var request = new AddUserRequest
+            var request = new ApplicationService.AddUserRequest
             {
                 Email = Guid.NewGuid().ToString() + "@gmail.com",
                 FirstName = Guid.NewGuid().ToString(),
@@ -78,7 +79,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetAll()
         {
-            var request = new GetAllUserRequest
+            var request = new ApplicationService.GetAllUserRequest
             {
                 Accending = true,
                 OrderedBy = "Id",
@@ -95,7 +96,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Delete()
         {
-            var addRequest = new AddUserRequest
+            var addRequest = new ApplicationService.AddUserRequest
             {
                 Email = Guid.NewGuid().ToString() + "@gmail.com",
                 FirstName = Guid.NewGuid().ToString(),
@@ -112,7 +113,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new DeleteUserRequest
+            var request = new ApplicationService.DeleteUserRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -125,7 +126,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Update()
         {
-            var addRequest = new AddUserRequest
+            var addRequest = new ApplicationService.AddUserRequest
             {
                 Email = Guid.NewGuid().ToString() + "@gmail.com",
                 FirstName = Guid.NewGuid().ToString(),
@@ -142,10 +143,19 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new UpdateUserRequest
+            var request = new ApplicationService.UpdateUserRequest
             {
                 Id = addResult.NewRecordedId,
                 Email = Guid.NewGuid().ToString() + "@gmail.com",
+                FirstName = Guid.NewGuid().ToString(),
+                IsActive = true,
+                LastName = Guid.NewGuid().ToString(),
+                Password = Guid.NewGuid().ToString(),
+                PhoneNumber = Guid.NewGuid().ToString(),
+                UserName = Guid.NewGuid().ToString(),
+                Role = 2,
+                Description = string.Empty,
+                Level = 1
             };
             var result = sysAdminHttpClient.CallPostService<UpdateUserResponse>(ConstantsUrl.UpdateUserApiUrl, request);
             Assert.True(result.IsSuccess);
@@ -156,7 +166,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void ChangeActiveStatus()
         {
-            var addRequest = new AddUserRequest
+            var addRequest = new ApplicationService.AddUserRequest
             {
                 Email = Guid.NewGuid().ToString() + "@gmail.com",
                 FirstName = Guid.NewGuid().ToString(),
@@ -173,7 +183,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new ChangeActiveStatusUserRequest
+            var request = new ApplicationService.ChangeActiveStatusUserRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -186,7 +196,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Search()
         {
-            var request = new SearchUserRequest
+            var request = new ApplicationService.SearchUserRequest
             {
                 Accending = true,
                 OrderedBy = "Id",

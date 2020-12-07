@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.ApplicationService;
+﻿using Sofa.CourseManagement.IntegratedTest.Messages;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
 using Sofa.SharedKernel;
 using System;
@@ -34,7 +34,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Add()
         {
-            var request = new AddFieldRequest()
+            var request = new ApplicationService.AddFieldRequest()
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
@@ -50,7 +50,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetAll()
         {
-            var request = new GetAllTermRequest
+            var request = new ApplicationService.GetAllTermRequest
             {
                 Accending = true,
                 OrderedBy = "Id",
@@ -68,7 +68,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Delete()
         {
-            var addRequest = new AddFieldRequest
+            var addRequest = new ApplicationService.AddFieldRequest
             {
                 Title = Guid.NewGuid().ToString(),
                 InstituteId = DefaultData.InstituteId,
@@ -78,7 +78,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new DeleteFieldRequest
+            var request = new ApplicationService.DeleteFieldRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -91,20 +91,24 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Update()
         {
-            var addRequest = new AddFieldRequest
+            var addRequest = new ApplicationService.AddFieldRequest
             {
                 Title = Guid.NewGuid().ToString(),
                 InstituteId = DefaultData.InstituteId,
-                IsActive = false
+                IsActive = false,
+                Description = Guid.NewGuid().ToString()
             };
             var addResult = sysAdminHttpClient.CallPostService<AddFieldResponse>(ConstantsUrl.AddFieldApiUrl, addRequest);
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new UpdateFieldRequest
+            var request = new ApplicationService.UpdateFieldRequest
             {
                 Id = addResult.NewRecordedId,
-                Title = Guid.NewGuid().ToString()
+                Title = Guid.NewGuid().ToString(),
+                InstituteId = DefaultData.InstituteId,
+                IsActive = false,
+                Description = Guid.NewGuid().ToString()
             };
             var result = sysAdminHttpClient.CallPostService<UpdateFieldResponse>(ConstantsUrl.UpdateFieldApiUrl, request);
             Assert.True(result.IsSuccess);
@@ -115,7 +119,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void ChangeActiveStatus()
         {
-            var addRequest = new AddFieldRequest
+            var addRequest = new ApplicationService.AddFieldRequest
             {
                 IsActive = false,
                 Title = Guid.NewGuid().ToString(),
@@ -125,7 +129,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new ChangeActiveStatusFieldRequest
+            var request = new ApplicationService.ChangeActiveStatusFieldRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -138,7 +142,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Search()
         {
-            var request = new SearchFieldRequest
+            var request = new ApplicationService.SearchFieldRequest
             {
                 Accending = true,
                 OrderedBy = "Id",

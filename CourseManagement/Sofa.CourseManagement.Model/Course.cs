@@ -35,7 +35,7 @@ namespace Sofa.CourseManagement.Model
         public static Course CreateInstance(Guid? id, bool isActive, string description)
         {
             var course = new Course();
-            course.Id = id.HasValue ? id.Value : Guid.Empty;
+            course.Id = id.HasValue ? id.Value : Guid.NewGuid();
             course.AssignCreateDate(DateTime.Now);
             course.AssignFirstRowVersion();
             course.AssignIsActive(isActive);

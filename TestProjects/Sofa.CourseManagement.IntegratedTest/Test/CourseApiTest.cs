@@ -1,4 +1,4 @@
-﻿using Sofa.CourseManagement.ApplicationService;
+﻿using Sofa.CourseManagement.IntegratedTest.Messages;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.Enum;
@@ -35,7 +35,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Add()
         {
-            var request = new AddCourseRequest()
+            var request = new Sofa.CourseManagement.ApplicationService.AddCourseRequest()
             {
                 FieldId = DefaultData.FieldId,
                 AgeRange = AgeRangeEnum.Adults,
@@ -52,7 +52,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void GetAll()
         {
-            var request = new GetAllCourseRequest
+            var request = new Sofa.CourseManagement.ApplicationService.GetAllCourseRequest
             {
                 Accending = true,
                 OrderedBy = "Id",
@@ -70,7 +70,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Delete()
         {
-            var addRequest = new AddCourseRequest
+            var addRequest = new Sofa.CourseManagement.ApplicationService.AddCourseRequest
             {
                 Title = Guid.NewGuid().ToString(),
                 IsActive = false,
@@ -81,7 +81,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new DeleteCourseRequest
+            var request = new Sofa.CourseManagement.ApplicationService.DeleteCourseRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -94,7 +94,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Update()
         {
-            var addRequest = new AddCourseRequest
+            var addRequest = new Sofa.CourseManagement.ApplicationService.AddCourseRequest
             {
                 Title = Guid.NewGuid().ToString(),
                 IsActive = false,
@@ -105,10 +105,13 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new UpdateCourseRequest
+            var request = new Sofa.CourseManagement.ApplicationService.UpdateCourseRequest
             {
                 Id = addResult.NewRecordedId,
-                Title = Guid.NewGuid().ToString()
+                Title = Guid.NewGuid().ToString(),
+                IsActive = false,
+                AgeRange = AgeRangeEnum.Adults,
+                FieldId = DefaultData.FieldId
             };
             var result = sysAdminHttpClient.CallPostService<UpdateCourseResponse>(ConstantsUrl.UpdateCourseApiUrl, request);
             Assert.True(result.IsSuccess);
@@ -119,7 +122,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void ChangeActiveStatus()
         {
-            var addRequest = new AddCourseRequest
+            var addRequest = new Sofa.CourseManagement.ApplicationService.AddCourseRequest
             {
                 Title = Guid.NewGuid().ToString(),
                 IsActive = false,
@@ -130,7 +133,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
             Assert.True(addResult.IsSuccess);
             Assert.NotEqual(addResult.NewRecordedId, Guid.Empty);
 
-            var request = new ChangeActiveStatusCourseRequest
+            var request = new Sofa.CourseManagement.ApplicationService.ChangeActiveStatusCourseRequest
             {
                 Id = addResult.NewRecordedId
             };
@@ -143,7 +146,7 @@ namespace Sofa.CourseManagement.IntegratedTest.Test
         [Fact]
         public void Search()
         {
-            var request = new SearchCourseRequest
+            var request = new Sofa.CourseManagement.ApplicationService.SearchCourseRequest
             {
                 Accending = true,
                 OrderedBy = "Id",

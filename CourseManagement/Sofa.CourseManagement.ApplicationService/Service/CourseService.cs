@@ -139,7 +139,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var course = Course.CreateInstance(request.Id, request.Title, request.AgeRange, request.FieldId, request.IsActive, string.Empty);
+                var course = Course.CreateInstance(request.Id, request.Title, request.AgeRange, request.FieldId, request.IsActive, request.Description);
                 this._unitOfWork.courseRepository.Update(course);
                 this._unitOfWork.Commit();
                 this._busControl.Publish<RegisterCourseEvent>(new RegisterCourseEvent()

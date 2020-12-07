@@ -32,7 +32,7 @@ namespace Sofa.CourseManagement.Model
         public static Term CreateInstance(Guid? id, bool isActive, string description)
         {
             var term = new Term();
-            term.Id = id.HasValue ? id.Value : Guid.Empty;
+            term.Id = id.HasValue ? id.Value : Guid.NewGuid();
             term.AssignCreateDate(DateTime.Now);
             term.AssignFirstRowVersion();
             term.AssignIsActive(isActive);

@@ -138,7 +138,7 @@ namespace Sofa.CourseManagement.ApplicationService
             {
                 request.Validate();
 
-                var field = Field.CreateInstance(null, request.Title, request.InstituteId, request.IsActive, request.Description);
+                var field = Field.CreateInstance(request.Id, request.Title, request.InstituteId, request.IsActive, request.Description);
                 this._unitOfWork.fieldRepository.Update(field);
                 this._unitOfWork.Commit();
                 this._busControl.Publish<RegisterFieldEvent>(new RegisterFieldEvent()
