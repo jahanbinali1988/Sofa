@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CourseManagement\Sofa.CourseManagement.Model\Sofa.CourseManagement.Model.csproj" />
     <ProjectReference Include="..\..\Sofa.SharedKernel\Sofa.SharedKernel.csproj" />
   </ItemGroup>
 

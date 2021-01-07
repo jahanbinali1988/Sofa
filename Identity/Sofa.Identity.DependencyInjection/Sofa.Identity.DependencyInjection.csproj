@@ -5,10 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="MassTransit" Version="7.0.4" />
+    <PackageReference Include="MassTransit.Autofac" Version="7.0.4" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="7.0.4" />
-    <PackageReference Include="MassTransit.StructureMap" Version="7.0.4" />
-    <PackageReference Include="structuremap" Version="4.7.1" />
   </ItemGroup>
 
   <ItemGroup>

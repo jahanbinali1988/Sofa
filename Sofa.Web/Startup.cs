@@ -33,35 +33,6 @@ namespace Sofa.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env, ILoggerFactory loggerFactory)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseMiddleware<EnableRewindableBodyStartup>();
-
-            app.UseCors("AllowAllOrigin");
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            app.UseDeveloperExceptionPage();
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sofa Course Management API V1");
-            });
-
-            app.UseIdentityServer();
-            app.UseMvc();
-            HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
-        }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
@@ -146,6 +117,30 @@ namespace Sofa.Web
                 opt.SuppressModelStateInvalidFilter = true;
             });
             return ConfigurationIoc(services);
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        {
+            app.UseMiddleware<EnableRewindableBodyStartup>();
+
+            app.UseCors("AllowAllOrigin");
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sofa Course Management API V1");
+            });
+
+            app.UseIdentityServer();
+            app.UseMvc();
+            HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
         }
 
         private IServiceProvider ConfigurationIoc(IServiceCollection services)

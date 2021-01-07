@@ -10,23 +10,25 @@ using Sofa.Identity.EntityFramework.Context;
 using Sofa.Identity.EntityFramework.Factory;
 using Sofa.Identity.EntityFramework.Seed;
 using Sofa.SharedKernel;
-using StructureMap;
 using System;
 using Microsoft.Extensions.Hosting;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 
 namespace Sofa.Identity.WebAPI
 {
     public class Startup
     {
-        Container container;
+        ContainerBuilder containerBuilder;
         public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            containerBuilder = new ContainerBuilder();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        [Obsolete]
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // ********************
@@ -35,7 +37,7 @@ namespace Sofa.Identity.WebAPI
             services.AddCors(options =>
             {
                 options.AddPolicy(
-                   name: "AllowOrigin",
+                   name: "AllowAllOrigin",
                    builder =>
                    {
                        builder.AllowAnyOrigin()
@@ -73,20 +75,13 @@ namespace Sofa.Identity.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors("AllowOrigin");
-
-            // ********************
-            // Start Bus
-            // ********************
-            var busControl = container.GetInstance<IBusControl>();
-            busControl.Start();
+            app.UseCors("AllowAllOrigin");
 
             app.UseMvc();
             app.UseIdentityServer();
         }
 
-        [Obsolete]
-        public IServiceProvider ConfigureIoC(IServiceCollection services)
+        private IServiceProvider ConfigureIoC(IServiceCollection services)
         {
             // Register the Options:
             services.AddOptions();
@@ -104,30 +99,31 @@ namespace Sofa.Identity.WebAPI
             // Finally Add the Applications DbContext:
             services.AddDbContext<SofaIdentityDbContext>();
 
-            container = new Container();
+            // Create an Autofac Container and push the framework services
+            var containerBuilder = new ContainerBuilder();
 
-            container.Configure(config =>
-            {
-                config.For<IConfiguration>().Use(Configuration);
+            containerBuilder.RegisterType<ServiceBusSettingProvider>().As<IServiceBusSettingProvider>();
+            containerBuilder.RegisterType<Logger>().As<ILogger>();
+            containerBuilder.Populate(services);
 
-                config.For<ILogger>().Use<Logger>();
-                var allRegistry = RegistryProvider.GetAllRegistry();
+            // Register your own services within Autofac
+            containerBuilder.RegisterModule<RegisterDBFactory>();
+            containerBuilder.RegisterModule<RegisterRepository>();
+            containerBuilder.RegisterModule<RegisterService>();
+            containerBuilder.RegisterModule<RegisterServiceBus>();
+            containerBuilder.RegisterModule<RegisterConsumer>();
 
-                foreach (var registry in allRegistry)
-                {
-                    config.AddRegistry(registry);
-                }
-            });
+            // Build the container and return an IServiceProvider from Autofac
+            var container = containerBuilder.Build();
 
-            var serviceBusSettingsProvider = new ServiceBusSettingProvider(Configuration);
-            container.Configure(config =>
-            {
-                config.AddRegistry(new ServiceBusRegistry(serviceBusSettingsProvider, container));
-                //Populate the container using the service collection
-                config.Populate(services);
-            });
+            // ********************
+            // Start Bus
+            // ********************
+            var busControl = container.Resolve<IBusControl>();
+            busControl.Start();
 
-            return container.GetInstance<IServiceProvider>();
+            return container.Resolve<IServiceProvider>();
         }
     }
 }
+
