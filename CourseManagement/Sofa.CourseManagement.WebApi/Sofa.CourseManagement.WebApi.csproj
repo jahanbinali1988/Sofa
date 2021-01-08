@@ -27,9 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CourseManagement\Sofa.CourseManagement.ApplicationService\Sofa.CourseManagement.ApplicationService.csproj" />
-    <ProjectReference Include="..\CourseManagement\Sofa.CourseManagement.DependencyResolver\Sofa.CourseManagement.DependencyResolver.csproj" />
-    <ProjectReference Include="..\Identity\Sofa.Identity.WebAPI\Sofa.Identity.WebAPI.csproj" />
+    <ProjectReference Include="..\..\Identity\Sofa.Identity.WebAPI\Sofa.Identity.WebAPI.csproj" />
+    <ProjectReference Include="..\Sofa.CourseManagement.ApplicationService\Sofa.CourseManagement.ApplicationService.csproj" />
+    <ProjectReference Include="..\Sofa.CourseManagement.DependencyResolver\Sofa.CourseManagement.DependencyResolver.csproj" />
   </ItemGroup>
 
 </Project>

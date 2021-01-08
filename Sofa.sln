@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.CourseManagement.WebApi", "Sofa.Web\Sofa.CourseManagement.WebApi.csproj", "{B46C10F8-ACA3-42E5-90FA-240208251373}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.SharedKernel", "Sofa.SharedKernel\Sofa.SharedKernel.csproj", "{3749195E-7BFC-4D6E-A1CA-E1EDB52FA240}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{0C64FBBE-70C8-4FFD-BC3A-D14B1C11609A}"
@@ -85,16 +83,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.EntityFramework", "Sof
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.CourseManagement.EntityFramework", "CourseManagement\Sofa.CourseManagement.EntityFramework\Sofa.CourseManagement.EntityFramework.csproj", "{8D63657D-40CC-4001-8325-A0AF6D2D1F82}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.CourseManagement.WebApi", "CourseManagement\Sofa.CourseManagement.WebApi\Sofa.CourseManagement.WebApi.csproj", "{F775F7FE-15CF-4A56-B964-364EE26838EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B46C10F8-ACA3-42E5-90FA-240208251373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B46C10F8-ACA3-42E5-90FA-240208251373}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B46C10F8-ACA3-42E5-90FA-240208251373}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B46C10F8-ACA3-42E5-90FA-240208251373}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3749195E-7BFC-4D6E-A1CA-E1EDB52FA240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3749195E-7BFC-4D6E-A1CA-E1EDB52FA240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3749195E-7BFC-4D6E-A1CA-E1EDB52FA240}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -239,6 +235,10 @@ Global
 		{8D63657D-40CC-4001-8325-A0AF6D2D1F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D63657D-40CC-4001-8325-A0AF6D2D1F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D63657D-40CC-4001-8325-A0AF6D2D1F82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F775F7FE-15CF-4A56-B964-364EE26838EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F775F7FE-15CF-4A56-B964-364EE26838EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F775F7FE-15CF-4A56-B964-364EE26838EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F775F7FE-15CF-4A56-B964-364EE26838EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -274,6 +274,7 @@ Global
 		{B0E05B0B-3117-488A-9DFD-36AEF38C3AE6} = {D8E2555C-704E-4563-A878-E53694E0E00C}
 		{1DD7C15F-DD58-4525-9E41-9882F7C3E556} = {D8E2555C-704E-4563-A878-E53694E0E00C}
 		{8D63657D-40CC-4001-8325-A0AF6D2D1F82} = {13B298C4-A4D1-49D6-987E-47B1AA07882A}
+		{F775F7FE-15CF-4A56-B964-364EE26838EA} = {13B298C4-A4D1-49D6-987E-47B1AA07882A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E38AB46-5852-4B73-86BD-87B31CE0E267}
