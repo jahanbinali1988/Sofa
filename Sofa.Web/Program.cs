@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Sofa.Web
+namespace Sofa.CourseManagement.WebApi
 {
     public class Program
     {

@@ -5,7 +5,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Events;
 using Sofa.CourseManagement.IntegratedTest.Utilities;
-using Sofa.Web;
+using Sofa.CourseManagement.WebApi;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -84,7 +84,7 @@ namespace Sofa.CourseManagement.IntegratedTest
         private string GetContentRoot()
         {
             var integrationTestsPath = PlatformServices.Default.Application.ApplicationBasePath;
-            var applicationPath = integrationTestsPath.Replace("TestProjects\\Sofa.CourseManagement.IntegratedTest", "Sofa.Web");
+            var applicationPath = integrationTestsPath.Replace("TestProjects\\Sofa.CourseManagement.IntegratedTest", "Sofa.CourseManagement.WebApi");
 
             return applicationPath;
         }

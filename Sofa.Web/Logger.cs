@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using System;
 
-namespace Sofa.Web
+namespace Sofa.CourseManagement.WebApi
 {
     public class Logger : Sofa.SharedKernel.ILogger
     {

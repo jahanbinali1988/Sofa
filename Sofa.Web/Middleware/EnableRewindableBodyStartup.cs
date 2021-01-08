@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace Sofa.Web.Middleware
+namespace Sofa.CourseManagement.WebApi.Middleware
 {
     public class EnableRewindableBodyStartup
     {

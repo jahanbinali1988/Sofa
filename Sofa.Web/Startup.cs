@@ -17,10 +17,10 @@ using Sofa.CourseManagement.EntityFramework.Seed;
 using Sofa.EntityFramework.Factory;
 using Sofa.EntityFramework.Seed;
 using Sofa.SharedKernel;
-using Sofa.Web.Middleware;
+using Sofa.CourseManagement.WebApi.Middleware;
 using System;
 
-namespace Sofa.Web
+namespace Sofa.CourseManagement.WebApi
 {
     public class Startup
     {

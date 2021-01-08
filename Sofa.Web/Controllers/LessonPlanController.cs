@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sofa.CourseManagement.ApplicationService;
 using System;
 
-namespace Sofa.Web.Controllers
+namespace Sofa.CourseManagement.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

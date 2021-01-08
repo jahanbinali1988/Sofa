@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Sofa.Web\Sofa.Web.csproj" />
+    <ProjectReference Include="..\..\Sofa.Web\Sofa.CourseManagement.WebApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 
-namespace Sofa.Web
+namespace Sofa.CourseManagement.WebApi
 {
     public static class ClaimExtensions
     {

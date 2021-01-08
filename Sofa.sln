@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.Web", "Sofa.Web\Sofa.Web.csproj", "{B46C10F8-ACA3-42E5-90FA-240208251373}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.CourseManagement.WebApi", "Sofa.Web\Sofa.CourseManagement.WebApi.csproj", "{B46C10F8-ACA3-42E5-90FA-240208251373}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.SharedKernel", "Sofa.SharedKernel\Sofa.SharedKernel.csproj", "{3749195E-7BFC-4D6E-A1CA-E1EDB52FA240}"
 EndProject
@@ -83,7 +83,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.Identity.IntegratedTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.EntityFramework", "Sofa.EntityFramework\Sofa.EntityFramework.csproj", "{2E475AAC-671F-48A5-8099-4A2A166395D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofa.CourseManagement.EntityFramework", "CourseManagement\Sofa.CourseManagement.EntityFramework\Sofa.CourseManagement.EntityFramework.csproj", "{8D63657D-40CC-4001-8325-A0AF6D2D1F82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.CourseManagement.EntityFramework", "CourseManagement\Sofa.CourseManagement.EntityFramework\Sofa.CourseManagement.EntityFramework.csproj", "{8D63657D-40CC-4001-8325-A0AF6D2D1F82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

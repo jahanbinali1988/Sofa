@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Sofa.SharedKernel;
 
-namespace Sofa.Web
+namespace Sofa.CourseManagement.WebApi
 {
     public class ConnectionStringProvider : IConnectionStringProvider
     {

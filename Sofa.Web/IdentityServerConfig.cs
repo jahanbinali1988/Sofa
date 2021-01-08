@@ -2,7 +2,7 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace Sofa.Web
+namespace Sofa.CourseManagement.WebApi
 {
     public class IdentityServerConfig
     {

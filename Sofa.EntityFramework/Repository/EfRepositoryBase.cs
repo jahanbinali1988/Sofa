@@ -67,7 +67,12 @@ namespace Sofa.EntityFramework.Repository
             return _dbSet.CountAsync<TEntity>(filter);
         }
 
-        public TEntity Get(TKey id, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null)
+        public TEntity Get(TKey id)
+        {
+            return _dbSet.Where<TEntity>(c => c.Id.Equals(id)).SingleOrDefault();
+        }
+
+        public TEntity GetWithIncluded(TKey id, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null)
         {
             return _dbSet.Where<TEntity>(c => c.Id.Equals(id)).Include(c => includes).SingleOrDefault();
         }
