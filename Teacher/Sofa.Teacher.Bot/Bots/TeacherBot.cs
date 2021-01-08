@@ -3,15 +3,15 @@ using Microsoft.Bot.Schema;
 using Sofa.SharedKernel.Enum;
 using Sofa.Teacher.ApplicationService;
 using Sofa.Teacher.ApplicationService.Service;
-using Sofa.Teacher.Mapper;
-using Sofa.Teacher.States;
+using Sofa.Teacher.Bot.Mapper;
+using Sofa.Teacher.Bot.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sofa.Teacher.Bots
+namespace Sofa.Teacher.Bot.Bots
 {
     public class TeacherBot : ActivityHandler
     {

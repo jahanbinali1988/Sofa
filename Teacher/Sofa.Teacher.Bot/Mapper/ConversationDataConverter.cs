@@ -1,9 +1,9 @@
-﻿using Sofa.Teacher.Model;
-using Sofa.Teacher.States;
+﻿using Sofa.Teacher.Bot.Model;
+using Sofa.Teacher.Bot.States;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sofa.Teacher.Mapper
+namespace Sofa.Teacher.Bot.Mapper
 {
     public static class ConversationDataConverter
     {

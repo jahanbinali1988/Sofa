@@ -3,7 +3,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using System.Threading.Tasks;
 
-namespace Sofa.Teacher.Controllers
+namespace Sofa.Teacher.Bot.Controllers
 {
     [Route("api/messages")]
     [ApiController]

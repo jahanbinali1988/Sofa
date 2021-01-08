@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using System;
 
-namespace Sofa.Teacher
+namespace Sofa.Teacher.Bot
 {
     public class Logger : Sofa.SharedKernel.ILogger
     {

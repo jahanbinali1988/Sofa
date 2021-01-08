@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Sofa.Teacher
+namespace Sofa.Teacher.Bot
 {
     public class CustomUserOwnedPasswordValidator : IResourceOwnerPasswordValidator
     {

@@ -45,8 +45,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.Identity.Repository.Da
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Teacher", "Teacher", "{DFDC37C3-3205-49D0-BEE0-DB0E9A5B16F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.Teacher", "Sofa.Bot\Sofa.Teacher.csproj", "{AB5B62FE-5415-49CB-AA1B-EBDF1D6BC3D3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.Teacher.ApplicationService", "Teacher\Sofa.Teacher.ApplicationService\Sofa.Teacher.ApplicationService.csproj", "{D3932E88-31A4-4B64-BB45-CED1D9E57901}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.Teacher.DomainService", "Teacher\Sofa.Teacher.DomainService\Sofa.Teacher.DomainService.csproj", "{B6BF9683-1346-4368-94D9-11D305E861EA}"
@@ -84,6 +82,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.CourseManagement.EntityFramework", "CourseManagement\Sofa.CourseManagement.EntityFramework\Sofa.CourseManagement.EntityFramework.csproj", "{8D63657D-40CC-4001-8325-A0AF6D2D1F82}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.CourseManagement.WebApi", "CourseManagement\Sofa.CourseManagement.WebApi\Sofa.CourseManagement.WebApi.csproj", "{F775F7FE-15CF-4A56-B964-364EE26838EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sofa.Teacher.Bot", "Teacher\Sofa.Teacher.Bot\Sofa.Teacher.Bot.csproj", "{CFFA916D-6BB5-4BAB-AACC-299CDE4E2A8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -159,10 +159,6 @@ Global
 		{928F4B11-1022-4249-8536-FB0825E61293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{928F4B11-1022-4249-8536-FB0825E61293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{928F4B11-1022-4249-8536-FB0825E61293}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB5B62FE-5415-49CB-AA1B-EBDF1D6BC3D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB5B62FE-5415-49CB-AA1B-EBDF1D6BC3D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB5B62FE-5415-49CB-AA1B-EBDF1D6BC3D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB5B62FE-5415-49CB-AA1B-EBDF1D6BC3D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3932E88-31A4-4B64-BB45-CED1D9E57901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3932E88-31A4-4B64-BB45-CED1D9E57901}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3932E88-31A4-4B64-BB45-CED1D9E57901}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -239,6 +235,10 @@ Global
 		{F775F7FE-15CF-4A56-B964-364EE26838EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F775F7FE-15CF-4A56-B964-364EE26838EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F775F7FE-15CF-4A56-B964-364EE26838EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFFA916D-6BB5-4BAB-AACC-299CDE4E2A8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFFA916D-6BB5-4BAB-AACC-299CDE4E2A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFFA916D-6BB5-4BAB-AACC-299CDE4E2A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFFA916D-6BB5-4BAB-AACC-299CDE4E2A8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -275,6 +275,7 @@ Global
 		{1DD7C15F-DD58-4525-9E41-9882F7C3E556} = {D8E2555C-704E-4563-A878-E53694E0E00C}
 		{8D63657D-40CC-4001-8325-A0AF6D2D1F82} = {13B298C4-A4D1-49D6-987E-47B1AA07882A}
 		{F775F7FE-15CF-4A56-B964-364EE26838EA} = {13B298C4-A4D1-49D6-987E-47B1AA07882A}
+		{CFFA916D-6BB5-4BAB-AACC-299CDE4E2A8F} = {DFDC37C3-3205-49D0-BEE0-DB0E9A5B16F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E38AB46-5852-4B73-86BD-87B31CE0E267}

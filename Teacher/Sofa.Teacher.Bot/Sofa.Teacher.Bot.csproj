@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <AssemblyName>Sofa.Teacher.Bot.Bot</AssemblyName>
+    <RootNamespace>Sofa.Teacher.Bot.Bot</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,10 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Identity\Sofa.Identity.ApplicationService\Sofa.Identity.ApplicationService.csproj" />
-    <ProjectReference Include="..\Sofa.SharedKernel\Sofa.SharedKernel.csproj" />
-    <ProjectReference Include="..\Teacher\Sofa.Teacher.ApplicationService\Sofa.Teacher.ApplicationService.csproj" />
-    <ProjectReference Include="..\Teacher\Sofa.Teacher.DependencyInjection\Sofa.Teacher.DependencyResolver.csproj" />
+    <ProjectReference Include="..\..\Identity\Sofa.Identity.ApplicationService\Sofa.Identity.ApplicationService.csproj" />
+    <ProjectReference Include="..\..\Sofa.SharedKernel\Sofa.SharedKernel.csproj" />
+    <ProjectReference Include="..\Sofa.Teacher.ApplicationService\Sofa.Teacher.ApplicationService.csproj" />
+    <ProjectReference Include="..\Sofa.Teacher.DependencyInjection\Sofa.Teacher.DependencyResolver.csproj" />
   </ItemGroup>
 
     <ItemGroup>

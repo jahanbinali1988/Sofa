@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Sofa.SharedKernel;
 
-namespace Sofa.Teacher
+namespace Sofa.Teacher.Bot
 {
     public class ServiceBusSettingProvider : IServiceBusSettingProvider
     {

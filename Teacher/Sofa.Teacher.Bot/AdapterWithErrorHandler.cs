@@ -3,7 +3,7 @@ using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Sofa.Teacher
+namespace Sofa.Teacher.Bot
 {
     public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
     {

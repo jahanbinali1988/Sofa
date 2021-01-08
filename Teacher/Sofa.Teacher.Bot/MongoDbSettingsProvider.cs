@@ -2,7 +2,7 @@
 using Sofa.SharedKernel;
 using Sofa.SharedKernel.BaseClasses;
 
-namespace Sofa.Teacher
+namespace Sofa.Teacher.Bot
 {
     public class MongoDbSettingsProvider : IMongoDbSettingsProvider
     {

@@ -2,7 +2,7 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace Sofa.Teacher
+namespace Sofa.Teacher.Bot
 {
     public class IdentityServerConfig
     {

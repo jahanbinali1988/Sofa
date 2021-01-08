@@ -1,4 +1,4 @@
-﻿namespace Sofa.Teacher.Model
+﻿namespace Sofa.Teacher.Bot.Model
 {
     public class LastConversation
     {

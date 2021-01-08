@@ -1,7 +1,7 @@
-﻿using Sofa.Teacher.Model;
+﻿using Sofa.Teacher.Bot.Model;
 using System.Collections.Generic;
 
-namespace Sofa.Teacher.States
+namespace Sofa.Teacher.Bot.States
 {
     public class ConversationData
     {

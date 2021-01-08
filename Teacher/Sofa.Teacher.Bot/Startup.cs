@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Sofa.EntityFramework.Factory;
 using Sofa.EntityFramework.Seed;
 using Sofa.SharedKernel;
-using Sofa.Teacher.Bots;
+using Sofa.Teacher.Bot.Bots;
 using Sofa.Teacher.DependencyResolver;
 using Sofa.Teacher.EntityFramework.Context;
 using Sofa.Teacher.EntityFramework.Factory;
@@ -22,7 +22,7 @@ using Sofa.Teacher.EntityFramework.Seed;
 using System;
 using Microsoft.Extensions.Hosting;
 
-namespace Sofa.Teacher
+namespace Sofa.Teacher.Bot
 {
     public class Startup
     {
@@ -134,7 +134,7 @@ namespace Sofa.Teacher
             services.AddSingleton<IDbContextSeed, DbContextSeed>();
             // Add the DbContextOptions:
             var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseSqlServer(Configuration.GetConnectionString("BotConnection"), x => x.MigrationsAssembly("Sofa.Teacher.EntityFramework"))
+                .UseSqlServer(Configuration.GetConnectionString("BotConnection"), x => x.MigrationsAssembly("Sofa.Teacher.Bot.EntityFramework"))
                 .Options;
             services.AddSingleton(dbContextOptions);
             // Finally register the DbContextOptions:

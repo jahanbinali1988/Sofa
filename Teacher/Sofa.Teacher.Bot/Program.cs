@@ -6,7 +6,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Sofa.Teacher
+namespace Sofa.Teacher.Bot
 {
     public class Program
     {

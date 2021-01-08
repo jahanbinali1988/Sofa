@@ -1,7 +1,7 @@
 ﻿using Sofa.SharedKernel.Enum;
 using System;
 
-namespace Sofa.Teacher.States
+namespace Sofa.Teacher.Bot.States
 {
     // Defines a state property used to track information about the user.
     public class UserProfile
